@@ -1,0 +1,87 @@
+@import '../common/styles/globals.css';
+@import '../common/styles/blog.css';
+@import '../common/styles/article.css';
+@import '../common/styles/gsap-animations.css';
+
+@custom-variant dark (&:is(.dark *));
+
+header:has(+ [data-no-header]) {
+    display: none;
+}
+
+body:has(+ [data-snap]) {
+    @apply h-screen overflow-y-auto snap-y snap-mandatory;
+}
+
+[data-no-footer] ~ footer {
+    display: none;
+}
+
+[data-no-bot] ~ .pi-bot {
+    display: none;
+}
+
+@theme inline {
+    --animate-shiny-text: shiny-text 8s infinite;
+  @keyframes shiny-text {
+  0%, 90%, 100% {
+    background-position: calc(-100% - var(--shiny-width)) 0;
+        }
+  30%, 60% {
+    background-position: calc(100% + var(--shiny-width)) 0;
+        }
+    }
+  --animate-marquee: marquee var(--duration) infinite linear;
+  --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite
+;
+  @keyframes marquee {
+  from {
+    transform: translateX(0);
+        }
+  to {
+    transform: translateX(calc(-100% - var(--gap)));
+        }
+    }
+  @keyframes marquee-vertical {
+  from {
+    transform: translateY(0);
+        }
+  to {
+    transform: translateY(calc(-100% - var(--gap)));
+        }
+    }}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+    }
+  
+  /* Lenis gerencia o scroll suave */
+  body {
+    @apply bg-background text-foreground;
+    }
+}
+
+@layer utilities {
+  /* Custom scrollbar styles */
+  .scrollbar-thin {
+    scrollbar-width: thin;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .scrollbar-thumb-gray-600::-webkit-scrollbar-thumb {
+    background-color: rgb(75 85 99);
+    border-radius: 3px;
+  }
+
+  .scrollbar-track-transparent::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  .scrollbar-thin:hover::-webkit-scrollbar-thumb {
+    background-color: rgb(107 114 128);
+  }
+}
