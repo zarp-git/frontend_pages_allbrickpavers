@@ -10,7 +10,7 @@ export default function Header() {
       <div className="container mx-auto py-4 h-[90px] flex items-center justify-between">
 
         {/* Left Side: Logo & Nav */}
-        <div className="flex items-center gap-10">
+        <div className="flex items-center 2xl:gap-10">
           <HeaderLogo />
           <div className="hidden lg:block h-8 w-[1px] bg-border/40 mx-2" />
           <Navigation className="hidden lg:flex" />

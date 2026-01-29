@@ -223,18 +223,6 @@ export default function Hero() {
         <span className="text-gray-400 font-rubik text-sm">Scroll over</span>
         <ArrowDown className="text-gray-400 size-5" />
       </div>
-
-      {/* Decorative Green Text Circle */}
-      <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 hidden 2xl:block opacity-20 pointer-events-none">
-        <svg viewBox="0 0 200 200" className="w-[400px] h-[400px] animate-spin-slow">
-          <path id="curve" d="M 100, 100 m -75, 0 a 75,75 0 1,1 150,0 a 75,75 0 1,1 -150,0" fill="transparent" />
-          <text width="500">
-            <textPath xlinkHref="#curve" className="text-primary font-bold text-2xl uppercase tracking-[0.2em] fill-green-600">
-              • PROJETOS • REFORMAS • CONSTRUÇÃO
-            </textPath>
-          </text>
-        </svg>
-      </div>
     </section>
   );
 }
