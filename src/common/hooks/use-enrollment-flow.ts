@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import { FlowStep } from '@/components/enrollment/step-indicator';
+import { FlowStep } from '@/presentation/components/enrollment/step-indicator';
 
 export const useEnrollmentFlow = () => {
   const STEP_ORDER: FlowStep[] = ['identification', 'payment'];

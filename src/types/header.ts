@@ -1,4 +1,4 @@
-import { LucideIcon } from "lucide-react"
+import { RemixiconComponentType } from "@remixicon/react"
 import React from "react"
 
 export interface INavItem {
@@ -6,7 +6,7 @@ export interface INavItem {
   href: string
   hasDropdown?: boolean
   dropdownItems?: INavItem[]
-  icon?: LucideIcon
+  icon?: RemixiconComponentType
 }
 
 export interface IActionButton {

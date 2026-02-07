@@ -1,7 +1,7 @@
 import type {
   EnrollmentStatus as PrismaEnrollmentStatus,
   UserSubmissionType as PrismaUserSubmissionType,
-} from '@prisma/client'
+} from '@/generated/prisma/enums'
 import bcrypt from 'bcrypt'
 import prisma from '@/common/lib/prisma'
 

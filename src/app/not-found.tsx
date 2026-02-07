@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { Container } from "@/components/ui/container";
+import { Button } from "@/presentation/components/ui/button";
+import { Container } from "@/presentation/components/ui/container";
 
 export default function NotFound() {
   return (
@@ -12,11 +12,9 @@ export default function NotFound() {
           Desculpe, a página que você está procurando não existe ou foi movida.
         </p>
         <Link href="/">
-          <Button size="lg">
-            Voltar para a página inicial
-          </Button>
+          <Button size="lg">Voltar para a página inicial</Button>
         </Link>
       </div>
     </Container>
   );
-} 
+}

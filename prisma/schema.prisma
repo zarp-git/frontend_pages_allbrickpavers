@@ -1,19 +1,20 @@
+// Prisma schema for Ponte Americas leads and enrollments
+// Supports lead capture and user enrollment flows
+
 generator client {
-  provider = "prisma-client-js"
+  provider = "prisma-client"
+  output   = "../prisma/generated/prisma"
 }
 
 datasource db {
-  provider          = "postgresql"
-  url               = env("PRISMA_DATABASE_URL")
-  directUrl         = env("DATABASE_URL")
-  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+  provider = "postgresql"
 }
 
 model Lead {
   id          Int     @id @default(autoincrement())
   name        String  @db.VarChar(100)
   email       String? @db.VarChar(255)
-  phoneNumber String? @db.VarChar(20) @map("phone_number")
+  phoneNumber String? @map("phone_number") @db.VarChar(20)
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
@@ -27,21 +28,21 @@ model Lead {
 }
 
 model LeadSubmission {
-  id       Int            @id @default(autoincrement())
-  leadId   Int            @map("lead_id")
+  id       Int                @id @default(autoincrement())
+  leadId   Int                @map("lead_id")
   type     LeadSubmissionType
   success  Boolean
   data     Json // Form submission data
-  metadata Json           @default("{}") // Request metadata
+  metadata Json               @default("{}") // Request metadata
 
   // Location and tracking data
-  city       String?  @db.VarChar(100)
-  country    String?  @db.VarChar(100)
-  ipAddress  String?  @db.Inet @map("ip_address")
-  route      String?  @db.VarChar(500)
-  userAgent  String?  @db.Text @map("user_agent")
+  city       String? @db.VarChar(100)
+  country    String? @db.VarChar(100)
+  ipAddress  String? @map("ip_address") @db.Inet
+  route      String? @db.VarChar(500)
+  userAgent  String? @map("user_agent") @db.Text
   origin     Int
-  originFont String?  @db.VarChar(100) @map("origin_font")
+  originFont String? @map("origin_font") @db.VarChar(100)
 
   createdAt DateTime @default(now()) @map("created_at")
 
@@ -74,20 +75,20 @@ model User {
   id          Int     @id @default(autoincrement())
   name        String  @db.VarChar(100)
   email       String  @unique @db.VarChar(255)
-  phoneNumber String? @db.VarChar(20) @map("phone_number")
+  phoneNumber String? @map("phone_number") @db.VarChar(20)
   password    String  @db.VarChar(255)
 
   // Enrollment specific fields
   enrollmentStatus EnrollmentStatus @default(IDENTIFICATION_PENDING) @map("enrollment_status")
 
   // Location and metadata
-  city       String?  @db.VarChar(100)
-  country    String?  @db.VarChar(100)
-  ipAddress  String?  @db.Inet @map("ip_address")
-  route      String?  @db.VarChar(500)
-  userAgent  String?  @db.Text @map("user_agent")
-  origin     Int      @default(6) // EOriginLead.page
-  originFont String?  @db.VarChar(100) @map("origin_font")
+  city       String? @db.VarChar(100)
+  country    String? @db.VarChar(100)
+  ipAddress  String? @map("ip_address") @db.Inet
+  route      String? @db.VarChar(500)
+  userAgent  String? @map("user_agent") @db.Text
+  origin     Int     @default(6) // EOriginLead.page
+  originFont String? @map("origin_font") @db.VarChar(100)
 
   // Timestamps
   createdAt  DateTime  @default(now()) @map("created_at")
@@ -122,11 +123,8 @@ model UserSubmission {
   @@map("user_submissions")
 }
 
-
 enum UserSubmissionType {
   ENROLLMENT_ATTEMPT
   PAYMENT_ATTEMPT
   IDENTIFICATION_SUBMISSION
 }
-
-

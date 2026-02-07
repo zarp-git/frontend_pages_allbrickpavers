@@ -1,4 +1,4 @@
-import { FileText, Shield } from "lucide-react";
+// Icon names are stored as strings and resolved in legal-layout.tsx
 import { LegalPageConfig } from "@/types/legal-metadata";
 
 // Constantes compartilhadas

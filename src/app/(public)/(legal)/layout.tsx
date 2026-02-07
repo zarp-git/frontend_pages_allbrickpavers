@@ -1,28 +1,31 @@
-import SiteLayout from "@/components/layouts/site-layout";
+import SiteLayout from "@/presentation/components/templates/SiteTemplate";
 
-export default function LegalLayout({ children }: { children: React.ReactNode }) {
-    return (
-			<SiteLayout
-				actionButtons={{
-					member: {
-						href: "/members",
-						text: "JÁ SOU ALUNO",
-						variant: "outline",
-						icon: undefined,
-						mobileIcon: undefined,
-					},
-					cta: {
-						href: "/#programs",
-						text: "COMEÇAR AGORA",
-						variant: "default",
-						icon: undefined,
-						mobileIcon: undefined,
-					},
-				}}
-				languageOptions={undefined}
-			>
-				{children}
-			</SiteLayout>
-		);
+export default function LegalLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <SiteLayout
+      actionButtons={{
+        member: {
+          href: "/members",
+          text: "JÁ SOU ALUNO",
+          variant: "outline",
+          icon: undefined,
+          mobileIcon: undefined,
+        },
+        cta: {
+          href: "/#programs",
+          text: "COMEÇAR AGORA",
+          variant: "default",
+          icon: undefined,
+          mobileIcon: undefined,
+        },
+      }}
+      languageOptions={undefined}
+    >
+      {children}
+    </SiteLayout>
+  );
 }
- 
