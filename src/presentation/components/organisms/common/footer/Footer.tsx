@@ -12,7 +12,7 @@ import {
   FOOTER_COMPANY_LINKS,
   FOOTER_SERVICES,
   FOOTER_LEGAL_LINKS,
-} from "@/common/constants/footer";
+} from "@/constants/footer";
 import CompanyLogo from "@/presentation/components/atoms/CompanyLogo";
 
 export type FooterVariant = "default" | "simplified";

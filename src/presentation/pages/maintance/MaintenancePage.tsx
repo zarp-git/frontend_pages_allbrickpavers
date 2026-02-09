@@ -9,7 +9,7 @@ import {
 } from "@remixicon/react";
 import CompanyLogo from "@/presentation/components/atoms/CompanyLogo";
 import { BrandedButton } from "@/presentation/components/molecules/common/BrandedButton";
-import { CONTACT } from "@/common/constants";
+import { CONTACT } from "@/constants";
 
 export default function MaintenancePage() {
   return (

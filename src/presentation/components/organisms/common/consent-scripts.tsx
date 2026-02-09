@@ -2,7 +2,7 @@
 
 import { useEffect, useState, memo } from "react";
 import Script from "next/script";
-import { useConsent } from "@/common/hooks/use-consent";
+import { useConsent } from "@/hooks/use-consent";
 import { ConsentChoice } from "@/types/consent";
 
 const ConsentScripts = memo(() => {
@@ -29,7 +29,10 @@ const ConsentScripts = memo(() => {
     if (typeof window !== "undefined") {
       window.addEventListener("pdmi:consent", handleConsent as EventListener);
       return () => {
-        window.removeEventListener("pdmi:consent", handleConsent as EventListener);
+        window.removeEventListener(
+          "pdmi:consent",
+          handleConsent as EventListener,
+        );
       };
     }
   }, [choice]);
@@ -37,10 +40,10 @@ const ConsentScripts = memo(() => {
   if (!isAllowed) return null;
 
   return (
-		<>
-			{/* Microsoft Clarity: carrega somente quando o usuário escolher "Aceitar todos" */}
-			<Script id="microsoft-clarity" strategy="afterInteractive">
-				{`
+    <>
+      {/* Microsoft Clarity: carrega somente quando o usuário escolher "Aceitar todos" */}
+      <Script id="microsoft-clarity" strategy="afterInteractive">
+        {`
           (function(c,l,a,r,i,t,y){
             c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
             t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
@@ -49,11 +52,11 @@ const ConsentScripts = memo(() => {
             c[a]("consent", true);
           })(window, document, "clarity", "script", "ttnlk8l8dt");
         `}
-			</Script>
+      </Script>
 
-			{/* Atualiza consent do GA após aceitar */}
-			<Script id="ga-consent-accept" strategy="afterInteractive">
-				{`
+      {/* Atualiza consent do GA após aceitar */}
+      <Script id="ga-consent-accept" strategy="afterInteractive">
+        {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);} 
           gtag('consent', 'update', {
@@ -63,13 +66,11 @@ const ConsentScripts = memo(() => {
             'analytics_storage': 'granted'
           });
         `}
-			</Script>
-		</>
-	);
+      </Script>
+    </>
+  );
 });
 
 ConsentScripts.displayName = "ConsentScripts";
 
 export { ConsentScripts };
-
-

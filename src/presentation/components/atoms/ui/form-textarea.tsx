@@ -1,5 +1,5 @@
 import { forwardRef } from "react";
-import { cn } from "@/common/lib/utils";
+import { cn } from "@/lib/utils";
 
 interface FormTextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   label: string;
@@ -21,18 +21,14 @@ export const FormTextarea = forwardRef<HTMLTextAreaElement, FormTextareaProps>(
           id={id}
           className={cn(
             "w-full p-4 bg-[#f9fafb] rounded-2xl border border-[#e5e7eb]",
-            className
+            className,
           )}
           {...props}
         />
-        {error && (
-          <p className="mt-1 text-[#f31260] text-sm">
-            {error}
-          </p>
-        )}
+        {error && <p className="mt-1 text-[#f31260] text-sm">{error}</p>}
       </div>
     );
-  }
+  },
 );
 
-FormTextarea.displayName = "FormTextarea"; 
+FormTextarea.displayName = "FormTextarea";

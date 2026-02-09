@@ -1,6 +1,6 @@
-import * as React from "react"
-import { cn } from "@/common/lib/utils"
-import { UseFormRegister } from "react-hook-form"
+import * as React from "react";
+import { cn } from "@/lib/utils";
+import { UseFormRegister } from "react-hook-form";
 
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   register?: UseFormRegister<any>;
@@ -21,9 +21,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 
     const registerProps = register ? register(props.name as string) : {};
     return <input ref={ref} {...registerProps} {...inputProps} />;
-  }
+  },
 );
-Input.displayName = "Input"
+Input.displayName = "Input";
 
-export { Input }
-
+export { Input };

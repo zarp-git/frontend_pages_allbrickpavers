@@ -10,7 +10,7 @@ import {
 import Link from "next/link";
 import { Button } from "@/presentation/components/atoms/ui/button";
 import type { INavItem } from "@/types/header";
-import { NAV_ITEMS } from "@/common/constants";
+import { NAV_ITEMS } from "@/constants";
 
 interface MobileMenuProps {
   navItems?: INavItem[];

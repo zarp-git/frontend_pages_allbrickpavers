@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
-import { CONSENT_STORAGE_KEY } from "@/common/constants";
+import { CONSENT_STORAGE_KEY } from "@/constants";
 import { ConsentChoice } from "@/types/consent";
 
 interface ConsentState {

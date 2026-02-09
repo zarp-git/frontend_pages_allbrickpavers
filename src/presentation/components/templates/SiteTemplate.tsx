@@ -3,9 +3,9 @@
 import React from "react";
 import Header from "@/presentation/components/organisms/common/header/Header";
 import Footer from "@/presentation/components/organisms/common/footer/Footer";
-import { cn } from "@/common/lib/utils";
-import { useSmoothScroll } from "@/common/hooks/use-smooth-scroll";
-import { useLenisScroll } from "@/common/hooks/use-lenis-scroll";
+import { cn } from "@/lib/utils";
+import { useSmoothScroll } from "@/hooks/use-smooth-scroll";
+import { useLenisScroll } from "@/hooks/use-lenis-scroll";
 import type {
   INavItem,
   IActionButtons,

@@ -1,5 +1,5 @@
 import LegalLayout from "@/presentation/components/templates/LegalTemplate";
-import { useLegalMetadata } from "@/common/hooks/use-legal-metadata";
+import { useLegalMetadata } from "@/hooks/use-legal-metadata";
 import { legalPagesConfig } from "@/server/config/legal-pages";
 
 export const metadata = useLegalMetadata(

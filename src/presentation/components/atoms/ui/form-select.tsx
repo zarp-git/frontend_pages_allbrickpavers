@@ -1,5 +1,5 @@
 import { forwardRef } from "react";
-import { cn } from "@/common/lib/utils";
+import { cn } from "@/lib/utils";
 
 interface FormSelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
   label: string;
@@ -25,7 +25,7 @@ export const FormSelect = forwardRef<HTMLSelectElement, FormSelectProps>(
           id={id}
           className={cn(
             "w-full p-4 bg-[#f9fafb] rounded-2xl border border-[#e5e7eb]",
-            className
+            className,
           )}
           {...props}
         >
@@ -36,14 +36,10 @@ export const FormSelect = forwardRef<HTMLSelectElement, FormSelectProps>(
             </option>
           ))}
         </select>
-        {error && (
-          <p className="mt-1 text-[#f31260] text-sm">
-            {error}
-          </p>
-        )}
+        {error && <p className="mt-1 text-[#f31260] text-sm">{error}</p>}
       </div>
     );
-  }
+  },
 );
 
-FormSelect.displayName = "FormSelect"; 
+FormSelect.displayName = "FormSelect";
