@@ -15,7 +15,7 @@ import {
 } from "@/common/constants/footer";
 import CompanyLogo from "@/presentation/components/atoms/CompanyLogo";
 
-export type FooterVariant = "default" | "simplified";       
+export type FooterVariant = "default" | "simplified";
 
 interface FooterProps {
   variant?: FooterVariant;
@@ -59,7 +59,7 @@ export default function Footer({ variant = "default" }: FooterProps) {
             <div className="flex-1 h-80 px-14 py-16 border-r border-secondary flex justify-start items-start gap-12">
               <div className="flex-1 flex flex-col justify-start items-start gap-6">
                 {/* Company Logo */}
-                <CompanyLogo />
+                <CompanyLogo size="xl" />
 
                 {/* Tagline */}
                 <p className="text-gray-700 text-base font-normal font-rubik leading-6">

@@ -28,7 +28,7 @@ export default function Header({
       <div className="container mx-auto py-4 h-[90px] flex items-center justify-between">
         {/* Left Side: Logo & Nav */}
         <div className="flex items-center 2xl:gap-10">
-          <CompanyLogo />
+          <CompanyLogo size="lg" />
           <div className="hidden lg:block h-8 w-px bg-border/40 mx-2" />
           <Navigation className="hidden lg:flex" navItems={navItems} />
         </div>

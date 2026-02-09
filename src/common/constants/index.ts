@@ -21,9 +21,10 @@ export const SOCIAL_LINKS = {
 // Contact information used across the site
 export const CONTACT = {
 	email: "contato@ponteamericas.com",
-	phoneDisplay: "+1 321 429-6742",
-	phoneHref: "+13214296742",
-	hours: "Seg-Sex: 9h às 18h (Brasil)",
+	phoneDisplay: "(407) 818-7876",
+	phoneHref: "tel:+14078187876",
+	phoneRaw: "+14078187876",
+	hours: "Mon-Sat: 9:00 AM - 6:00 PM",
 } as const;
 
 // Navigation links for header/footer
