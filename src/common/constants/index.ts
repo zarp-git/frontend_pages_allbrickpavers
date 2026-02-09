@@ -145,3 +145,7 @@ export {
 	COMPARISON_HEADERS,
 	type ComparisonItem,
 } from "@/common/constants/comparison";
+
+// Export navigation items
+export { NAV_ITEMS } from "@/common/constants/navigation";
+

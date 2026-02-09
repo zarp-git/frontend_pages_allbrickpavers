@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { Button } from "@/presentation/components/ui/button";
-import { Container } from "@/presentation/components/ui/container";
+import { Button } from "@/presentation/components/atoms/ui/button";
+import { Container } from "@/presentation/components/atoms/ui/container";
 
 export default function NotFound() {
   return (

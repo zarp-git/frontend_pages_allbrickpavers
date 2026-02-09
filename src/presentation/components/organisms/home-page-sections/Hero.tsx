@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState, useEffect, useCallback } from "react";
-import { ComparisonSlider } from "@/presentation/components/ui/comparison-slider";
-import { Button } from "@/presentation/components/ui/button";
+import { ComparisonSlider } from "@/presentation/components/atoms/ui/comparison-slider";
+import { Button } from "@/presentation/components/atoms/ui/button";
 import {
   RiArrowDownLine,
   RiPhoneLine,

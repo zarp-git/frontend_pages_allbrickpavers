@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "@/presentation/components/ui/button";
+import { Button } from "@/presentation/components/atoms/ui/button";
 import { RiPhoneLine } from "@remixicon/react";
 
 export default function IntroSection() {

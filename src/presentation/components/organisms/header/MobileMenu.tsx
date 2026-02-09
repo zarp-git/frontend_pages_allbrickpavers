@@ -8,19 +8,17 @@ import {
   RiPhoneLine,
 } from "@remixicon/react";
 import Link from "next/link";
-import { Button } from "@/presentation/components/ui/button";
+import { Button } from "@/presentation/components/atoms/ui/button";
+import type { INavItem } from "@/types/header";
+import { NAV_ITEMS } from "@/common/constants";
 
-const navItems = [
-  { label: "Company", href: "/company" },
-  { label: "Locations", href: "/locations", hasDropdown: true },
-  { label: "Services", href: "/services", hasDropdown: true },
-  { label: "Gallery", href: "/gallery" },
-  { label: "Learning Center", href: "/learning-center" },
-  { label: "Tools", href: "/tools", hasDropdown: true },
-];
+interface MobileMenuProps {
+  navItems?: INavItem[];
+}
 
-export default function MobileMenu() {
+export default function MobileMenu({ navItems }: MobileMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const items = navItems || NAV_ITEMS;
 
   return (
     <div className="lg:hidden">
@@ -45,9 +43,9 @@ export default function MobileMenu() {
           </div>
 
           <nav className="flex flex-col gap-6 flex-1 overflow-y-auto">
-            {navItems.map((item) => (
+            {items.map((item) => (
               <div
-                key={item.label}
+                key={item.title}
                 className="border-b border-border/40 pb-4 last:border-0"
               >
                 <Link
@@ -55,7 +53,7 @@ export default function MobileMenu() {
                   onClick={() => setIsOpen(false)}
                   className="flex items-center justify-between text-lg font-medium font-rubik"
                 >
-                  {item.label}
+                  {item.title}
                   {item.hasDropdown && (
                     <RiArrowDownSLine className="size-5 text-muted-foreground" />
                   )}

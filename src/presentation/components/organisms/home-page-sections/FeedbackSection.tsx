@@ -7,8 +7,8 @@ import "swiper/css";
 import "swiper/css/autoplay";
 import { RiPhoneLine } from "@remixicon/react";
 
-import { Button } from "@/presentation/components/ui/button";
-import StarRating from "@/presentation/components/ui/StarRating";
+import { Button } from "@/presentation/components/atoms/ui/button";
+import StarRating from "@/presentation/components/atoms/ui/StarRating";
 
 // --- Mock Data ---
 const FEEDBACKS = [

@@ -8,7 +8,7 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@/presentation/components/ui/dialog";
+} from "@/presentation/components/atoms/ui/dialog";
 import { useModal } from "./use-modal";
 import {
   RiCheckboxCircleLine,
@@ -16,7 +16,7 @@ import {
   RiAlertLine,
   RiInformationLine,
 } from "@remixicon/react";
-import { Button } from "@/presentation/components/ui/button";
+import { Button } from "@/presentation/components/atoms/ui/button";
 
 const iconMap = {
   success: RiCheckboxCircleLine,

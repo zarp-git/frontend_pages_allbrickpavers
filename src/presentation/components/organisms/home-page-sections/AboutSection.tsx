@@ -3,7 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import { RiPhoneLine } from "@remixicon/react";
-import { Button } from "@/presentation/components/ui/button";
+import { Button } from "@/presentation/components/atoms/ui/button";
 
 export default function AboutSection() {
   return (

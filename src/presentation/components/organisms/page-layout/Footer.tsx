@@ -1,11 +1,9 @@
 import React from "react";
 import { RiTimeLine, RiPhoneLine, RiInstagramLine } from "@remixicon/react";
-import { Button } from "@/presentation/components/ui/button";
-import GoogleMap from "./GoogleMap";
+import { Button } from "@/presentation/components/atoms/ui/button";
+import { CompanyLogo } from "@/presentation/components/atoms/CompanyLogo";
 
-// Assets from Figma
-const BRAND_LOGO =
-  "http://localhost:3845/assets/3de3888eebb7dee7f13602b7fa7e64371fda41e9.png";
+// Assets from Figma  
 const BADGE_IMAGE =
   "http://localhost:3845/assets/065a75cfd7a334e31b72b3c8dcc323472a445eba.png";
 
@@ -18,11 +16,7 @@ export default function Footer() {
           <div className="flex flex-col sm:flex-row gap-8 lg:w-1/3">
             <div className="border border-secondary p-6 rounded-sm w-full sm:w-[500px] flex gap-4 relative">
               <div className="flex-1 flex flex-col gap-4 z-10">
-                <img
-                  src={BRAND_LOGO}
-                  alt="AllBricks Pavers"
-                  className="h-12 w-auto object-contain object-left"
-                />
+                <CompanyLogo />
                 <p className="text-muted-foreground text-sm leading-relaxed font-rubik max-w-[200px]">
                   Durable, Beautiful Concrete Pavers for Any Orlando Hardscape
                   Project
@@ -127,7 +121,7 @@ export default function Footer() {
         </div>
 
         {/* Footer Bottom */}
-        <div className="mt-16 pt-8 border-t border-border text-center font-rubik text-gray-500 text-sm">
+        <div className="mt-16 pt-8 bg-black text-center font-rubik text-gray-500 text-sm">
           <p>
             &copy; {new Date().getFullYear()} AllBricks Pavers. All rights
             reserved.

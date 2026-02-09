@@ -7,7 +7,7 @@ import useEmblaCarousel, {
 import { RiArrowLeftLine, RiArrowRightLine } from "@remixicon/react";
 
 import { cn } from "@/common/lib/utils";
-import { Button } from "@/presentation/components/ui/button";
+import { Button } from "@/presentation/components/atoms/ui/button";
 
 type CarouselApi = UseEmblaCarouselType[1];
 type UseCarouselParameters = Parameters<typeof useEmblaCarousel>;

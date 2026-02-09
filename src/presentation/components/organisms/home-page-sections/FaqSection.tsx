@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
-import { Button } from "@/presentation/components/ui/button";
+import { Button } from "@/presentation/components/atoms/ui/button";
 import { RiPhoneLine } from "@remixicon/react";
-import AccordionItem from "@/presentation/components/ui/accordion-item";
+import AccordionItem from "@/presentation/components/atoms/ui/accordion-item";
 import Image from "next/image";
 
 const FAQS = [

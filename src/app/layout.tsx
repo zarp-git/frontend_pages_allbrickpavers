@@ -1,49 +1,18 @@
 import type { Metadata } from "next";
-import { Rubik } from "next/font/google";
-import localFont from "next/font/local";
+import { Rubik, Hanken_Grotesk } from "next/font/google";
 import "./globals.css";
-import Header from "@/presentation/components/header/Header";
-import Footer from "@/presentation/components/Footer";
+import Header from "@/presentation/components/organisms/header/Header";
+import Footer from "@/presentation/components/organisms/footer/Footer";
 
 const rubik = Rubik({
   variable: "--font-rubik",
   subsets: ["latin"],
 });
 
-const clashDisplay = localFont({
-  src: [
-    {
-      path: "./fonts/ClashDisplay-ExtraLight.woff2",
-      weight: "200",
-      style: "normal",
-    },
-    {
-      path: "./fonts/ClashDisplay-Light.woff2",
-      weight: "300",
-      style: "normal",
-    },
-    {
-      path: "./fonts/ClashDisplay-Regular.woff2",
-      weight: "400",
-      style: "normal",
-    },
-    {
-      path: "./fonts/ClashDisplay-Medium.woff2",
-      weight: "500",
-      style: "normal",
-    },
-    {
-      path: "./fonts/ClashDisplay-Semibold.woff2",
-      weight: "600",
-      style: "normal",
-    },
-    {
-      path: "./fonts/ClashDisplay-Bold.woff2",
-      weight: "700",
-      style: "normal",
-    },
-  ],
+const hankenGrotesk = Hanken_Grotesk({
   variable: "--font-clash",
+  subsets: ["latin"],
+  weight: ["200", "300", "400", "500", "600", "700", "800"],
   display: "swap",
 });
 
@@ -60,7 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${rubik.variable} ${clashDisplay.variable} antialiased`}
+        className={`${rubik.variable} ${hankenGrotesk.variable} antialiased`}
       >
         <Header />
         {children}

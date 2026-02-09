@@ -5,10 +5,10 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/presentation/components/ui/card";
-import { Button } from "@/presentation/components/ui/button";
+} from "@/presentation/components/atoms/ui/card";
+import { Button } from "@/presentation/components/atoms/ui/button";
 import { RiBankCardLine, RiArrowLeftLine } from "@remixicon/react";
-import { WaitlistMessage } from "@/presentation/components/waitlist-message";
+import { WaitlistMessage } from "@/presentation/components/molecules/common/waitlist-message";
 
 interface PaymentStepProps {
   onBack?: () => void;
