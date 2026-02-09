@@ -14,7 +14,7 @@ import { CONTACT } from "@/common/constants";
 export default function MaintenancePage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center p-4">
-      <div className="max-w-2xl w-full">
+      <main className="max-w-2xl w-full">
         <div className="bg-white rounded-2xl shadow-2xl p-8 md:p-12 text-center">
           {/* Logo */}
           <div className="flex justify-center mb-8">
@@ -61,22 +61,38 @@ export default function MaintenancePage() {
         </div>
 
         {/* Footer Note */}
-        <div className="text-center mt-8 space-y-4">
+        <footer className="text-center mt-8 space-y-4">
           <p className="text-sm text-gray-500 font-rubik">
             Thank you for your understanding and continued support.
           </p>
 
-          <a
-            href="https://maps.app.goo.gl/7vWDcYwnV3JVoyUe6"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 text-sm text-gray-400 hover:text-primary transition-colors duration-200 font-rubik group"
-          >
-            <RiMapPinLine className="w-4 h-4 group-hover:scale-110 transition-transform" />
-            99 6th St SW Suite 109, Winter Haven, FL 33880
-          </a>
-        </div>
-      </div>
+          <div itemScope itemType="https://schema.org/LocalBusiness">
+            <address
+              className="not-italic"
+              itemScope
+              itemType="https://schema.org/PostalAddress"
+              itemProp="address"
+            >
+              <a
+                href="https://maps.app.goo.gl/7vWDcYwnV3JVoyUe6"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 text-sm text-gray-400 hover:text-primary transition-colors duration-200 font-rubik group"
+                aria-label="Directions to our office at 99 6th St SW Suite 109, Winter Haven, FL 33880"
+              >
+                <RiMapPinLine
+                  className="w-4 h-4 group-hover:scale-110 transition-transform"
+                  aria-hidden="true"
+                />
+                <span itemProp="streetAddress">99 6th St SW Suite 109</span>,{" "}
+                <span itemProp="addressLocality">Winter Haven</span>,{" "}
+                <span itemProp="addressRegion">FL</span>{" "}
+                <span itemProp="postalCode">33880</span>
+              </a>
+            </address>
+          </div>
+        </footer>
+      </main>
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import getLatestPostsAction from "@/presentation/actions/get-latest-posts.action";
 import useGetLatestPosts from "@/common/hooks/use-get-latest-posts";
 import { removeHtmlTags } from "@/common/lib/utils";
-import { Container } from "@/presentation/components/ui/container";
+import { Container } from "@/presentation/components/atoms/ui/container";
 import Image from "next/image";
 import Link from "next/link";
 

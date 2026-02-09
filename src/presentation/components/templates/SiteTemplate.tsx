@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import Header from "@/presentation/components/organisms/header/Header";
-import Footer from "@/presentation/components/organisms/footer/Footer";
+import Header from "@/presentation/components/organisms/common/header/Header";
+import Footer from "@/presentation/components/organisms/common/footer/Footer";
 import { cn } from "@/common/lib/utils";
 import { useSmoothScroll } from "@/common/hooks/use-smooth-scroll";
 import { useLenisScroll } from "@/common/hooks/use-lenis-scroll";

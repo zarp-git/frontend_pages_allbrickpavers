@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Rubik, Hanken_Grotesk } from "next/font/google";
 import "@/app/globals.css";
-import Header from "@/presentation/components/organisms/header/Header";
-import Footer from "@/presentation/components/organisms/footer/Footer";
+import Header from "@/presentation/components/organisms/common/header/Header";
+import Footer from "@/presentation/components/organisms/common/footer/Footer";
 
 const rubik = Rubik({
   variable: "--font-rubik",
@@ -18,7 +18,7 @@ const hankenGrotesk = Hanken_Grotesk({
 
 export const metadata: Metadata = {
   title: "Allbrick Pavers - Central Florida Pavers Installation",
-  description: "Allbrick Pavers - Premium Pavers for Your Home",
+  description: "Explore expert paver installation, sealing, and maintenance services in Lakeland, Davenport, and Central Florida. Trusted, local, and competitively priced.",
 };
 
 export default function RootLayout({

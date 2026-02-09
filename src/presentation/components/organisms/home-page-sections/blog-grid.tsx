@@ -1,8 +1,8 @@
 import { getPosts } from "@/server/services/blog-posts/get-posts";
 import { IPagination, IPost } from "@/types/post";
-import ClientPagination from "@/presentation/components/ui/client-pagination";
-import BlogCard from "@/presentation/components/ui/blog-card";
-import { Container } from "@/presentation/components/ui/container";
+import ClientPagination from "@/presentation/components/atoms/ui/client-pagination";
+import BlogCard from "@/presentation/components/atoms/ui/blog-card";
+import { Container } from "@/presentation/components/atoms/ui/container";
 
 export default async function BlogGrid({
   searchParams,

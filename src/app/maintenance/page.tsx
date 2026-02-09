@@ -4,7 +4,7 @@ import MaintenancePage from "@/presentation/pages/maintance/MaintenancePage";
 export const metadata: Metadata = {
   title: "Site Under Maintenance | AllBricks Pavers",
   description:
-    "Our website is currently undergoing scheduled maintenance. We'll be back soon!",
+    "Explore expert paver installation, sealing, and maintenance services in Lakeland, Davenport, and Central Florida. Trusted, local, and competitively priced.",
   robots: {
     index: false,
     follow: false,

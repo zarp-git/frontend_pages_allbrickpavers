@@ -67,17 +67,28 @@ export default function Footer({ variant = "default" }: FooterProps) {
                 </p>
 
                 {/* Address */}
-                <div className="w-full flex flex-col justify-start items-start gap-3">
+                {/* Address */}
+                <address
+                  className="w-full flex flex-col justify-start items-start gap-3 not-italic"
+                  itemScope
+                  itemType="https://schema.org/PostalAddress"
+                >
                   <div className="w-full flex justify-start items-center gap-2.5">
-                    <RiMapPinLine className="w-5 h-5 text-primary" />
+                    <RiMapPinLine
+                      className="w-5 h-5 text-primary"
+                      aria-hidden="true"
+                    />
                     <span className="text-gray-700 text-base font-medium font-rubik">
                       {FOOTER_COMPANY_INFO.address.label}
                     </span>
                   </div>
-                  <p className="text-gray-700 text-sm font-normal font-rubik leading-5">
+                  <p
+                    className="text-gray-700 text-sm font-normal font-rubik leading-5"
+                    itemProp="streetAddress"
+                  >
                     {FOOTER_COMPANY_INFO.address.street}
                   </p>
-                </div>
+                </address>
               </div>
             </div>
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { ComparisonSlider } from "@/presentation/components/ui/comparison-slider";
+import { ComparisonSlider } from "@/presentation/components/atoms/ui/comparison-slider";
 
 export default function GalleryComparison() {
   return (
