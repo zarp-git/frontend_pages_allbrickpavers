@@ -63,7 +63,7 @@ export default function FaqSection() {
         <div className="flex flex-col-reverse lg:flex-row gap-12 lg:gap-24 relative">
           {/* Left Column: FAQ Items (Scrolls) */}
           <div className="flex-1 w-full lg:w-[60%]">
-            <h2 className="text-[28px] md:text-[36px] font-clash font-semibold text-gray-900 mb-8 uppercase leading-tight">
+            <h2 className="text-[28px] md:text-[36px] font-hanken font-semibold text-gray-900 mb-8 uppercase leading-tight">
               FREQUENTLY ASKED QUESTIONS (FAQ)
             </h2>
             <div className="flex flex-col">
@@ -107,7 +107,7 @@ export default function FaqSection() {
                   />
                 </div>
 
-                <h3 className="text-2xl font-bold text-[#A52024] font-clash mb-4">
+                <h3 className="text-2xl font-bold text-[#A52024] font-hanken mb-4">
                   7-YEARS WARRANTY
                 </h3>
 
@@ -149,7 +149,7 @@ export default function FaqSection() {
               className="w-full h-full object-contain"
             />
           </div>
-          <h3 className="text-2xl font-bold text-[#A52024] font-clash mb-2">
+          <h3 className="text-2xl font-bold text-[#A52024] font-hanken mb-2">
             7-YEARS WARRANTY
           </h3>
           <p className="text-gray-500 text-sm leading-relaxed mb-6 font-rubik max-w-sm">

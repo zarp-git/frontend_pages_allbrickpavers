@@ -33,7 +33,7 @@ export default function MobileMenu({ navItems }: MobileMenuProps) {
       {isOpen && (
         <div className="fixed inset-0 z-50 bg-background/95 backdrop-blur-sm p-6 flex flex-col animate-in slide-in-from-right duration-300">
           <div className="flex items-center justify-between mb-8">
-            <span className="font-clash text-xl font-bold">Menu</span>
+            <span className="font-hanken text-xl font-bold">Menu</span>
             <button
               onClick={() => setIsOpen(false)}
               className="p-2 text-foreground hover:bg-accent rounded-md"

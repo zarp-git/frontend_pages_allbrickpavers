@@ -19,7 +19,7 @@
 
 @theme {
   --font-sans: var(--font-rubik);
-  --font-clash-display: var(--font-clash-display);
+  --font-hanken-display: var(--font-hanken-display);
 
   --color-border: hsl(var(--border));
   --color-input: hsl(var(--input));

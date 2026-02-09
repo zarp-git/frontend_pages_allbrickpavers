@@ -142,7 +142,7 @@ export function JourneySectionLp({
                 <span className="inline-block px-4 py-2 bg-red-100 text-red-700 text-sm font-semibold uppercase tracking-wide rounded-full">
                   {eyebrow}
                 </span>
-                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 font-clash-display leading-tight">
+                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 font-hanken-display leading-tight">
                   {title}{" "}
                   <GradientText className=" bg-clip-text text-transparent">
                     {highlightedWord}

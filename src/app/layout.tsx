@@ -10,7 +10,7 @@ const rubik = Rubik({
 });
 
 const hankenGrotesk = Hanken_Grotesk({
-  variable: "--font-clash",
+  variable: "--font-hanken",
   subsets: ["latin"],
   weight: ["200", "300", "400", "500", "600", "700", "800"],
   display: "swap",

@@ -34,7 +34,7 @@ export default function Footer() {
             {/* Contact Column */}
             <div className="flex flex-col gap-4">
               <div className="flex flex-col gap-2">
-                <h3 className="text-xl text-foreground font-medium font-clash">
+                <h3 className="text-xl text-foreground font-medium font-hanken">
                   CONTACT US NOW
                 </h3>
                 <div className="h-[2px] w-10 bg-primary rounded-full" />
@@ -71,7 +71,7 @@ export default function Footer() {
             {/* Legal Column */}
             <div className="flex flex-col gap-4">
               <div className="flex flex-col gap-2">
-                <h3 className="text-xl text-foreground font-medium font-clash">
+                <h3 className="text-xl text-foreground font-medium font-hanken">
                   LEGAL
                 </h3>
                 <div className="h-[2px] w-10 bg-primary rounded-full" />
@@ -93,7 +93,7 @@ export default function Footer() {
             {/* Follow Us Column */}
             <div className="flex flex-col gap-4">
               <div className="flex flex-col gap-2">
-                <h3 className="text-xl text-foreground font-medium font-clash">
+                <h3 className="text-xl text-foreground font-medium font-hanken">
                   FOLLOW US
                 </h3>
                 <div className="h-[2px] w-10 bg-primary rounded-full" />
