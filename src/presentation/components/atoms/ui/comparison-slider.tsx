@@ -127,7 +127,7 @@ export function ComparisonSlider({
 
       {/* Divider Line */}
       <div
-        className="absolute inset-y-0 w-1 bg-white shadow-[0_0_10px_rgba(0,0,0,0.5)] pointer-events-none"
+        className="absolute inset-y-0 w-1 bg-white pointer-events-none"
         style={{ left: `${position}%`, transform: "translateX(-50%)" }}
       />
 
@@ -135,7 +135,7 @@ export function ComparisonSlider({
       <button
         ref={handleRef}
         className={cn(
-          "absolute top-1/2 -translate-y-1/2 w-6 h-10 bg-white rounded-md shadow-[0_4px_12px_rgba(0,0,0,0.3)] flex items-center justify-center text-gray-800 z-20 focus:outline-none focus:ring-4 focus:ring-primary/40 transition-[transform,box-shadow] duration-200 hover:scale-110 active:scale-95",
+          "absolute top-1/2 -translate-y-1/2 w-6 h-10 bg-white rounded-md flex items-center justify-center text-gray-800 z-20 focus:outline-none focus:ring-4 focus:ring-primary/40 transition-[transform] duration-200 hover:scale-110 active:scale-95",
           isResizing && "scale-110 ring-4 ring-primary/40",
         )}
         style={{ left: `${position}%`, transform: "translate(-50%, -50%)" }}

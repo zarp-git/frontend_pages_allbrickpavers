@@ -5,16 +5,20 @@ import Hero from "@/presentation/components/organisms/home-page-sections/Hero";
 import FeedbackSection from "@/presentation/components/organisms/home-page-sections/FeedbackSection";
 import FaqSection from "@/presentation/components/organisms/home-page-sections/FaqSection";
 import AboutSection from "@/presentation/components/organisms/home-page-sections/AboutSection";
+import { PaversVsConcreteSection } from "@/presentation/components/organisms/home-page-sections/PaversVsConcreteSection";
+import { InstallationTrustSection } from "@/presentation/components/organisms/home-page-sections/InstallationTrustSection";
 
 export default function Home() {
   return (
     <main>
       <Hero />
       <IntroSection />
+         <AboutSection />
       <DifferentialsSection />
-      <GalleryComparison />
       <FeedbackSection />
-      <AboutSection />
+   
+      <PaversVsConcreteSection />
+      <InstallationTrustSection />
       <FaqSection />
     </main>
   );
