@@ -1,4 +1,5 @@
 import IntroSection from "@/presentation/components/organisms/home-page-sections/IntroSection";
+import DifferentialsSection from "@/presentation/components/organisms/home-page-sections/DifferentialsSection";
 import GalleryComparison from "@/presentation/components/organisms/home-page-sections/GalleryComparison";
 import Hero from "@/presentation/components/organisms/home-page-sections/Hero";
 import FeedbackSection from "@/presentation/components/organisms/home-page-sections/FeedbackSection";
@@ -10,6 +11,7 @@ export default function Home() {
     <main>
       <Hero />
       <IntroSection />
+      <DifferentialsSection />
       <GalleryComparison />
       <FeedbackSection />
       <AboutSection />
