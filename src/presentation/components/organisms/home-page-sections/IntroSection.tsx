@@ -5,7 +5,7 @@ import { RiPhoneLine } from "@remixicon/react";
 export default function IntroSection() {
   return (
     <section className="py-20 bg-white">
-      <div className="container mx-auto">
+      <div className="section-container">
         <div className="flex flex-col md:flex-row gap-12 items-center justify-center">
           {/* Left Column: Image */}
           <div className="flex-1">

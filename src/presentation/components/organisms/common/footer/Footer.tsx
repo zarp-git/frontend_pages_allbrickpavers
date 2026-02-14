@@ -35,7 +35,7 @@ export default function Footer({ variant = "default" }: FooterProps) {
   if (variant === "simplified") {
     return (
       <footer className="w-full bg-black border-t border-gray-900">
-        <div className="container mx-auto px-6 md:px-28 py-6 md:py-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="section-container py-6 md:py-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-gray-400 text-sm md:text-base font-normal font-rubik leading-5">
             AllBrick Pavers &copy; Copyright <CurrentYear /> - All Rights
             Reserved.
@@ -68,8 +68,8 @@ export default function Footer({ variant = "default" }: FooterProps) {
   return (
     <footer className="w-full">
       {/* ── Main Footer Section ── */}
-      <div className="bg-white px-6 md:px-14 lg:px-28 py-10 lg:py-16 flex flex-col items-center gap-8 lg:gap-12">
-        <div className="w-full max-w-[1216px] flex flex-col items-center gap-8">
+      <div className="bg-white py-10 lg:py-16 w-full flex flex-col items-center gap-8 lg:gap-12">
+        <div className="section-container flex flex-col items-center gap-8">
           {/* ── Top Card (bordered) ── */}
           <div className="w-full rounded-[10px] border border-secondary overflow-hidden">
             <div className="flex flex-col lg:flex-row">
@@ -171,9 +171,12 @@ export default function Footer({ variant = "default" }: FooterProps) {
           </div>
 
           {/* ── Bottom Section · Navigation Links ── */}
-          <div className="w-full px-0 lg:px-14 flex flex-col lg:flex-row justify-between items-start gap-10 lg:gap-20">
+          <div className="w-full flex flex-col lg:flex-row justify-between items-start gap-10 lg:gap-20">
             {/* Link Columns */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-16">
+            <nav
+              aria-label="Footer Directory"
+              className="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-16"
+            >
               {/* Company */}
               <FooterLinkColumn title="COMPANY" links={FOOTER_COMPANY_LINKS} />
 
@@ -185,7 +188,7 @@ export default function Footer({ variant = "default" }: FooterProps) {
 
               {/* Legal */}
               <FooterLinkColumn title="LEGAL" links={FOOTER_LEGAL_LINKS} />
-            </div>
+            </nav>
 
             {/* Find Us On */}
             <div className="w-full lg:w-60 flex flex-col gap-8">
@@ -197,53 +200,59 @@ export default function Footer({ variant = "default" }: FooterProps) {
               </div>
 
               {/* Social Icons */}
-              <div className="flex items-center gap-6">
-                <Link
-                  href={SOCIAL_LINKS.instagram}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Follow us on Instagram"
-                  className="transition-transform hover:scale-110"
-                >
-                  <Image
-                    src="/images/brands/instagram-icon.svg"
-                    alt="Instagram"
-                    width={40}
-                    height={40}
-                    className="w-10 h-10"
-                  />
-                </Link>
-                <Link
-                  href={SOCIAL_LINKS.facebook}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Follow us on Facebook"
-                  className="transition-transform hover:scale-110"
-                >
-                  <Image
-                    src="/images/brands/facebook-icon.svg"
-                    alt="Facebook"
-                    width={40}
-                    height={40}
-                    className="w-10 h-10"
-                  />
-                </Link>
-                <Link
-                  href={SOCIAL_LINKS.googleMaps}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Find us on Google Maps"
-                  className="transition-transform hover:scale-110"
-                >
-                  <Image
-                    src="/images/brands/google-maps-icon.svg"
-                    alt="Google Maps"
-                    width={28}
-                    height={40}
-                    className="w-7 h-10"
-                  />
-                </Link>
-              </div>
+              <ul className="flex items-center gap-6 list-none m-0 p-0">
+                <li>
+                  <Link
+                    href={SOCIAL_LINKS.instagram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Follow us on Instagram"
+                    className="transition-transform hover:scale-110 block"
+                  >
+                    <Image
+                      src="/images/brands/instagram-icon.svg"
+                      alt="Instagram"
+                      width={40}
+                      height={40}
+                      className="w-10 h-10"
+                    />
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href={SOCIAL_LINKS.facebook}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Follow us on Facebook"
+                    className="transition-transform hover:scale-110 block"
+                  >
+                    <Image
+                      src="/images/brands/facebook-icon.svg"
+                      alt="Facebook"
+                      width={40}
+                      height={40}
+                      className="w-10 h-10"
+                    />
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href={SOCIAL_LINKS.googleMaps}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Find us on Google Maps"
+                    className="transition-transform hover:scale-110 block"
+                  >
+                    <Image
+                      src="/images/brands/google-maps-icon.svg"
+                      alt="Google Maps"
+                      width={28}
+                      height={40}
+                      className="w-7 h-10"
+                    />
+                  </Link>
+                </li>
+              </ul>
 
               {/* Leave a Review */}
               <Button
@@ -269,29 +278,31 @@ export default function Footer({ variant = "default" }: FooterProps) {
       </div>
 
       {/* ── Copyright Bar ── */}
-      <div className="w-full px-6 md:px-14 lg:px-28 py-6 lg:py-8 bg-black border-t border-gray-900 flex flex-col md:flex-row justify-between items-center gap-4">
-        <p className="text-gray-400 text-sm md:text-base font-normal font-rubik leading-5">
-          AllBrick Pavers &copy; Copyright <CurrentYear /> - All Rights
-          Reserved.
-        </p>
-        <div className="flex-1 flex justify-end items-center gap-4">
-          <span className="text-gray-500 text-sm md:text-base font-normal font-rubik underline leading-5">
-            Developed and Maintained by
-          </span>
-          <Link
-            href="https://www.zarpstudio.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:opacity-80 transition-opacity"
-          >
-            <Image
-              src="/images/brands/zarp-logomark.svg"
-              alt="Zarp Studio"
-              width={83}
-              height={25}
-              className="h-6 w-auto"
-            />
-          </Link>
+      <div className="w-full py-6 lg:py-8 bg-black border-t border-gray-900">
+        <div className="section-container flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-gray-400 text-sm md:text-base font-normal font-rubik leading-5">
+            AllBrick Pavers &copy; Copyright <CurrentYear /> - All Rights
+            Reserved.
+          </p>
+          <div className="flex-1 flex justify-end items-center gap-4">
+            <span className="text-gray-500 text-sm md:text-base font-normal font-rubik underline leading-5">
+              Developed and Maintained by
+            </span>
+            <Link
+              href="https://www.zarpstudio.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:opacity-80 transition-opacity"
+            >
+              <Image
+                src="/images/brands/zarp-logomark.svg"
+                alt="Zarp Studio"
+                width={83}
+                height={25}
+                className="h-6 w-auto"
+              />
+            </Link>
+          </div>
         </div>
       </div>
     </footer>
@@ -313,15 +324,18 @@ function FooterLinkColumn({ title, links }: FooterLinkColumnProps) {
         </h3>
         <div className="w-10 h-0.5 bg-primary rounded-lg" />
       </div>
-      {links.map((link) => (
-        <Link
-          key={link.href}
-          href={link.href}
-          className="text-gray-700 text-base font-normal font-rubik hover:text-primary transition-colors"
-        >
-          {link.label}
-        </Link>
-      ))}
+      <ul className="flex flex-col gap-4 list-none m-0 p-0">
+        {links.map((link) => (
+          <li key={link.href}>
+            <Link
+              href={link.href}
+              className="text-gray-700 text-base font-normal font-rubik hover:text-primary transition-colors block"
+            >
+              {link.label}
+            </Link>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

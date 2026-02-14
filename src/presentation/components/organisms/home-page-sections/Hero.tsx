@@ -136,13 +136,13 @@ export default function Hero() {
 
   return (
     <section
-      className="relative w-full min-h-svh flex flex-col justify-center overflow-hidden px-4 md:px-6 lg:px-8 pb-16 md:pb-20"
+      className="relative w-full min-h-svh flex flex-col justify-center overflow-hidden pb-16 md:pb-20"
       style={{
         background:
           "radial-gradient(277.91% 109.76% at 63.33% 38.87%, #FFF 0%, #D9D9D9 100%)",
       }}
     >
-      <div className="container mx-auto relative z-10 flex flex-col lg:flex-row items-center gap-8 md:gap-12 lg:gap-0">
+      <div className="section-container relative z-10 flex flex-col lg:flex-row items-center gap-8 md:gap-12 lg:gap-0">
         {/* Text Content */}
         <div className="flex-1 flex flex-col items-center lg:items-start gap-4 md:gap-6 relative z-30">
           {/* Badge */}

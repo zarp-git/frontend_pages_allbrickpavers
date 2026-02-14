@@ -59,7 +59,7 @@ export default function FeedbackSection() {
 
   return (
     <section className="py-20 bg-white overflow-hidden">
-      <div className="container mx-auto px-4 text-center mb-12">
+      <div className="section-container text-center mb-12">
         <h2 className="h2 text-foreground mb-4">
           What Costumers Are Talking About Is
         </h2>
@@ -71,7 +71,7 @@ export default function FeedbackSection() {
         - "sumindo tudo o que sair desse container" -> overflow-hidden on the container.
         - Slider takes 100% of this container.
       */}
-      <div className="container mx-auto relative overflow-hidden">
+      <div className="section-container relative overflow-hidden">
         <div className="w-full">
           <Swiper
             modules={[Autoplay]}
@@ -151,7 +151,7 @@ export default function FeedbackSection() {
       </div>
 
       {/* Footer Buttons */}
-      <div className="container mx-auto px-4 mt-12 flex flex-wrap items-center justify-center gap-4">
+      <div className="section-container mt-12 flex flex-wrap items-center justify-center gap-4">
         <Button
           variant="brick"
           size="lg"

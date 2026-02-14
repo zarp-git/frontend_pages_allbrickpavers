@@ -59,11 +59,8 @@ export default function FaqSection() {
   };
 
   return (
-    <section
-      id="faq"
-      className="w-full bg-gray-50 px-6 md:px-14 lg:px-28 py-14 lg:py-20"
-    >
-      <div className="max-w-[1440px] mx-auto flex flex-col lg:flex-row justify-between items-start gap-12 lg:gap-16">
+    <section id="faq" className="w-full bg-gray-50 py-14 lg:py-20">
+      <div className="section-container flex flex-col lg:flex-row justify-between items-start gap-12 lg:gap-16">
         {/* Left Column - Warranty Badge + CTA */}
         <div className="w-full lg:w-[554px] flex flex-col items-center lg:items-start gap-8">
           {/* Warranty Badge */}

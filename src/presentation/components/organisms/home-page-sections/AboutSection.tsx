@@ -8,7 +8,7 @@ import { Button } from "@/presentation/components/atoms/ui/button";
 export default function AboutSection() {
   return (
     <section className="py-20 bg-white">
-      <div className="container mx-auto">
+      <div className="section-container">
         {/* Section Heading */}
         <div className="text-center mb-16">
           <h2 className="text-[28px] md:text-[36px] font-rubik font-semibold text-gray-900 leading-tight">
