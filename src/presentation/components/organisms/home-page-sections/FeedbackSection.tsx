@@ -1,172 +1,268 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useRef } from "react";
+import Image from "next/image";
+import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
+import { Navigation, Autoplay } from "swiper/modules";
+import type { Swiper as SwiperType } from "swiper";
 import "swiper/css";
-import "swiper/css/autoplay";
-import { RiPhoneLine } from "@remixicon/react";
+import "swiper/css/navigation";
+import {
+  RiPhoneLine,
+  RiArrowRightUpLine,
+  RiArrowLeftSLine,
+  RiArrowRightSLine,
+} from "@remixicon/react";
 
 import { Button } from "@/presentation/components/atoms/ui/button";
 import StarRating from "@/presentation/components/atoms/ui/StarRating";
+import { SOCIAL_LINKS, CONTACT } from "@/constants";
 
-// --- Mock Data ---
-const FEEDBACKS = [
+// ---------------------------------------------------------------------------
+// Review data
+// ---------------------------------------------------------------------------
+interface Review {
+  id: number;
+  name: string;
+  daysAgo: string;
+  rating: number;
+  serviceTag: string;
+  image: string;
+  text: string;
+}
+
+const DEFAULT_AVATAR = "/images/avatars/default-avatar-profile-picture.svg";
+
+const REVIEWS: Review[] = [
   {
     id: 1,
-    name: "Doug Wilson",
-    avatar: "https://randomuser.me/api/portraits/men/32.jpg",
-    daysAgo: "13 Days Ago",
+    name: "Liz Pratt",
+    daysAgo: "20 days ago",
     rating: 5,
-    text: "I’m Extremely Happy With The Work Allbrick Pavers Did At My Home. They Re-Leveled The Travertine Pavers Around My Pool And Added A Brand-New Walkway, And Everything Turned Out Absolutely Beautiful. The Crew Was Professional, Skilled, And Clearly Knew Exactly What They Were Doing.",
+    serviceTag: "Patio Pavers",
+    image: "/images/sections-images/patio-pavers-1-after-1.webp",
+    text: "We shopped around for months for the best paver company to redo our patio in Providence, Davenport, FL. Through our search we found many scammers and large companies that don't give you the time of day and don't care about your money or the quality. We chose Allbrick Pavers specifically because of all the extra time they spent with us free of charge to help us feel comfortable, understand all of our options thoroughly and worked with our budget without pressure to pick our forever patio.",
   },
   {
     id: 2,
-    name: "57iglesias",
-    avatar: "https://randomuser.me/api/portraits/men/45.jpg", // Placeholder or generic avatar
-    daysAgo: "13 Days Ago",
+    name: "Doug Wilson",
+    daysAgo: "13 days ago",
     rating: 5,
-    text: "I Reached Out To Allbrick For An Expansion Of My Pavers. They Were Very Professional From The First Call Throughout The Entire Process. They Were On Time, Work In A Clean And Orderly Manner. The Team Works Extremely Well Together.",
+    serviceTag: "Pool Deck",
+    image: "/images/sections-images/pool-deck-after.jpg",
+    text: "I'm extremely happy with the work Allbrick Pavers did at my home. They re-leveled the travertine pavers around my pool and added a brand-new walkway, and everything turned out absolutely beautiful. The crew was professional, skilled, and clearly knew exactly what they were doing. The job was completed in a timely manner and the craftsmanship was excellent from start to finish. I highly recommend Allbrick Pavers to anyone looking for expert paver work and quality results!",
   },
   {
     id: 3,
-    name: "Audania Taylor",
-    avatar: "https://randomuser.me/api/portraits/women/44.jpg",
-    daysAgo: "15 Days Ago",
+    name: "57iglesias",
+    daysAgo: "13 days ago",
     rating: 5,
-    text: "Look At This! LOOK AT THIS!!! Is This Not Gorgeous! Rael And His Davenport Team Meticulously Planned, Communicated, And Completed My Back Lanai In Excellent Time. He Worked With Other Contractors For A Seamless Installation.",
+    serviceTag: "Fire Pit",
+    image: "/images/sections-images/firepit-pavers-1-after-1.webp",
+    text: "I reached out to Allbrick for an expansion of my pavers. They were very professional from the first call throughout the entire process. They were on time, work in a clean and orderly manner. The team works extremely well together. Once completed, they left my front lawn neat and clean. I live in Winter Haven and they provided all the necessary documentation for the HOA approval. Highly recommend this company, they were a pleasure to work with them.",
   },
   {
     id: 4,
-    name: "Liz Pratt",
-    avatar: "https://randomuser.me/api/portraits/women/68.jpg",
-    daysAgo: "20 Days Ago",
+    name: "Audania Taylor",
+    daysAgo: "15 days ago",
     rating: 5,
-    text: "We Shopped Around For Months For The Best Paver Company To Redo Our Patio In Providence, Davenport, FL. Through Our Search We Found Many Scammers And Lazy Companies That Don't Give You The Time Of Day. Not Allbrick!",
+    serviceTag: "Patio Pavers",
+    image: "/images/sections-images/patio-pavers-2-after-1.webp",
+    text: "Look at this! LOOK AT THIS!!! Is this not gorgeous! Rael and his Davenport team meticulously planned, communicated, and completed my back lanai in excellent time. He worked with other contractors for a seamless installation so there were no pauses in the work. ALLBRICK's prices were reasonable and Rael even offered to throw in a fire pit for free (which was appreciated but eventually declined). My husband and I are so happy with the work ALLBRICK did. Highly, HIGHLY recommend!!",
   },
   {
     id: 5,
-    name: "John Doe",
-    avatar: "https://randomuser.me/api/portraits/men/85.jpg",
-    daysAgo: "22 Days Ago",
-    rating: 4.5,
-    text: "Fantastic service from start to finish. The team was punctual and the end result exceeded our expectations. Highly recommend for anyone looking for quality paving work.",
+    name: "Liz Pratt",
+    daysAgo: "20 days ago",
+    rating: 5,
+    serviceTag: "Patio Pavers",
+    image: "/images/sections-images/patio-pavers-3-after-1.webp",
+    text: "We shopped around for months for the best paver company to redo our patio in Providence, Davenport, FL. Through our search we found many scammers and large companies that don't give you the time of day and don't care about your money or the quality. We chose Allbrick Pavers specifically because of all the extra time they spent with us free of charge to help us feel comfortable, understand all of our options thoroughly and worked with our budget without pressure to pick our forever patio.",
   },
 ];
 
+// ---------------------------------------------------------------------------
+// Component
+// ---------------------------------------------------------------------------
 export default function FeedbackSection() {
-  const [swiperRef, setSwiperRef] = useState<any>(null);
+  const swiperRef = useRef<SwiperType | null>(null);
 
   return (
-    <section className="py-20 bg-white overflow-hidden">
-      <div className="section-container text-center mb-12">
-        <h2 className="h2 text-foreground mb-4">
-          What Costumers Are Talking About Is
+    <section
+      id="testimonials"
+      className="relative py-14 lg:py-20 bg-white overflow-hidden"
+    >
+      {/* ── Heading ── */}
+      <div className="section-container text-center mb-10 lg:mb-12">
+        <h2 className="text-gray-800 text-2xl md:text-3xl font-black font-hanken uppercase leading-tight tracking-wide">
+          What Customers Are Talking About Our Service
         </h2>
       </div>
 
-      {/* 
-        Container Logic:
-        - "container mx-auto" defines the max width.
-        - "sumindo tudo o que sair desse container" -> overflow-hidden on the container.
-        - Slider takes 100% of this container.
-      */}
-      <div className="section-container relative overflow-hidden">
-        <div className="w-full">
-          <Swiper
-            modules={[Autoplay]}
-            spaceBetween={24}
-            // Responsive breakpoints to show partial slides
-            slidesPerView={1.2}
-            loop={true}
-            speed={4000} // continuous flow speed
-            autoplay={{
-              delay: 0,
-              disableOnInteraction: false,
-              pauseOnMouseEnter: true,
-            }}
-            breakpoints={{
-              640: {
-                slidesPerView: 2.2,
-              },
-              1024: {
-                slidesPerView: 3.2,
-              },
-              1280: {
-                slidesPerView: 3.5,
-              },
-            }}
-            className="ease-linear!"
-            // Swiper's continuous autoplay usually requires 'linear' timing function in global css or custom class,
-            // but standard autoplay with delay 0 approximates it.
-            // We'll let standard autoplay handle the "girando" Feel.
-            onSwiper={setSwiperRef}
-          >
-            {FEEDBACKS.map((feedback) => (
-              <SwiperSlide key={feedback.id} className="h-auto">
-                <div className="bg-white border border-[#ececec] rounded-2xl p-6 h-full flex flex-col gap-4 shadow-sm hover:shadow-md transition-shadow">
-                  {/* Header: Avatar, Name, Google Logo, Days Ago */}
-                  <div className="flex items-start justify-between">
-                    <div className="flex items-center gap-4">
-                      <div className="relative">
-                        <img
-                          src={feedback.avatar}
-                          alt={feedback.name}
-                          className="w-[52px] h-[52px] rounded-full object-cover"
-                        />
-                        {/* Google Logo Badge - absolute positioned on avatar as per common design patterns for reviews, or usually Next to it. 
-                                Design Screenshot shows Google logo small next to name or overlapping avatar?
-                                Screenshot shows: Avatar on left. Name and "13 Days Ago" in text column. 
-                                AND a Google G logo at the bottom right of the AVATAR circle.
-                            */}
-                        <img
-                          src="/images/google-logo.png"
-                          alt="Google"
-                          className="absolute -bottom-1 -right-1 w-5 h-5 bg-white rounded-full p-0.5 shadow-sm"
-                        />
-                      </div>
-                      <div className="flex flex-col text-left">
-                        <h4 className="text-base font-bold text-gray-900 font-rubik leading-tight">
-                          {feedback.name}
-                        </h4>
-                        <span className="text-xs text-gray-400 font-rubik">
-                          {feedback.daysAgo}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
+      {/* ── Carousel ── */}
+      <div className="section-container relative">
+        <Swiper
+          modules={[Navigation, Autoplay]}
+          spaceBetween={32}
+          slidesPerView={1.15}
+          loop
+          speed={600}
+          autoplay={{
+            delay: 5000,
+            disableOnInteraction: false,
+            pauseOnMouseEnter: true,
+          }}
+          breakpoints={{
+            640: { slidesPerView: 1.8, spaceBetween: 24 },
+            768: { slidesPerView: 2.3, spaceBetween: 28 },
+            1024: { slidesPerView: 3.2, spaceBetween: 32 },
+            1280: { slidesPerView: 3.8, spaceBetween: 32 },
+          }}
+          onSwiper={(swiper) => {
+            swiperRef.current = swiper;
+          }}
+          className="overflow-visible!"
+        >
+          {REVIEWS.map((review) => (
+            <SwiperSlide key={review.id} className="h-auto!">
+              <ReviewCard review={review} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
 
-                  {/* Stars */}
-                  <StarRating rating={feedback.rating} />
-
-                  {/* Text */}
-                  <p className="text-gray-600 font-rubik text-sm leading-relaxed text-left line-clamp-6">
-                    {feedback.text}
-                  </p>
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </div>
+        {/* ── Fade Edges ── */}
+        <div
+          className="pointer-events-none absolute left-0 top-0 bottom-0 w-16 lg:w-32 z-10"
+          style={{
+            background:
+              "linear-gradient(to right, rgb(255 255 255) 0%, rgb(255 255 255 / 0) 100%)",
+          }}
+        />
+        <div
+          className="pointer-events-none absolute right-0 top-0 bottom-0 w-16 lg:w-32 z-10"
+          style={{
+            background:
+              "linear-gradient(to left, rgb(255 255 255) 0%, rgb(255 255 255 / 0) 100%)",
+          }}
+        />
       </div>
 
-      {/* Footer Buttons */}
-      <div className="section-container mt-12 flex flex-wrap items-center justify-center gap-4">
+      {/* ── Navigation Arrows ── */}
+      <div className="section-container flex justify-center gap-4 mt-8">
+        <button
+          type="button"
+          aria-label="Previous review"
+          onClick={() => swiperRef.current?.slidePrev()}
+          className="size-10 rounded-full bg-white border border-gray-200 flex items-center justify-center hover:border-gray-400 transition-colors"
+        >
+          <RiArrowLeftSLine className="size-5 text-gray-700" />
+        </button>
+        <button
+          type="button"
+          aria-label="Next review"
+          onClick={() => swiperRef.current?.slideNext()}
+          className="size-10 rounded-full bg-white border border-gray-200 flex items-center justify-center hover:border-gray-400 transition-colors"
+        >
+          <RiArrowRightSLine className="size-5 text-gray-700" />
+        </button>
+      </div>
+
+      {/* ── CTA Buttons ── */}
+      <div className="section-container mt-10 flex flex-wrap items-center justify-center gap-4">
         <Button
+          asChild
           variant="brick"
           size="lg"
-          className="h-[52px] px-8 text-base font-medium uppercase min-w-[200px] flex items-center justify-center gap-2"
+          className="h-12 px-8 text-base font-medium rounded-lg"
         >
-          CONTACT US NOW <RiPhoneLine className="size-5" />
+          <Link href={`${CONTACT.phoneHref}`}>
+            Contact Us Now
+            <RiPhoneLine className="size-5" />
+          </Link>
         </Button>
         <Button
+          asChild
           variant="brick-outline"
           size="lg"
-          className="h-[52px] px-8 text-base font-medium uppercase min-w-[200px]"
+          className="h-12 px-8 text-base font-medium rounded-lg"
         >
-          SEE MORE
+          <Link
+            href={SOCIAL_LINKS.googleMaps}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Read All Reviews
+            <RiArrowRightUpLine className="size-5" />
+          </Link>
         </Button>
       </div>
     </section>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// ReviewCard sub-component
+// ---------------------------------------------------------------------------
+function ReviewCard({ review }: { review: Review }) {
+  return (
+    <article className="w-80 p-5 bg-gray-50 rounded-2xl border border-gray-200 flex flex-col justify-start items-start gap-4 h-full">
+      {/* ── Project Image with Service Chip ── */}
+      <div className="relative self-stretch h-40 rounded-md border border-gray-200 overflow-hidden">
+        <Image
+          src={review.image}
+          alt={`${review.serviceTag} project by AllBrick Pavers`}
+          fill
+          sizes="320px"
+          className="object-cover"
+        />
+        <span className="absolute top-3 left-3 px-3 py-1.5 bg-stone-50/90 backdrop-blur-sm rounded-full border border-gray-200 text-gray-700 text-xs font-medium font-rubik">
+          {review.serviceTag}
+        </span>
+      </div>
+
+      {/* ── Reviewer Info ── */}
+      <div className="self-stretch flex flex-col gap-3.5">
+        <div className="self-stretch relative flex items-center gap-4">
+          {/* Avatar with Google badge */}
+          <div className="relative shrink-0">
+            <Image
+              src={DEFAULT_AVATAR}
+              alt={review.name}
+              width={48}
+              height={48}
+              className="size-12 rounded-full object-cover bg-gray-200"
+            />
+            <div className="absolute -bottom-0.5 -right-0.5 size-6 p-[5px] bg-white rounded-full border border-neutral-100 flex items-center justify-center">
+              <Image
+                src="/images/svg/google-icon.svg"
+                alt="Google"
+                width={16}
+                height={17}
+                className="size-4"
+              />
+            </div>
+          </div>
+
+          {/* Name & date */}
+          <div className="flex-1 flex flex-col gap-[5px]">
+            <span className="text-black text-base font-normal font-rubik capitalize leading-4">
+              {review.name}
+            </span>
+            <span className="text-gray-400 text-sm font-normal font-rubik capitalize leading-4">
+              {review.daysAgo}
+            </span>
+          </div>
+        </div>
+
+        {/* Stars */}
+        <StarRating rating={review.rating} size={20} />
+      </div>
+
+      {/* ── Review Text ── */}
+      <p className="self-stretch text-neutral-600 text-base font-normal font-rubik leading-6">
+        {review.text}
+      </p>
+    </article>
   );
 }
