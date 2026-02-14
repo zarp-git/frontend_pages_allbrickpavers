@@ -4,30 +4,52 @@ import React, { useState, useEffect, useCallback } from "react";
 import { ComparisonSlider } from "@/presentation/components/atoms/ui/comparison-slider";
 import { Button } from "@/presentation/components/atoms/ui/button";
 import {
-  RiArrowDownLine,
+  RiArrowDownSLine,
   RiPhoneLine,
-  RiArrowLeftSLine,
-  RiArrowRightSLine,
+  RiArrowLeftLine,
+  RiArrowRightLine,
 } from "@remixicon/react";
 import { cn } from "@/lib/utils";
+import { CyclingText } from "@/presentation/components/molecules/common/CyclingText";
+
+const CITIES = [
+  "WINTER HAVEN",
+  "LAKELAND",
+  "HAINES CITY",
+  "DAVENPORT",
+  "AUBURNDALE",
+  "HORIZON WEST",
+];
+
+const SERVICES = [
+  "PAVERS INSTALLATION",
+  "PAVERS REPAIR",
+  "PAVERS MAINTENANCE PLANS",
+  "PATIO PAVERS",
+  "POOL DECKS PAVERS",
+  "DRIVEWAY PAVERS",
+  "FIREPIT PAVERS",
+];
 
 const SLIDES = [
   {
-    before: "/images/hero/before1.png",
-    after: "/images/hero/after1.png",
-    label: "Patio Pavers",
+    before: "/images/sections-images/pool-deck-before.jpeg",
+    after: "/images/sections-images/pool-deck-after.jpg",
+    label: "Pool Deck",
     id: 1,
   },
   {
-    before: "/images/hero/before1.png",
-    after: "/images/hero/after1.png",
-    label: "Pool Deck",
+    before: "/images/sections-images/cracked-pavers.jpg",
+    after: "/images/sections-images/driveway-pavers-1-after.webp",
+    label: "Driveway Pavers",
     id: 2,
   },
   {
-    before: "/images/hero/before1.png",
-    after: "/images/hero/after1.png",
-    label: "Driveways",
+    before:
+      "/images/sections-images/difference-section-driveway-paver-others.jpg",
+    after:
+      "/images/sections-images/difference-section-driveway-paver-ours.webp",
+    label: "Patio Pavers",
     id: 3,
   },
 ];
@@ -36,15 +58,6 @@ export default function Hero() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isAutoPlay, setIsAutoPlay] = useState(true);
 
-  // Auto-play logic
-  useEffect(() => {
-    if (!isAutoPlay) return;
-    const interval = setInterval(() => {
-      handleNext();
-    }, 5000);
-    return () => clearInterval(interval);
-  }, [activeIndex, isAutoPlay]);
-
   const handleNext = useCallback(() => {
     setActiveIndex((current) => (current + 1) % SLIDES.length);
   }, []);
@@ -52,6 +65,15 @@ export default function Hero() {
   const handlePrev = useCallback(() => {
     setActiveIndex((current) => (current - 1 + SLIDES.length) % SLIDES.length);
   }, []);
+
+  // Auto-play logic
+  useEffect(() => {
+    if (!isAutoPlay) return;
+    const interval = setInterval(() => {
+      handleNext();
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [activeIndex, isAutoPlay, handleNext]);
 
   // Pause autoplay on interaction
   const pauseAutoPlay = () => setIsAutoPlay(false);
@@ -67,7 +89,6 @@ export default function Hero() {
     // We only really care about -1 (Left), 0 (Center), and 1 (Right)
     const isCenter = offset === 0;
     const isLeft = offset === -1 || offset === total - 1;
-    const isRight = offset === 1 || offset === -(total - 1);
 
     if (isCenter) {
       return {
@@ -114,12 +135,16 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative w-full pt-10 pb-20 overflow-hidden bg-hero-radial">
-      {/* Background radial gradient simulation - Removed inline style in favor of class */}
-
-      <div className="container mx-auto relative z-10 flex flex-col lg:flex-row items-center gap-12 lg:gap-[0px]">
+    <section
+      className="relative w-full min-h-svh flex flex-col justify-center overflow-hidden px-4 md:px-6 lg:px-8 pb-16 md:pb-20"
+      style={{
+        background:
+          "radial-gradient(277.91% 109.76% at 63.33% 38.87%, #FFF 0%, #D9D9D9 100%)",
+      }}
+    >
+      <div className="container mx-auto relative z-10 flex flex-col lg:flex-row items-center gap-8 md:gap-12 lg:gap-0">
         {/* Text Content */}
-        <div className="flex-1 flex flex-col items-start gap-6 relative z-30">
+        <div className="flex-1 flex flex-col items-center lg:items-start gap-4 md:gap-6 relative z-30">
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-2 py-1 bg-white border border-gray-200 rounded-full shadow-sm">
             <span className="bg-[#dcfce7] text-[#064e3b] text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">
@@ -131,24 +156,32 @@ export default function Hero() {
           </div>
 
           {/* Heading */}
-          <h1 className="h1 text-gray-900 text-left">
+          <h1 className="h1 text-gray-900 text-center lg:text-left">
             The Best Specialists for{" "}
-            <span className="text-primary block">PAVERS INSTALLATION</span>
-            in <span className="text-gray-900">HAINES CITY</span>
+            <span className="text-primary block">
+              <CyclingText items={SERVICES} interval={3000} direction="up" />
+            </span>
+            in{" "}
+            <CyclingText
+              items={CITIES}
+              className="text-gray-900"
+              interval={2500}
+              direction="up"
+            />
           </h1>
 
           {/* Description */}
-          <p className="text-gray-600 font-rubik text-base md:text-lg leading-relaxed max-w-[480px]">
+          <p className="text-gray-600 font-rubik text-sm md:text-base lg:text-lg leading-relaxed max-w-[480px] text-center lg:text-left">
             Transforming ordinary outdoor spaces into stunning landscapes that
             last a lifetime. Serving Central Florida homeowners since 2008.
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
             <Button
               variant="brick"
               size="lg"
-              className="h-14 px-8 text-base font-bold tracking-wide flex items-center gap-2 shadow-lg hover:shadow-xl transition-all"
+              className="h-12 md:h-14 px-6 md:px-8 text-sm md:text-base font-bold tracking-wide flex items-center gap-2 shadow-lg hover:shadow-xl transition-all"
             >
               CONTACT US NOW <RiPhoneLine className="size-5" />
             </Button>
@@ -157,29 +190,29 @@ export default function Hero() {
 
         {/* 3D Card Carousel Area */}
         <div
-          className="flex-1 w-full max-w-[800px] h-[450px] relative flex items-center justify-center perspective-1000"
+          className="flex-1 w-full max-w-[800px] h-[280px] sm:h-[340px] md:h-[400px] lg:h-[450px] relative flex items-center justify-center perspective-1000"
           onMouseEnter={pauseAutoPlay}
           onMouseLeave={resumeAutoPlay}
         >
           {/* Navigation Buttons (Outside the transform flow) */}
           <button
             onClick={handlePrev}
-            className="absolute left-4 md:-left-8 top-1/2 -translate-y-1/2 z-40 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-50 hover:scale-110 md:hover:-translate-x-1 active:scale-95 transition-all cursor-pointer text-foreground border border-gray-100"
+            className="absolute left-0 md:-left-8 top-1/2 -translate-y-1/2 z-40 w-10 h-10 md:w-12 md:h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-50 hover:scale-110 md:hover:-translate-x-1 active:scale-95 transition-all cursor-pointer text-foreground border border-gray-100"
             aria-label="Previous slide"
           >
-            <RiArrowLeftSLine className="w-6 h-6" />
+            <RiArrowLeftLine className="w-5 h-5 md:w-6 md:h-6" />
           </button>
 
           <button
             onClick={handleNext}
-            className="absolute right-4 md:-right-8 top-1/2 -translate-y-1/2 z-40 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-50 hover:scale-110 md:hover:translate-x-1 active:scale-95 transition-all cursor-pointer text-foreground border border-gray-100"
+            className="absolute right-0 md:-right-8 top-1/2 -translate-y-1/2 z-40 w-10 h-10 md:w-12 md:h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-50 hover:scale-110 md:hover:translate-x-1 active:scale-95 transition-all cursor-pointer text-foreground border border-gray-100"
             aria-label="Next slide"
           >
-            <RiArrowRightSLine className="w-6 h-6" />
+            <RiArrowRightLine className="w-5 h-5 md:w-6 md:h-6" />
           </button>
 
           {/* Cards */}
-          <div className="relative w-full max-w-[534px] h-[400px] flex items-center justify-center">
+          <div className="relative w-full max-w-[534px] h-[240px] sm:h-[300px] md:h-[360px] lg:h-[400px] flex items-center justify-center">
             {SLIDES.map((slide, index) => {
               const style = getSlideStyles(index);
               const isActive = index === activeIndex;
@@ -196,17 +229,17 @@ export default function Hero() {
                 >
                   <div
                     className={cn(
-                      "relative w-full h-full rounded-[24px] overflow-hidden shadow-2xl bg-white transition-all duration-500",
+                      "relative w-full h-full rounded-[16px] md:rounded-[24px] overflow-hidden shadow-2xl bg-white transition-all duration-500",
                       isActive
-                        ? "border-[6px] border-white shadow-[0_20px_50px_rgba(0,0,0,0.2)]"
+                        ? "border-4 md:border-[6px] border-white shadow-[0_20px_50px_rgba(0,0,0,0.2)]"
                         : "border-0 opacity-50 contrast-75 brightness-90 grayscale-[0.3]",
                     )}
                   >
                     <ComparisonSlider
                       beforeImage={slide.before}
                       afterImage={slide.after}
-                      beforeLabel="Existing"
-                      afterLabel="New Pavers"
+                      beforeLabel="Old style"
+                      afterLabel="After AllBrick Pavers"
                       className="w-full h-full"
                       initialPosition={50}
                       // Disable interaction on non-active slides
@@ -218,13 +251,13 @@ export default function Hero() {
                     {/* Floating Label - Only on active */}
                     <div
                       className={cn(
-                        "absolute bottom-6 left-1/2 -translate-x-1/2 z-20 transition-all duration-500",
+                        "absolute bottom-4 md:bottom-6 left-1/2 -translate-x-1/2 z-20 transition-all duration-500",
                         isActive
                           ? "opacity-100 translate-y-0"
                           : "opacity-0 translate-y-4",
                       )}
                     >
-                      <div className="bg-white/90 backdrop-blur text-gray-900 text-xs font-bold px-6 py-2.5 rounded-full shadow-lg uppercase tracking-wider border border-white/50">
+                      <div className="bg-white/90 backdrop-blur text-gray-900 text-[10px] md:text-xs font-bold px-4 md:px-6 py-2 md:py-2.5 rounded-full shadow-lg uppercase tracking-wider border border-white/50">
                         {slide.label}
                       </div>
                     </div>
@@ -237,9 +270,11 @@ export default function Hero() {
       </div>
 
       {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce">
-        <span className="text-gray-400 font-rubik text-sm">Scroll over</span>
-        <RiArrowDownLine className="text-gray-400 size-5" />
+      <div className="absolute bottom-6 md:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 md:gap-2 animate-bounce">
+        <span className="text-gray-400 font-rubik text-xs md:text-sm">
+          Scroll over
+        </span>
+        <RiArrowDownSLine className="text-gray-400 size-4 md:size-5" />
       </div>
     </section>
   );

@@ -37,7 +37,7 @@ export default function AboutSection() {
                 }}
               >
                 <Image
-                  src="/images/introImage.png"
+                  src="/images/sections-images/upgrade-pavers-section.webp"
                   alt="Paver Patio"
                   fill
                   className="object-cover"
@@ -106,7 +106,7 @@ export default function AboutSection() {
                 }}
               >
                 <Image
-                  src="/images/introImage.png"
+                  src="/images/sections-images/local-expertise-section.webp"
                   alt="Driveway Pavers"
                   fill
                   className="object-cover"

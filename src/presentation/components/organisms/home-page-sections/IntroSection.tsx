@@ -12,7 +12,9 @@ export default function IntroSection() {
             <div className="w-full md:w-auto shrink-0 relative flex justify-center md:block">
               <div className="relative rounded-[20px] overflow-hidden w-full shadow-lg">
                 <img
-                  src={"/images/introImage.png"}
+                  src={
+                    "/images/sections-images/cta-section-placing-a-paver.jpg"
+                  }
                   alt="Paver installation example"
                   className="w-full h-full object-cover scale-110"
                 />

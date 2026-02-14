@@ -1,10 +1,12 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/presentation/components/atoms/ui/button";
 import { RiPhoneLine } from "@remixicon/react";
 import AccordionItem from "@/presentation/components/atoms/ui/accordion-item";
-import Image from "next/image";
+import { FOOTER_COMPANY_INFO } from "@/constants/footer";
 
 const FAQS = [
   {
@@ -57,110 +59,68 @@ export default function FaqSection() {
   };
 
   return (
-    <section className="py-20 bg-[#F9FAFB]">
-      <div className="container mx-auto px-4 md:px-8">
-        {/* Main Layout: Left Scroll, Right Sticky */}
-        <div className="flex flex-col-reverse lg:flex-row gap-12 lg:gap-24 relative">
-          {/* Left Column: FAQ Items (Scrolls) */}
-          <div className="flex-1 w-full lg:w-[60%]">
-            <h2 className="text-[28px] md:text-[36px] font-hanken font-semibold text-gray-900 mb-8 uppercase leading-tight">
-              FREQUENTLY ASKED QUESTIONS (FAQ)
-            </h2>
-            <div className="flex flex-col">
-              {FAQS.map((faq, index) => (
-                <AccordionItem
-                  key={index}
-                  question={faq.question}
-                  answer={faq.answer}
-                  isOpen={openIndex === index}
-                  onClick={() => handleToggle(index)}
-                />
-              ))}
-            </div>
-          </div>
-
-          {/* Right Column: Sticky Content (Warranty & CTA) */}
-          <div className="w-full lg:w-[35%] relative">
-            <div className="lg:sticky lg:top-32 flex flex-col items-start gap-6">
-              <div className="hidden lg:block absolute -top-20 left-0 w-full mb-10">
-                {/* This is tricky with flex-col-reverse. 
-                       Better to have a standard Header row if width permits, 
-                       but with Sticky side, structure usually:
-                       <Container>
-                         <StickySide />
-                         <MainContent />
-                       </Container>
-                       I'll stick to the Row layout.
-                   */}
-              </div>
-
-              {/* Sticky Side Content */}
-              <div className="hidden lg:flex flex-col items-center text-center">
-                {/* Warranty Badge Placeholder - Circle with 7 */}
-                <div className="w-48 h-48 rounded-full flex items-center justify-center relative mb-6">
-                  <Image
-                    src="/images/FAQ/warranty-badge.png"
-                    alt="Warranty Badge"
-                    width={180}
-                    height={180}
-                    className="w-full h-full object-contain"
-                  />
-                </div>
-
-                <h3 className="text-2xl font-bold text-[#A52024] font-hanken mb-4">
-                  7-YEARS WARRANTY
-                </h3>
-
-                <p className="text-gray-500 text-sm leading-relaxed mb-6 font-rubik max-w-[280px]">
-                  When you choose AllBrick Pavers, you're protected. Our
-                  comprehensive 7-year warranty covers workmanship and
-                  installation defects—giving you complete peace of mind.
-                </p>
-
-                <Button
-                  variant="brick"
-                  className="w-full h-12 text-sm font-bold uppercase tracking-wide"
-                >
-                  Contact Us Now <RiPhoneLine className="ml-2 w-4 h-4" />
-                </Button>
-              </div>
-            </div>
-          </div>
-
-          {/* Mobile Warranty Block (Shown below questions or above? "flex-col-reverse" puts Left (Questions) at bottom?
-              Wait, standard mobile flow: Title -> Questions -> Warranty?
-              My Code: flex-col-reverse -> Right Col (Warranty) First in DOM? No.
-              flex-col-reverse means Item 2 (Right) is Top, Item 1 (Left) is Bottom.
-              So Mobile: Warranty Block -> Questions.
-              Typically FAQs are: Title -> Questions -> Call to Action.
-              Let's allow standard flex-col.
-           */}
-        </div>
-
-        {/* Mobile View for Warranty (Below) - If I switch to standard flex-col */}
-        {/* Mobile View for Warranty (Below) - If I switch to standard flex-col */}
-        <div className="lg:hidden mt-12 flex flex-col items-center text-center px-4">
-          <div className="w-40 h-40 mb-6">
+    <section
+      id="faq"
+      className="w-full bg-gray-50 px-6 md:px-14 lg:px-28 py-14 lg:py-20"
+    >
+      <div className="max-w-[1440px] mx-auto flex flex-col lg:flex-row justify-between items-start gap-12 lg:gap-16">
+        {/* Left Column - Warranty Badge + CTA */}
+        <div className="w-full lg:w-[554px] flex flex-col items-center lg:items-start gap-8">
+          {/* Warranty Badge */}
+          <div className="w-48 h-48 lg:w-64 lg:h-64 relative shrink-0">
             <Image
-              src="/images/FAQ/warranty-badge.png"
-              alt="Warranty Badge"
-              width={160}
-              height={160}
+              src="/images/7-years-warranty-badge.svg"
+              alt="7 Years Exclusive Warranty Badge"
+              width={256}
+              height={256}
               className="w-full h-full object-contain"
             />
           </div>
-          <h3 className="text-2xl font-bold text-[#A52024] font-hanken mb-2">
-            7-YEARS WARRANTY
-          </h3>
-          <p className="text-gray-500 text-sm leading-relaxed mb-6 font-rubik max-w-sm">
-            Our comprehensive 7-year warranty gives you complete peace of mind.
-          </p>
+
+          {/* Text Content */}
+          <div className="flex flex-col gap-3 text-center lg:text-left">
+            <h2 className="text-3xl lg:text-4xl font-semibold font-hanken text-primary">
+              YOUR PAVERS SECURED
+            </h2>
+            <p className="text-gray-600 text-base font-normal font-rubik leading-6 max-w-[480px]">
+              When you choose AllBrick Pavers, you&apos;re protected. Our
+              comprehensive 7-year warranty covers workmanship and installation
+              defects, giving you complete peace of mind. We stand behind every
+              square foot we install because we do it right the first time.
+            </p>
+          </div>
+
+          {/* CTA Button */}
           <Button
             variant="brick"
-            className="w-full max-w-[300px] h-12 text-sm font-bold uppercase tracking-wide"
+            size="lg"
+            className="h-12 px-8 py-4 rounded-lg flex items-center gap-4"
+            asChild
           >
-            Contact Us Now <RiPhoneLine className="ml-2 w-4 h-4" />
+            <Link href={`tel:${FOOTER_COMPANY_INFO.contact.phone}`}>
+              <span className="uppercase">CONTACT US NOW</span>
+              <RiPhoneLine className="w-5 h-5" />
+            </Link>
           </Button>
+        </div>
+
+        {/* Right Column - FAQ Accordion */}
+        <div className="w-full lg:flex-1 lg:max-w-[598px] flex flex-col gap-6">
+          <h2 className="text-[28px] lg:text-4xl font-semibold font-hanken text-gray-800 uppercase leading-10">
+            FREQUENTLY ASKED QUESTIONS
+          </h2>
+
+          <div className="flex flex-col">
+            {FAQS.map((faq, index) => (
+              <AccordionItem
+                key={index}
+                question={faq.question}
+                answer={faq.answer}
+                isOpen={openIndex === index}
+                onClick={() => handleToggle(index)}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>

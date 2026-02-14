@@ -1,58 +1,95 @@
-import React from "react";
+"use client";
+
+import { useState, useEffect } from "react";
+import { RiMenu3Line, RiCloseLine } from "@remixicon/react";
 import { Button } from "@/presentation/components/atoms/ui/button";
 import CompanyLogo from "@/presentation/components/atoms/CompanyLogo";
 import Navigation from "./Navigation";
 import MobileMenu from "./MobileMenu";
-import type {
-  INavItem,
-  IActionButtons,
-  ILanguageOptions,
-  HeaderVariant,
-} from "@/types/header";
+import Link from "next/link";
+import { cn } from "@/lib/utils";
+import type { INavItem } from "@/types/header";
+import { NAV_ITEMS } from "@/constants";
 
 interface HeaderProps {
   navItems?: INavItem[];
-  actionButtons?: IActionButtons;
-  languageOptions?: ILanguageOptions;
-  variant?: HeaderVariant;
 }
 
-export default function Header({
-  navItems,
-  actionButtons,
-  languageOptions,
-  variant,
-}: HeaderProps) {
-  return (
-    <header className="sticky top-0 z-40 w-full border-b border-border/10 bg-[#fbf8f8]/80 backdrop-blur-md">
-      <div className="container mx-auto py-4 h-[90px] flex items-center justify-between">
-        {/* Left Side: Logo & Nav */}
-        <div className="flex items-center 2xl:gap-10">
-          <CompanyLogo size="lg" />
-          <div className="hidden lg:block h-8 w-px bg-border/40 mx-2" />
-          <Navigation className="hidden lg:flex" navItems={navItems} />
-        </div>
+export default function Header({ navItems }: HeaderProps) {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
-        {/* Right Side: Buttons & Mobile Toggle */}
-        <div className="flex items-center gap-4">
-          <div className="hidden xl:flex items-center gap-4">
-            <Button
-              variant="brick-outline"
-              className="px-6 h-[44px] font-rubik text-sm font-bold uppercase tracking-wide border-2"
-            >
-              Book a Free Consultation
-            </Button>
-            <Button
-              variant="brick"
-              className="px-6 h-[44px] font-rubik text-sm font-bold uppercase tracking-wide"
-            >
-              Contact Us
-            </Button>
+  const items = navItems || NAV_ITEMS;
+
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 10);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  return (
+    <>
+      <header
+        className={cn(
+          "fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300",
+          isScrolled
+            ? "bg-white/95 backdrop-blur-md shadow-sm py-2"
+            : "bg-white/80 backdrop-blur-sm py-3",
+        )}
+      >
+        <div className="section-container flex items-center justify-between h-[60px] md:h-[70px]">
+          {/* Left: Logo */}
+          <div className="flex items-center shrink-0">
+            <CompanyLogo size="md" />
           </div>
 
-          <MobileMenu navItems={navItems} />
+          {/* Center: Desktop Navigation */}
+          <Navigation className="hidden lg:flex" navItems={items} />
+
+          {/* Right: CTA Buttons + Mobile Toggle */}
+          <div className="flex items-center gap-3">
+            {/* Desktop CTA */}
+            <div className="hidden xl:flex items-center gap-3">
+              <Link href="/consultation">
+                <Button
+                  variant="brick-outline"
+                  className="px-5 h-10 font-rubik text-sm font-bold uppercase tracking-wide border-2"
+                >
+                  Free Consultation
+                </Button>
+              </Link>
+              <Link href="/contact">
+                <Button
+                  variant="brick"
+                  className="px-5 h-10 font-rubik text-sm font-bold uppercase tracking-wide"
+                >
+                  Contact Us
+                </Button>
+              </Link>
+            </div>
+
+            {/* Mobile Menu Toggle */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="lg:hidden p-2 text-foreground hover:bg-gray-100 rounded-lg transition-colors"
+              aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+            >
+              {mobileMenuOpen ? (
+                <RiCloseLine className="size-7" />
+              ) : (
+                <RiMenu3Line className="size-7" />
+              )}
+            </button>
+          </div>
         </div>
-      </div>
-    </header>
+      </header>
+
+      {/* Mobile Menu */}
+      <MobileMenu
+        isOpen={mobileMenuOpen}
+        onClose={() => setMobileMenuOpen(false)}
+        navItems={items}
+      />
+    </>
   );
 }

@@ -3,7 +3,7 @@
 import React, { useState, useRef, useCallback } from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import { RiDragMove2Line } from "@remixicon/react";
+import { RiDraggable } from "@remixicon/react";
 
 interface ComparisonSliderProps {
   beforeImage: string;
@@ -53,7 +53,7 @@ export function ComparisonSlider({
 
       setPosition(percentage);
     },
-    [isResizing]
+    [isResizing],
   );
 
   // Handle keyboard navigation
@@ -70,7 +70,7 @@ export function ComparisonSlider({
       ref={containerRef}
       className={cn(
         "relative w-full h-[400px] md:h-[500px] rounded-2xl overflow-hidden select-none touch-none bg-gray-100 cursor-ew-resize group",
-        className
+        className,
       )}
       onPointerDown={handlePointerDown}
       onPointerUp={handlePointerUp}
@@ -92,10 +92,12 @@ export function ComparisonSlider({
       />
 
       {/* After Label */}
-      <div className={cn(
-        "absolute top-4 right-4 bg-black/50 backdrop-blur-md text-white px-3 py-1 rounded-md text-sm font-medium transition-opacity duration-300",
-        position > 90 ? "opacity-0" : "opacity-100"
-      )}>
+      <div
+        className={cn(
+          "absolute top-4 right-4 bg-black/50 backdrop-blur-md text-white px-3 py-1 rounded-md text-sm font-medium transition-opacity duration-300",
+          position > 90 ? "opacity-0" : "opacity-100",
+        )}
+      >
         {afterLabel}
       </div>
 
@@ -113,10 +115,12 @@ export function ComparisonSlider({
         />
 
         {/* Before Label */}
-        <div className={cn(
-          "absolute top-4 left-4 bg-black/50 backdrop-blur-md text-white px-3 py-1 rounded-md text-sm font-medium transition-opacity duration-300",
-          position < 10 ? "opacity-0" : "opacity-100"
-        )}>
+        <div
+          className={cn(
+            "absolute top-4 left-4 bg-black/50 backdrop-blur-md text-white px-3 py-1 rounded-md text-sm font-medium transition-opacity duration-300",
+            position < 10 ? "opacity-0" : "opacity-100",
+          )}
+        >
           {beforeLabel}
         </div>
       </div>
@@ -124,22 +128,21 @@ export function ComparisonSlider({
       {/* Divider Line */}
       <div
         className="absolute inset-y-0 w-1 bg-white shadow-[0_0_10px_rgba(0,0,0,0.5)] pointer-events-none"
-        style={{ left: `${position}%`, transform: 'translateX(-50%)' }}
+        style={{ left: `${position}%`, transform: "translateX(-50%)" }}
       />
 
       {/* Handle */}
       <button
         ref={handleRef}
         className={cn(
-          "absolute top-1/2 -translate-y-1/2 w-10 h-10 bg-white rounded-full shadow-[0_4px_12px_rgba(0,0,0,0.3)] flex items-center justify-center text-gray-800 z-20 focus:outline-none focus:ring-4 focus:ring-primary/40 transition-all duration-200 hover:scale-110 active:scale-95",
-          isResizing && "scale-110 ring-4 ring-primary/40"
+          "absolute top-1/2 -translate-y-1/2 w-6 h-10 bg-white rounded-md shadow-[0_4px_12px_rgba(0,0,0,0.3)] flex items-center justify-center text-gray-800 z-20 focus:outline-none focus:ring-4 focus:ring-primary/40 transition-[transform,box-shadow] duration-200 hover:scale-110 active:scale-95",
+          isResizing && "scale-110 ring-4 ring-primary/40",
         )}
-        style={{ left: `${position}%`, transform: 'translate(-50%, -50%)' }}
+        style={{ left: `${position}%`, transform: "translate(-50%, -50%)" }}
         aria-label="Drag to compare images"
       >
-        <RiDragMove2Line className="w-5 h-5 text-primary" />
+        <RiDraggable className="w-5 h-5 text-primary" />
       </button>
-
     </div>
   );
 }

@@ -12,9 +12,10 @@ export const SITE_CONFIG = {
 
 // Social media links
 export const SOCIAL_LINKS = {
-	instagram: "https://www.instagram.com/allbrickpavers",
-	facebook: "https://www.facebook.com/allbrickpavers",
-	linkedin: "https://www.linkedin.com/company/allbrickpavers",
+	instagram: "https://www.instagram.com/allbrickpavers/",
+	facebook:
+		"https://www.facebook.com/p/AllBrick-Pavers-61552914309792/",
+	googleMaps: "https://maps.app.goo.gl/tMAmQCsBEhpKeMMw9",
 } as const;
 
 // Contact information used across the site

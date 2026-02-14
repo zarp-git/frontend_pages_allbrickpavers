@@ -6,35 +6,23 @@ import Footer from "@/presentation/components/organisms/common/footer/Footer";
 import { cn } from "@/lib/utils";
 import { useSmoothScroll } from "@/hooks/use-smooth-scroll";
 import { useLenisScroll } from "@/hooks/use-lenis-scroll";
-import type {
-  INavItem,
-  IActionButtons,
-  ILanguageOptions,
-  HeaderVariant,
-  FooterVariant,
-} from "@/types/header";
+import type { INavItem, FooterVariant } from "@/types/header";
 
 export interface SiteLayoutProps {
   children: React.ReactNode;
   navItems?: INavItem[];
-  actionButtons?: IActionButtons;
-  languageOptions?: ILanguageOptions;
   footerNavLinks?: { label: string; href: string }[];
   className?: string;
   style?: React.CSSProperties;
-  variant?: HeaderVariant;
   footerVariant?: FooterVariant;
 }
 
 export default function SiteLayout({
   children,
   navItems,
-  actionButtons,
-  languageOptions,
   footerNavLinks,
   className,
   style,
-  variant,
   footerVariant,
 }: SiteLayoutProps) {
   // Scroll aesthetic com Lenis (inércia e easing suave)
@@ -49,12 +37,7 @@ export default function SiteLayout({
 
   return (
     <div className="h-full">
-      <Header
-        navItems={navItems}
-        actionButtons={actionButtons}
-        languageOptions={languageOptions}
-        variant={variant}
-      />
+      <Header navItems={navItems} />
 
       {/* Espaço superior para compensar header fixo */}
       <main className={cn("pt-0", className)} style={style}>

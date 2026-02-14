@@ -14,12 +14,12 @@ export const FOOTER_COMPANY_INFO = {
 } as const;
 
 export const FOOTER_LOCATIONS = [
+  { label: "Winter Haven", href: "/locations/winter-haven" },
   { label: "Lakeland", href: "/locations/lakeland" },
   { label: "Haines city", href: "/locations/haines-city" },
   { label: "Davenport", href: "/locations/davenport" },
-  { label: "Horizon West", href: "/locations/horizon-west" },
   { label: "Auburndale", href: "/locations/auburndale" },
-  { label: "Winter Haven", href: "/locations/winter-haven" },
+  { label: "Horizon West", href: "/locations/horizon-west" },
 ] as const;
 
 export const FOOTER_COMPANY_LINKS = [
@@ -36,6 +36,7 @@ export const FOOTER_SERVICES = [
   { label: "Pavers Maintenance Plans", href: "/services/maintenance" },
   { label: "Patio Pavers", href: "/services/patio" },
   { label: "Pool Decks Pavers", href: "/services/pool-decks" },
+  { label: "Driveway Pavers", href: "/services/driveway" },
   { label: "Firepit Pavers", href: "/services/firepit" },
 ] as const;
 

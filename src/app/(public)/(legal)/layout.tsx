@@ -5,27 +5,5 @@ export default function LegalLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <SiteLayout
-      actionButtons={{
-        member: {
-          href: "/members",
-          text: "JÁ SOU ALUNO",
-          variant: "outline",
-          icon: undefined,
-          mobileIcon: undefined,
-        },
-        cta: {
-          href: "/#programs",
-          text: "COMEÇAR AGORA",
-          variant: "default",
-          icon: undefined,
-          mobileIcon: undefined,
-        },
-      }}
-      languageOptions={undefined}
-    >
-      {children}
-    </SiteLayout>
-  );
+  return <SiteLayout>{children}</SiteLayout>;
 }
