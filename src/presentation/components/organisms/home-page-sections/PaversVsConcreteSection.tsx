@@ -14,7 +14,7 @@ export const PaversVsConcreteSection = () => {
           PAVERS VS CONCRETE
         </h2>
 
-        <div className="w-full flex flex-col xl:flex-row justify-start items-center gap-12">
+        <div className="w-full flex flex-col xl:flex-row justify-start items-center gap-48">
           {/* Text Content */}
           <div className="w-full xl:w-[500px] flex flex-col justify-center items-start gap-8">
             <div className="flex flex-col justify-start items-start gap-4">
@@ -60,8 +60,8 @@ export const PaversVsConcreteSection = () => {
           <div className="flex-1 w-full relative">
             {/* Comparison Slider */}
             <ComparisonSlider
-              beforeImage="/images/sections-images/cracked-pavers.jpg"
-              afterImage="/images/sections-images/driveway-pavers-1-after.webp"
+              beforeImage="/images/sections-images/patio-pavers-1-before-1.png"
+              afterImage="/images/sections-images/patio-pavers-1-after-1.webp"
               beforeLabel="Concrete"
               afterLabel="Pavers"
               className="w-full h-[300px] md:h-[400px] lg:h-[420px] rounded-xl"

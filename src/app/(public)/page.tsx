@@ -7,18 +7,21 @@ import FaqSection from "@/presentation/components/organisms/home-page-sections/F
 import AboutSection from "@/presentation/components/organisms/home-page-sections/AboutSection";
 import { PaversVsConcreteSection } from "@/presentation/components/organisms/home-page-sections/PaversVsConcreteSection";
 import { InstallationTrustSection } from "@/presentation/components/organisms/home-page-sections/InstallationTrustSection";
+import { PaverServicesSection } from "@/presentation/components/organisms/home-page-sections/PaverServicesSection";
+import { CtaSection } from "@/presentation/components/organisms/home-page-sections/CtaSection";
 
 export default function Home() {
   return (
     <main>
       <Hero />
       <IntroSection />
-         <AboutSection />
+      <AboutSection />
       <DifferentialsSection />
+      <PaverServicesSection />
       <FeedbackSection />
-   
       <PaversVsConcreteSection />
       <InstallationTrustSection />
+      <CtaSection />
       <FaqSection />
     </main>
   );

@@ -11,8 +11,8 @@ import "swiper/css/navigation";
 import {
   RiPhoneLine,
   RiArrowRightUpLine,
-  RiArrowLeftSLine,
-  RiArrowRightSLine,
+  RiArrowLeftLine,
+  RiArrowRightLine,
 } from "@remixicon/react";
 
 import { Button } from "@/presentation/components/atoms/ui/button";
@@ -131,40 +131,22 @@ export default function FeedbackSection() {
           ))}
         </Swiper>
 
-        {/* ── Fade Edges ── */}
-        <div
-          className="pointer-events-none absolute left-0 top-0 bottom-0 w-16 lg:w-32 z-10"
-          style={{
-            background:
-              "linear-gradient(to right, rgb(255 255 255) 0%, rgb(255 255 255 / 0) 100%)",
-          }}
-        />
-        <div
-          className="pointer-events-none absolute right-0 top-0 bottom-0 w-16 lg:w-32 z-10"
-          style={{
-            background:
-              "linear-gradient(to left, rgb(255 255 255) 0%, rgb(255 255 255 / 0) 100%)",
-          }}
-        />
-      </div>
-
-      {/* ── Navigation Arrows ── */}
-      <div className="section-container flex justify-center gap-4 mt-8">
+        {/* ── Navigation Arrows ── */}
         <button
           type="button"
           aria-label="Previous review"
           onClick={() => swiperRef.current?.slidePrev()}
-          className="size-10 rounded-full bg-white border border-gray-200 flex items-center justify-center hover:border-gray-400 transition-colors"
+          className="absolute left-0 top-1/2 -translate-y-1/2 z-30 size-12 rounded-full bg-white border border-gray-200 shadow-md items-center justify-center hover:bg-gray-50 hover:border-gray-300 transition-all -ml-4 lg:-ml-6 hidden sm:flex"
         >
-          <RiArrowLeftSLine className="size-5 text-gray-700" />
+          <RiArrowLeftLine className="size-6 text-gray-700" />
         </button>
         <button
           type="button"
           aria-label="Next review"
           onClick={() => swiperRef.current?.slideNext()}
-          className="size-10 rounded-full bg-white border border-gray-200 flex items-center justify-center hover:border-gray-400 transition-colors"
+          className="absolute right-0 top-1/2 -translate-y-1/2 z-30 size-12 rounded-full bg-white border border-gray-200 shadow-md items-center justify-center hover:bg-gray-50 hover:border-gray-300 transition-all -mr-4 lg:-mr-6 hidden sm:flex"
         >
-          <RiArrowRightSLine className="size-5 text-gray-700" />
+          <RiArrowRightLine className="size-6 text-gray-700" />
         </button>
       </div>
 
