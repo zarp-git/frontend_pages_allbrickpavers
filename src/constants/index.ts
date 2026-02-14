@@ -1,5 +1,6 @@
 export * from "./footer";
 export * from "./navigation";
+export * from "./services";
 
 // Site configuration
 export const SITE_CONFIG = {
