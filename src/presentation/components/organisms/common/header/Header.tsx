@@ -1,15 +1,15 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { RiMenu3Line, RiCloseLine } from "@remixicon/react";
+import { RiMenu3Line, RiCloseLine, RiPhoneLine } from "@remixicon/react";
 import { Button } from "@/presentation/components/atoms/ui/button";
 import CompanyLogo from "@/presentation/components/atoms/CompanyLogo";
 import Navigation from "./Navigation";
 import MobileMenu from "./MobileMenu";
-import Link from "next/link";
 import { cn } from "@/lib/utils";
 import type { INavItem } from "@/types/header";
 import { NAV_ITEMS } from "@/constants";
+import { useLeadModal } from "@/hooks/use-lead-modal";
 
 interface HeaderProps {
   navItems?: INavItem[];
@@ -18,6 +18,7 @@ interface HeaderProps {
 export default function Header({ navItems }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const { openModal } = useLeadModal();
 
   const items = navItems || NAV_ITEMS;
 
@@ -50,22 +51,20 @@ export default function Header({ navItems }: HeaderProps) {
           <div className="flex items-center gap-3">
             {/* Desktop CTA */}
             <div className="hidden xl:flex items-center gap-3">
-              <Link href="/consultation">
-                <Button
-                  variant="brick-outline"
-                  className="px-5 h-10 font-rubik text-sm font-bold uppercase tracking-wide border-2"
-                >
-                  Free Consultation
-                </Button>
-              </Link>
-              <Link href="/contact">
-                <Button
-                  variant="brick"
-                  className="px-5 h-10 font-rubik text-sm font-bold uppercase tracking-wide"
-                >
-                  Contact Us
-                </Button>
-              </Link>
+              <Button
+                variant="brick-outline"
+                className="px-5 h-10 font-rubik text-sm font-bold uppercase tracking-wide border-2"
+                onClick={openModal}
+              >
+                Free Consultation
+              </Button>
+              <Button
+                variant="brick"
+                className="px-5 h-10 font-rubik text-sm font-bold uppercase tracking-wide flex items-center gap-2"
+                onClick={openModal}
+              >
+                Contact Us <RiPhoneLine className="size-4" />
+              </Button>
             </div>
 
             {/* Mobile Menu Toggle */}

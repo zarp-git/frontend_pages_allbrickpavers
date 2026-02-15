@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   RiArrowDownSLine,
   RiArrowUpSLine,
@@ -12,6 +13,7 @@ import { Button } from "@/presentation/components/atoms/ui/button";
 import CompanyLogo from "@/presentation/components/atoms/CompanyLogo";
 import type { INavItem } from "@/types/header";
 import { cn } from "@/lib/utils";
+import { useLeadModal } from "@/hooks/use-lead-modal";
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -25,6 +27,8 @@ export default function MobileMenu({
   navItems,
 }: MobileMenuProps) {
   const [openSections, setOpenSections] = useState<Record<string, boolean>>({});
+  const pathname = usePathname();
+  const { openModal } = useLeadModal();
 
   const toggleSection = (title: string) => {
     setOpenSections((prev) => ({
@@ -72,7 +76,12 @@ export default function MobileMenu({
         {/* Scrollable Nav Content */}
         <nav className="flex-1 overflow-y-auto py-4 px-5">
           <div className="space-y-1">
-            {navItems.map((item) => (
+            {navItems.map((item) => {
+              const isActive = item.hasDropdown
+                ? pathname.startsWith(item.href) && item.href !== "/"
+                : pathname === item.href;
+
+              return (
               <div key={item.title}>
                 {item.hasDropdown && item.dropdownItems ? (
                   /* Accordion Section */
@@ -116,36 +125,46 @@ export default function MobileMenu({
                   <Link
                     href={item.href}
                     onClick={onClose}
-                    className="flex items-center px-3 py-3 rounded-lg text-base font-rubik font-medium text-gray-900 hover:text-primary hover:bg-gray-50 transition-colors"
+                    className={cn(
+                      "flex items-center px-3 py-3 rounded-lg text-base font-rubik font-medium transition-colors",
+                      isActive
+                        ? "text-primary bg-primary/5"
+                        : "text-gray-900 hover:text-primary hover:bg-gray-50",
+                    )}
                   >
                     {item.title}
                   </Link>
                 )}
               </div>
-            ))}
+              );
+            })}
           </div>
         </nav>
 
         {/* Footer CTA */}
         <div className="p-5 border-t border-gray-100 space-y-3">
-          <Link href="/consultation" onClick={onClose} className="block">
-            <Button
-              variant="brick-outline"
-              size="lg"
-              className="w-full text-sm font-bold uppercase tracking-wide"
-            >
-              Book a Free Consultation
-            </Button>
-          </Link>
-          <Link href="/contact" onClick={onClose} className="block">
-            <Button
-              variant="brick"
-              size="lg"
-              className="w-full text-sm font-bold uppercase tracking-wide flex items-center justify-center gap-2"
-            >
-              Contact Us <RiPhoneLine className="size-5" />
-            </Button>
-          </Link>
+          <Button
+            variant="brick-outline"
+            size="lg"
+            className="w-full text-sm font-bold uppercase tracking-wide"
+            onClick={() => {
+              onClose();
+              openModal();
+            }}
+          >
+            Book a Free Consultation
+          </Button>
+          <Button
+            variant="brick"
+            size="lg"
+            className="w-full text-sm font-bold uppercase tracking-wide flex items-center justify-center gap-2"
+            onClick={() => {
+              onClose();
+              openModal();
+            }}
+          >
+            Contact Us <RiPhoneLine className="size-5" />
+          </Button>
         </div>
       </div>
     </div>

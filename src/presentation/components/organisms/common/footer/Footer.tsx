@@ -20,6 +20,7 @@ import {
 } from "@/constants/footer";
 import { SOCIAL_LINKS } from "@/constants";
 import CompanyLogo from "@/presentation/components/atoms/CompanyLogo";
+import { useLeadModal } from "@/hooks/use-lead-modal";
 
 export type FooterVariant = "default" | "simplified";
 
@@ -32,6 +33,7 @@ const GOOGLE_MAPS_EMBED_URL =
   "https://maps.google.com/maps?q=99+6th+St+SW+Ste+109,+Winter+Haven+FL+33880&t=&z=14&ie=UTF8&iwloc=&output=embed";
 
 export default function Footer({ variant = "default" }: FooterProps) {
+  const { openModal } = useLeadModal();
   if (variant === "simplified") {
     return (
       <footer className="w-full bg-black border-t border-gray-900">
@@ -139,12 +141,10 @@ export default function Footer({ variant = "default" }: FooterProps) {
                     variant="brick"
                     size="lg"
                     className="w-full h-10 px-5 py-4 rounded-lg flex justify-between items-center"
-                    asChild
+                    onClick={openModal}
                   >
-                    <Link href={`tel:${FOOTER_COMPANY_INFO.contact.phone}`}>
-                      <span className="uppercase">CALL US NOW</span>
-                      <RiPhoneLine className="w-5 h-5" />
-                    </Link>
+                    <span className="uppercase">CALL US NOW</span>
+                    <RiPhoneLine className="w-5 h-5" />
                   </Button>
                 </div>
 

@@ -20,6 +20,7 @@ import {
 } from "@remixicon/react";
 import { SERVICES_DATA, SERVICE_SIDEBAR_INFO } from "@/constants/services";
 import { FOOTER_COMPANY_INFO } from "@/constants/footer";
+import { useLeadModal } from "@/hooks/use-lead-modal";
 import type {
   ServiceData,
   ServiceFeature,
@@ -62,6 +63,8 @@ export function ServiceDetailView({ service }: ServiceDetailViewProps) {
 // 1 -- Hero Banner
 // ===========================================================================
 function ServiceHero({ service }: { service: ServiceData }) {
+  const { openModal } = useLeadModal();
+
   return (
     <section
       id="service-hero"
@@ -114,14 +117,12 @@ function ServiceHero({ service }: { service: ServiceData }) {
           variant="brick"
           size="lg"
           className="mt-2 h-12 px-8 py-4 rounded-lg flex items-center gap-4"
-          asChild
+          onClick={openModal}
         >
-          <Link href={`tel:${FOOTER_COMPANY_INFO.contact.phone}`}>
-            <span className="uppercase text-base font-medium">
-              get a free consultation
-            </span>
-            <RiPhoneLine className="size-5" />
-          </Link>
+          <span className="uppercase text-base font-medium">
+            get a free consultation
+          </span>
+          <RiPhoneLine className="size-5" />
         </Button>
       </div>
     </section>
@@ -311,6 +312,8 @@ function StatCard({ stat }: { stat: ServiceStat }) {
 // 2d -- Service Navigation Sidebar
 // ===========================================================================
 function ServiceNavSidebar({ currentSlug }: { currentSlug: string }) {
+  const { openModal } = useLeadModal();
+
   return (
     <nav className="flex flex-col gap-2" aria-label="Services navigation">
       <p className="text-sm font-rubik text-gray-500 uppercase tracking-[2px] mb-1">
@@ -335,13 +338,13 @@ function ServiceNavSidebar({ currentSlug }: { currentSlug: string }) {
       })}
 
       {/* Contact US button */}
-      <Link
-        href={`tel:${FOOTER_COMPANY_INFO.contact.phone}`}
-        className="w-full mt-1 px-4 py-3 bg-secondary rounded-lg text-center text-white text-sm font-semibold font-rubik uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-secondary/90 transition-colors"
+      <button
+        onClick={openModal}
+        className="w-full mt-1 px-4 py-3 bg-secondary rounded-lg text-center text-white text-sm font-semibold font-rubik uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-secondary/90 transition-colors cursor-pointer"
       >
         <RiPhoneLine className="size-4" />
         Contact Us
-      </Link>
+      </button>
     </nav>
   );
 }
@@ -424,6 +427,7 @@ function FeatureCard({ feature }: { feature: ServiceFeature }) {
 // ===========================================================================
 function ServiceFaqSection({ service }: { service: ServiceData }) {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
+  const { openModal } = useLeadModal();
 
   const handleToggle = (index: number) => {
     setOpenFaqIndex(openFaqIndex === index ? null : index);
@@ -483,14 +487,12 @@ function ServiceFaqSection({ service }: { service: ServiceData }) {
                 variant="brick"
                 size="lg"
                 className="h-12 px-8 py-4 rounded-lg flex items-center gap-4"
-                asChild
+                onClick={openModal}
               >
-                <Link href={`tel:${FOOTER_COMPANY_INFO.contact.phone}`}>
-                  <span className="uppercase text-base font-medium">
-                    get a free quote
-                  </span>
-                  <RiPhoneLine className="size-5" />
-                </Link>
+                <span className="uppercase text-base font-medium">
+                  get a free quote
+                </span>
+                <RiPhoneLine className="size-5" />
               </Button>
             </div>
           </div>
@@ -504,6 +506,8 @@ function ServiceFaqSection({ service }: { service: ServiceData }) {
 // 5 -- CTA Close
 // ===========================================================================
 function ServiceCta({ serviceTitle }: { serviceTitle: string }) {
+  const { openModal } = useLeadModal();
+
   return (
     <section id="service-cta" className="py-14 lg:py-20 bg-gray-50">
       <div className="section-container">
@@ -544,14 +548,12 @@ function ServiceCta({ serviceTitle }: { serviceTitle: string }) {
               variant="brick-outline"
               size="lg"
               className="h-12 px-8 py-4 rounded-lg border-2 border-white bg-transparent text-white hover:bg-white/10 flex items-center gap-4"
-              asChild
+              onClick={openModal}
             >
-              <Link href={`tel:${FOOTER_COMPANY_INFO.contact.phone}`}>
-                <span className="uppercase text-base font-medium">
-                  book a free consultation
-                </span>
-                <RiPhoneLine className="size-5" />
-              </Link>
+              <span className="uppercase text-base font-medium">
+                book a free consultation
+              </span>
+              <RiPhoneLine className="size-5" />
             </Button>
           </div>
         </div>

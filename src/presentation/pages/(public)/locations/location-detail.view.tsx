@@ -14,6 +14,7 @@ import {
 } from "@remixicon/react";
 import { LOCATIONS_DATA } from "@/constants/locations";
 import { FOOTER_COMPANY_INFO } from "@/constants/footer";
+import { useLeadModal } from "@/hooks/use-lead-modal";
 import type {
   LocationData,
   LocationServiceBlock,
@@ -53,6 +54,8 @@ export function LocationDetailView({ location }: LocationDetailViewProps) {
 // 1 — Hero Banner
 // ===========================================================================
 function LocationHero({ location }: { location: LocationData }) {
+  const { openModal } = useLeadModal();
+
   return (
     <section
       id="location-hero"
@@ -105,14 +108,12 @@ function LocationHero({ location }: { location: LocationData }) {
           variant="brick"
           size="lg"
           className="mt-2 h-12 px-8 py-4 rounded-lg flex items-center gap-4"
-          asChild
+          onClick={openModal}
         >
-          <Link href={`tel:${FOOTER_COMPANY_INFO.contact.phone}`}>
-            <span className="uppercase text-base font-medium">
-              get a free consultation
-            </span>
-            <RiPhoneLine className="size-5" />
-          </Link>
+          <span className="uppercase text-base font-medium">
+            get a free consultation
+          </span>
+          <RiPhoneLine className="size-5" />
         </Button>
       </div>
     </section>
@@ -247,6 +248,7 @@ function LocationAboutSection({ location }: { location: LocationData }) {
 // ===========================================================================
 function LocationFaqSection({ location }: { location: LocationData }) {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
+  const { openModal } = useLeadModal();
 
   const handleToggle = (index: number) => {
     setOpenFaqIndex(openFaqIndex === index ? null : index);
@@ -311,14 +313,12 @@ function LocationFaqSection({ location }: { location: LocationData }) {
                 variant="brick"
                 size="lg"
                 className="h-12 px-8 py-4 rounded-lg flex items-center gap-4"
-                asChild
+                onClick={openModal}
               >
-                <Link href={`tel:${FOOTER_COMPANY_INFO.contact.phone}`}>
-                  <span className="uppercase text-base font-medium">
-                    get a free quote
-                  </span>
-                  <RiPhoneLine className="size-5" />
-                </Link>
+                <span className="uppercase text-base font-medium">
+                  get a free quote
+                </span>
+                <RiPhoneLine className="size-5" />
               </Button>
             </div>
           </div>
@@ -388,6 +388,8 @@ function ServedAreaCard({ area }: { area: LocationServedArea }) {
 // 6 — CTA Close
 // ===========================================================================
 function LocationCta({ cityName }: { cityName: string }) {
+  const { openModal } = useLeadModal();
+
   return (
     <section id="location-cta" className="py-14 lg:py-20 bg-gray-50">
       <div className="section-container">
@@ -418,14 +420,12 @@ function LocationCta({ cityName }: { cityName: string }) {
               variant="brick-outline"
               size="lg"
               className="h-12 px-8 py-4 rounded-lg flex items-center gap-4 mt-2 border-white text-white hover:bg-white/10"
-              asChild
+              onClick={openModal}
             >
-              <Link href={`tel:${FOOTER_COMPANY_INFO.contact.phone}`}>
-                <span className="uppercase text-base font-medium">
-                  get a free consultation
-                </span>
-                <RiPhoneLine className="size-5" />
-              </Link>
+              <span className="uppercase text-base font-medium">
+                get a free consultation
+              </span>
+              <RiPhoneLine className="size-5" />
             </Button>
           </div>
         </div>
