@@ -10,8 +10,8 @@ export const useLegalMetadata = (config: LegalPageMetadata): Metadata => {
       title: config.title,
       description: config.description,
       type: "website",
-      locale: "pt_BR",
-      siteName: "Pandami",
+      locale: "en_US",
+      siteName: "AllBrick Pavers",
     },
     twitter: {
       card: "summary",

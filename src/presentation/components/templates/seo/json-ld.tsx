@@ -61,26 +61,31 @@ export const FAQJsonLd = ({ faq }: FAQJsonLdProps) => {
 
 // Componente para dados da organização
 export const OrganizationJsonLd = () => {
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://allbrickpavers.com";
   const organizationData = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "name": "Ponte Américas",
-    "description": "Programa completo para brasileiros nos Estados Unidos",
-    "url": process.env.NEXT_PUBLIC_SITE_URL || "https://ponteamericas.com",
-    "logo": `${process.env.NEXT_PUBLIC_SITE_URL || "https://ponteamericas.com"}/images/svg/logo.svg`,
+    "name": "AllBrick Pavers",
+    "description": "Professional paver installation, repair, and maintenance services in Central Florida.",
+    "url": siteUrl,
+    "logo": `${siteUrl}/images/svg/logo.svg`,
     "sameAs": [
-      "https://www.instagram.com/ponteamericas",
-      "https://www.facebook.com/ponteamericas",
-      "https://www.linkedin.com/company/ponteamericas"
+      "https://www.instagram.com/allbrickpavers/",
+      "https://www.facebook.com/p/AllBrick-Pavers-61552914309792/"
     ],
     "contactPoint": {
       "@type": "ContactPoint",
       "contactType": "customer service",
-      "availableLanguage": "Portuguese"
+      "telephone": "+1-941-284-6466",
+      "availableLanguage": "English"
     },
     "address": {
       "@type": "PostalAddress",
-      "addressCountry": "BR"
+      "streetAddress": "99 6th St SW Ste 109",
+      "addressLocality": "Winter Haven",
+      "addressRegion": "FL",
+      "postalCode": "33880-7902",
+      "addressCountry": "US"
     }
   };
 
@@ -89,36 +94,43 @@ export const OrganizationJsonLd = () => {
 
 // Componente para produto/serviço
 export const ProductJsonLd = () => {
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://allbrickpavers.com";
   const productData = {
 		"@context": "https://schema.org",
-		"@type": "SoftwareApplication",
-		name: "Ponte Américas | Programa de Imigração para os EUA",
+		"@type": "Service",
+		name: "AllBrick Pavers | Professional Paver Services",
 		description:
-			"Um programa completo que te prepara para viver, trabalhar e prosperar nos EUA, evitando os erros que custam milhares de dólares.",
-		url: process.env.NEXT_PUBLIC_SITE_URL || "https://ponteamericas.com",
-		applicationCategory: "EducationalApplication",
-		operatingSystem: "Web Browser",
-		offers: {
-			"@type": "Offer",
-			price: "0",
-			priceCurrency: "BRL",
-			description: "Teste grátis de 7 dias",
-			availability: "https://schema.org/InStock",
+			"Expert paver installation, repair, and maintenance services in Central Florida. Driveways, patios, pool decks, walkways, and fire pits.",
+		url: siteUrl,
+		serviceType: "Home Improvement",
+		areaServed: {
+			"@type": "State",
+			name: "Florida",
+		},
+		provider: {
+			"@type": "LocalBusiness",
+			name: "AllBrick Pavers",
 		},
 		aggregateRating: {
 			"@type": "AggregateRating",
-			ratingValue: "4.8",
-			ratingCount: "2000",
+			ratingValue: "4.9",
+			ratingCount: "150",
 			bestRating: "5",
 			worstRating: "1",
 		},
-		featureList: [
-			"Análise de cabelo com IA",
-			"Sugestões personalizadas",
-			"Compatível com todos os tipos de cabelo",
-			"Processamento em 30 segundos",
-			"Privacidade garantida",
-		],
+		hasOfferCatalog: {
+			"@type": "OfferCatalog",
+			name: "Paver Services",
+			itemListElement: [
+				"Paver Installation",
+				"Paver Repair",
+				"Paver Maintenance",
+				"Patio Pavers",
+				"Driveway Pavers",
+				"Pool Deck Pavers",
+				"Firepit Pavers",
+			],
+		},
 	};
 
   return <JsonLd data={productData} id="product-json-ld" />;
@@ -144,12 +156,12 @@ export const BreadcrumbJsonLd = ({ items }: { items: Array<{ name: string; url: 
 export const ReviewJsonLd = () => {
   const reviewData = {
     "@context": "https://schema.org",
-    "@type": "Product",
-    "name": "Ponte Américas - Programa de Imigração para os EUA",
+    "@type": "LocalBusiness",
+    "name": "AllBrick Pavers - Professional Paver Services",
     "aggregateRating": {
       "@type": "AggregateRating",
-      "ratingValue": "4.8",
-      "ratingCount": "2000",
+      "ratingValue": "4.9",
+      "ratingCount": "150",
       "bestRating": "5",
       "worstRating": "1"
     },
@@ -158,27 +170,27 @@ export const ReviewJsonLd = () => {
         "@type": "Review",
         "author": {
           "@type": "Person",
-          "name": "Ana Paula"
+          "name": "Sarah M."
         },
         "reviewRating": {
           "@type": "Rating",
           "ratingValue": "5",
           "bestRating": "5"
         },
-        "reviewBody": "Revolucionou meu trabalho como visagista. A IA é incrível!"
+        "reviewBody": "AllBrick Pavers did an amazing job on our driveway. Professional, on time, and the results exceeded our expectations!"
       },
       {
         "@type": "Review",
         "author": {
           "@type": "Person",
-          "name": "Carlos Mendes"
+          "name": "James R."
         },
         "reviewRating": {
           "@type": "Rating",
           "ratingValue": "5",
           "bestRating": "5"
         },
-        "reviewBody": "Resultados surpreendentes em poucos segundos."
+        "reviewBody": "Great craftsmanship on our pool deck. The team was very professional and the quality is outstanding."
       }
     ]
   };

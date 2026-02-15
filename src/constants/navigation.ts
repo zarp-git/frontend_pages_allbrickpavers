@@ -7,7 +7,7 @@ import type { INavItem } from "@/types/header";
  * Used by both desktop Navigation and MobileMenu components.
  */
 export const NAV_ITEMS: INavItem[] = [
-  { title: "Company", href: "/company" },
+  { title: "Home", href: "/" },
   {
     title: "Locations",
     href: "/locations",

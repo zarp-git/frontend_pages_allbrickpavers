@@ -30,10 +30,10 @@ export default async function BlogGrid({
       >
         <Container section={true}>
           <h2 className="text-2xl md:text-3xl font-bold text-center text-white md:mb-12 mb-8">
-            Blog Ponte Américas
+            AllBrick Pavers Blog
           </h2>
-          <p className="text-center">
-            Nenhum artigo encontrado. Por favor, tente novamente mais tarde.
+          <p className="text-center text-white">
+            No articles found. Please try again later.
           </p>
         </Container>
       </section>
@@ -50,7 +50,7 @@ export default async function BlogGrid({
     >
       <Container section={true}>
         <h2 className="text-2xl md:text-3xl font-bold text-center text-white md:mb-12 mb-8">
-          Blog Ponte Américas
+          AllBrick Pavers Blog
         </h2>
         <div className="relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -63,8 +63,8 @@ export default async function BlogGrid({
                 return <BlogCard key={post.id} post={post} uri={path} />;
               })
             ) : (
-              <p className="col-span-3 text-center">
-                Nenhum artigo publicado no momento.
+              <p className="col-span-3 text-center text-white">
+                No articles published at this time.
               </p>
             )}
           </div>

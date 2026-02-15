@@ -35,7 +35,7 @@ export const useConsentAnalytics = () => {
       }
 
       // Dispatch custom event for other components
-      window.dispatchEvent(new CustomEvent("pdmi:consent", { 
+      window.dispatchEvent(new CustomEvent("abp:consent", { 
         detail: { choice } 
       }));
     } catch (error) {

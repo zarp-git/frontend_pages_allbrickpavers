@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ReactNode } from "react";
 import { LegalPageConfig } from "@/types/legal-metadata";
 import { RiFileTextLine, RiShieldLine } from "@remixicon/react";
+import { CONTACT } from "@/constants";
 
 const getIcon = (iconName: string) => {
   const icons = {
@@ -25,29 +26,27 @@ export default function LegalLayout({
 }: LegalLayoutProps) {
   return (
     <div className="min-h-screen bg-background mt-40">
-      {/* Breadcrumb simples */}
-      <div className="absolute top-16 left-0 w-full border-b bg-muted/30">
+      {/* Simple breadcrumb */}
+      <div className="absolute top-20 left-0 w-full border-b bg-muted/30">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <nav className="flex items-center space-x-2 text-sm text-muted-foreground py-4">
             <Link href="/" className="hover:text-foreground transition-colors">
-              Início
+              Home
             </Link>
             <span>/</span>
             {currentPath && (
-              <>
-                <span className="text-foreground font-medium">
-                  {config?.title}
-                </span>
-              </>
+              <span className="text-foreground font-medium">
+                {config?.title}
+              </span>
             )}
           </nav>
         </div>
       </div>
 
-      {/* Conteúdo principal */}
+      {/* Main content */}
       <main className="py-8">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Cabeçalho do documento */}
+          {/* Document header */}
           <div className="mb-8">
             <div className="flex items-center gap-3 mb-4">
               {config?.icon && (
@@ -57,38 +56,37 @@ export default function LegalLayout({
               )}
               <div>
                 <h1 className="text-3xl font-bold tracking-tight">
-                  {config?.title || "Documento Legal"}
+                  {config?.title || "Legal Document"}
                 </h1>
                 {config?.lastUpdated && (
                   <p className="text-sm text-muted-foreground mt-1">
-                    Última atualização: {config.lastUpdated}
+                    Last updated: {config.lastUpdated}
                   </p>
                 )}
               </div>
             </div>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              {config?.description || "Documento legal da Pandami"}
+              {config?.description || "Legal document for AllBrick Pavers"}
             </p>
           </div>
 
-          {/* Conteúdo do documento */}
+          {/* Document content */}
           <div className="space-y-6">{children}</div>
 
-          {/* Footer do documento */}
+          {/* Document footer */}
           <div className="mt-12 pt-8 border-t">
             <div className="flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center">
               <div className="text-sm text-muted-foreground">
                 <p>
-                  Em caso de dúvidas sobre este documento, entre em contato
-                  conosco.
+                  If you have questions about this document, please contact us.
                 </p>
               </div>
               <div className="flex gap-2">
                 <Button variant="outline" size="sm" asChild>
-                  <Link href="mailto:contato@pandami.com.br">Contato</Link>
+                  <Link href={CONTACT.phoneHref}>Call Us</Link>
                 </Button>
                 <Button variant="outline" size="sm" asChild>
-                  <Link href="mailto:lgpd@pandami.com.br">DPO</Link>
+                  <Link href={`mailto:${CONTACT.email}`}>Email</Link>
                 </Button>
               </div>
             </div>

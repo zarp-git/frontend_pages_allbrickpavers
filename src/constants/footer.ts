@@ -1,5 +1,5 @@
 export const FOOTER_COMPANY_INFO = {
-  name: "AllBricks Pavers",
+  name: "AllBrick Pavers",
   tagline:
     "Transforming ordinary outdoor spaces into stunning landscapes that last a lifetime. Serving Central Florida homeowners since 2008.",
   address: {

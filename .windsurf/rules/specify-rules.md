@@ -1,4 +1,4 @@
-﻿# frontend_pages_ponte-americas Development Guidelines
+﻿# frontend_pages_allbrickpavers Development Guidelines
 
 Auto-generated from all feature plans. Last updated: 2025-11-15
 

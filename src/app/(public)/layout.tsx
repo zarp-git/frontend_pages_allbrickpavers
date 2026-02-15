@@ -3,6 +3,7 @@ import { Rubik, Hanken_Grotesk } from "next/font/google";
 import "@/app/globals.css";
 import Header from "@/presentation/components/organisms/common/header/Header";
 import Footer from "@/presentation/components/organisms/common/footer/Footer";
+import { LeadCollectModal } from "@/presentation/components/organisms/common/lead-collect-modal/LeadCollectModal";
 
 const rubik = Rubik({
   variable: "--font-rubik",
@@ -34,6 +35,7 @@ export default function RootLayout({
         <Header />
         {children}
         <Footer />
+        <LeadCollectModal />
       </body>
     </html>
   );

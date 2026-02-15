@@ -11,6 +11,7 @@ import {
 } from "@remixicon/react";
 import { cn } from "@/lib/utils";
 import { CyclingText } from "@/presentation/components/molecules/common/CyclingText";
+import { useLeadModal } from "@/hooks/use-lead-modal";
 
 const CITIES = [
   "WINTER HAVEN",
@@ -57,6 +58,7 @@ const SLIDES = [
 export default function Hero() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isAutoPlay, setIsAutoPlay] = useState(true);
+  const { openModal } = useLeadModal();
 
   const handleNext = useCallback(() => {
     setActiveIndex((current) => (current + 1) % SLIDES.length);
@@ -181,6 +183,7 @@ export default function Hero() {
             <Button
               variant="brick"
               size="lg"
+              onClick={openModal}
               className="h-12 md:h-14 px-6 md:px-8 text-sm md:text-base font-bold tracking-wide flex items-center gap-2 shadow-lg hover:shadow-xl transition-all"
             >
               CONTACT US NOW <RiPhoneLine className="size-5" />

@@ -83,14 +83,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       // images: ['https://seusite.com/image-sobre.jpg'],
     },
     {
-      url: `${siteBase}/termos-de-uso`,
-      lastModified: new Date('2025-09-19'),
+      url: `${siteBase}/terms-of-use`,
+      lastModified: new Date('2026-02-14'),
       changeFrequency: 'monthly',
       priority: 0.7,
     },
     {
-      url: `${siteBase}/politica-de-privacidade`,
-      lastModified: new Date('2025-09-19'),
+      url: `${siteBase}/privacy-policy`,
+      lastModified: new Date('2026-02-14'),
       changeFrequency: 'monthly',
       priority: 0.7,
     },

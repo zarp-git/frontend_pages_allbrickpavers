@@ -5,8 +5,11 @@ import Image from "next/image";
 import { Button } from "@/presentation/components/atoms/ui/button";
 import { RiPhoneLine } from "@remixicon/react";
 import { ComparisonSlider } from "@/presentation/components/atoms/ui/comparison-slider";
+import { useLeadModal } from "@/hooks/use-lead-modal";
 
 export const PaversVsConcreteSection = () => {
+  const { openModal } = useLeadModal();
+
   return (
     <section id="pavers-vs-concrete" className="py-20 bg-white">
       <div className="section-container flex flex-col items-center gap-12">
@@ -49,6 +52,7 @@ export const PaversVsConcreteSection = () => {
             <Button
               variant="brick"
               size="lg"
+              onClick={openModal}
               className="h-12 px-8 py-4 rounded-lg inline-flex justify-start items-center gap-4 text-base font-medium font-rubik uppercase"
             >
               contact us now

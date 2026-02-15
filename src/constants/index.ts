@@ -22,12 +22,12 @@ export const SOCIAL_LINKS = {
 
 // Contact information used across the site
 export const CONTACT = {
-	email: "contato@ponteamericas.com",
-	phoneDisplay: "(407) 818-7876",
-	phoneHref: "tel:+14078187876",
-	phoneRaw: "+14078187876",
-	hours: "Mon-Sat: 9:00 AM - 6:00 PM",
+	email: "allbrickpaving@gmail.com",
+	phoneDisplay: "+1 941-284-6466",
+	phoneHref: "tel:+19412846466",
+	phoneRaw: "+19412846466",
+	hours: "Mon-Sat: 9:00 AM - 5:00 PM",
 } as const;
 
 // Consent & privacy
-export const CONSENT_STORAGE_KEY = "pdmi_consent_choice_v2" as const;
+export const CONSENT_STORAGE_KEY = "abp_consent_choice_v1" as const;

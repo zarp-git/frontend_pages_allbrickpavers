@@ -6,5 +6,4 @@
  */
 
 export * from './shared'
-// Lead-specific exports will be added as needed
-// export * from './lead'
+export * from './lead'

@@ -1,9 +1,14 @@
+"use client";
+
 import React from "react";
 import { Button } from "@/presentation/components/atoms/ui/button";
 import { RiPhoneLine } from "@remixicon/react";
 import NextImage from "next/image";
+import { useLeadModal } from "@/hooks/use-lead-modal";
 
 export default function IntroSection() {
+  const { openModal } = useLeadModal();
+
   return (
     <section data-layer="section" className="py-20 bg-white">
       <div className="section-container flex flex-col justify-center items-center gap-8">
@@ -79,6 +84,7 @@ export default function IntroSection() {
                 data-size="lg"
                 data-type="primary"
                 variant="brick"
+                onClick={openModal}
                 className="h-12 px-8 py-4 rounded-lg flex justify-start items-center gap-4 text-base font-medium font-rubik uppercase"
               >
                 contact us now

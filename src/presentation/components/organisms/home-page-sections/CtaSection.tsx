@@ -1,12 +1,17 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
 import { Button } from "@/presentation/components/atoms/ui/button";
 import { RiPhoneLine } from "@remixicon/react";
+import { useLeadModal } from "@/hooks/use-lead-modal";
 
 // ---------------------------------------------------------------------------
 // Component
 // ---------------------------------------------------------------------------
 export function CtaSection() {
+  const { openModal } = useLeadModal();
+
   return (
     <section id="cta" className="py-20 lg:py-28 bg-gray-50 overflow-hidden">
       <div className="section-container">
@@ -49,6 +54,7 @@ export function CtaSection() {
             <Button
               variant="brick-outline"
               size="lg"
+              onClick={openModal}
               className="relative z-10 h-12 px-8 py-4 rounded-lg border-2 border-white bg-transparent text-white hover:bg-white/10 inline-flex justify-start items-center gap-4 text-base font-medium font-rubik uppercase"
             >
               book a free consultation

@@ -27,10 +27,10 @@ const ConsentScripts = memo(() => {
     };
 
     if (typeof window !== "undefined") {
-      window.addEventListener("pdmi:consent", handleConsent as EventListener);
+      window.addEventListener("abp:consent", handleConsent as EventListener);
       return () => {
         window.removeEventListener(
-          "pdmi:consent",
+          "abp:consent",
           handleConsent as EventListener,
         );
       };
