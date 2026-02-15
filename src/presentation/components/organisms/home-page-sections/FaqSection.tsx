@@ -59,12 +59,12 @@ export default function FaqSection() {
   };
 
   return (
-    <section id="faq" className="w-full bg-gray-50 py-14 lg:py-20">
-      <div className="section-container flex flex-col lg:flex-row justify-between items-start gap-12 lg:gap-16">
+    <section id="faq" className="w-full bg-gray-50 py-10 sm:py-14 lg:py-20">
+      <div className="section-container flex flex-col md:flex-row justify-between items-start gap-8 sm:gap-10 md:gap-12 lg:gap-16">
         {/* Left Column - Warranty Badge + CTA */}
-        <div className="w-full lg:w-[554px] flex flex-col items-center lg:items-start gap-8">
+        <div className="w-full md:w-80 lg:w-138.5 flex flex-col items-center md:items-start gap-6 sm:gap-8 md:shrink-0">
           {/* Warranty Badge */}
-          <div className="w-48 h-48 lg:w-64 lg:h-64 relative shrink-0">
+          <div className="w-48 h-48 md:w-52 md:h-52 lg:w-64 lg:h-64 relative shrink-0">
             <Image
               src="/images/7-years-warranty-badge.svg"
               alt="7 Years Exclusive Warranty Badge"
@@ -75,8 +75,8 @@ export default function FaqSection() {
           </div>
 
           {/* Text Content */}
-          <div className="flex flex-col gap-3 text-center lg:text-left">
-            <h2 className="text-3xl lg:text-4xl font-semibold font-hanken text-primary">
+          <div className="flex flex-col gap-3 text-center md:text-left">
+            <h2 className="text-2xl sm:text-3xl md:text-[28px] lg:text-4xl font-semibold font-hanken text-primary">
               YOUR PAVERS SECURED
             </h2>
             <p className="text-gray-600 text-base font-normal font-rubik leading-6 max-w-[480px]">
@@ -102,8 +102,8 @@ export default function FaqSection() {
         </div>
 
         {/* Right Column - FAQ Accordion */}
-        <div className="w-full lg:flex-1 lg:max-w-[598px] flex flex-col gap-6">
-          <h2 className="text-[28px] lg:text-4xl font-semibold font-hanken text-gray-800 uppercase leading-10">
+        <div className="w-full md:flex-1 lg:max-w-[598px] flex flex-col gap-6">
+          <h2 className="text-[24px] sm:text-[28px] lg:text-4xl font-semibold font-hanken text-gray-800 uppercase leading-tight sm:leading-10">
             FREQUENTLY ASKED QUESTIONS
           </h2>
 

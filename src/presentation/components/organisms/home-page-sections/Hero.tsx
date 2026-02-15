@@ -2,16 +2,14 @@
 
 import React, { useState, useEffect, useCallback } from "react";
 import { ComparisonSlider } from "@/presentation/components/atoms/ui/comparison-slider";
-import { Button } from "@/presentation/components/atoms/ui/button";
 import {
   RiArrowDownSLine,
-  RiPhoneLine,
   RiArrowLeftLine,
   RiArrowRightLine,
 } from "@remixicon/react";
 import { cn } from "@/lib/utils";
 import { CyclingText } from "@/presentation/components/molecules/common/CyclingText";
-import { useLeadModal } from "@/hooks/use-lead-modal";
+import { CtaButton } from "@/presentation/components/molecules/common/CtaButton";
 
 const CITIES = [
   "WINTER HAVEN",
@@ -25,7 +23,7 @@ const CITIES = [
 const SERVICES = [
   "PAVERS INSTALLATION",
   "PAVERS REPAIR",
-  "PAVERS MAINTENANCE PLANS",
+  "PAVERS MAINTENANCE",
   "PATIO PAVERS",
   "POOL DECKS PAVERS",
   "DRIVEWAY PAVERS",
@@ -58,7 +56,6 @@ const SLIDES = [
 export default function Hero() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isAutoPlay, setIsAutoPlay] = useState(true);
-  const { openModal } = useLeadModal();
 
   const handleNext = useCallback(() => {
     setActiveIndex((current) => (current + 1) % SLIDES.length);
@@ -107,11 +104,10 @@ export default function Hero() {
       return {
         zIndex: 10,
         opacity: 0.6,
-        // Target: 295px width, 228px height, but flexible for mobile
         width: "295px",
-        maxWidth: "55vw", // Responsive constraint
+        maxWidth: "40vw",
         height: "228px",
-        maxHeight: "45vw", // Proportional height constraint
+        maxHeight: "35vw",
         top: "50%",
         left: "50%",
         transform: "translate(-135%, -50%)",
@@ -124,9 +120,9 @@ export default function Hero() {
         zIndex: 10,
         opacity: 0.6,
         width: "295px",
-        maxWidth: "55vw",
+        maxWidth: "40vw",
         height: "228px",
-        maxHeight: "45vw",
+        maxHeight: "35vw",
         top: "50%",
         left: "50%",
         transform: "translate(35%, -50%)",
@@ -138,13 +134,13 @@ export default function Hero() {
 
   return (
     <section
-      className="relative w-full min-h-svh flex flex-col justify-center overflow-hidden pb-16 md:pb-20"
+      className="relative w-full min-h-svh flex flex-col justify-center overflow-hidden pt-20 pb-12 sm:pt-0 sm:pb-16 md:pb-20"
       style={{
         background:
           "radial-gradient(277.91% 109.76% at 63.33% 38.87%, #FFF 0%, #D9D9D9 100%)",
       }}
     >
-      <div className="section-container relative z-10 flex flex-col lg:flex-row items-center gap-8 md:gap-12 lg:gap-0">
+      <div className="section-container relative z-10 flex flex-col lg:flex-row items-center gap-6 sm:gap-8 md:gap-10 lg:gap-0">
         {/* Text Content */}
         <div className="flex-1 flex flex-col items-center lg:items-start gap-4 md:gap-6 relative z-30">
           {/* Badge */}
@@ -158,7 +154,7 @@ export default function Hero() {
           </div>
 
           {/* Heading */}
-          <h1 className="h1 text-gray-900 text-center lg:text-left">
+          <h1 className="h1 text-gray-900 text-center lg:text-left text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
             The Best Specialists for{" "}
             <span className="text-primary block">
               <CyclingText items={SERVICES} interval={3000} direction="up" />
@@ -180,20 +176,15 @@ export default function Hero() {
 
           {/* CTA Buttons */}
           <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
-            <Button
-              variant="brick"
-              size="lg"
-              onClick={openModal}
-              className="h-12 md:h-14 px-6 md:px-8 text-sm md:text-base font-bold tracking-wide flex items-center gap-2 shadow-lg hover:shadow-xl transition-all"
-            >
-              CONTACT US NOW <RiPhoneLine className="size-5" />
-            </Button>
+            <CtaButton
+              className="h-12 md:h-14 px-6 md:px-8 text-sm md:text-base font-bold tracking-wide shadow-lg hover:shadow-xl transition-all"
+            />
           </div>
         </div>
 
         {/* 3D Card Carousel Area */}
         <div
-          className="flex-1 w-full max-w-[800px] h-[280px] sm:h-[340px] md:h-[400px] lg:h-[450px] relative flex items-center justify-center perspective-1000"
+          className="flex-1 w-full max-w-[800px] h-[240px] sm:h-[340px] md:h-[400px] lg:h-[450px] relative flex items-center justify-center perspective-1000"
           onMouseEnter={pauseAutoPlay}
           onMouseLeave={resumeAutoPlay}
         >
@@ -215,7 +206,7 @@ export default function Hero() {
           </button>
 
           {/* Cards */}
-          <div className="relative w-full max-w-[534px] h-[240px] sm:h-[300px] md:h-[360px] lg:h-[400px] flex items-center justify-center">
+          <div className="relative w-full max-w-[534px] h-[200px] sm:h-[300px] md:h-[360px] lg:h-[400px] flex items-center justify-center">
             {SLIDES.map((slide, index) => {
               const style = getSlideStyles(index);
               const isActive = index === activeIndex;

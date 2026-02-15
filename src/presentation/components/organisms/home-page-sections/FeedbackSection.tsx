@@ -91,10 +91,10 @@ export default function FeedbackSection() {
   return (
     <section
       id="testimonials"
-      className="relative py-14 lg:py-20 bg-white overflow-hidden"
+      className="relative py-10 sm:py-14 lg:py-20 bg-white overflow-hidden"
     >
       {/* ── Heading ── */}
-      <div className="section-container text-center mb-10 lg:mb-12">
+      <div className="section-container text-center mb-8 sm:mb-10 lg:mb-12">
         <h2 className="text-gray-800 text-2xl md:text-3xl font-black font-hanken uppercase leading-tight tracking-wide">
           What Customers Are Talking About Our Service
         </h2>
@@ -104,7 +104,7 @@ export default function FeedbackSection() {
       <div className="section-container relative">
         <Swiper
           modules={[Navigation, Autoplay]}
-          spaceBetween={32}
+          spaceBetween={20}
           slidesPerView={1.15}
           loop
           speed={600}
@@ -151,7 +151,7 @@ export default function FeedbackSection() {
       </div>
 
       {/* ── CTA Buttons ── */}
-      <div className="section-container mt-10 flex flex-wrap items-center justify-center gap-4">
+      <div className="section-container mt-8 sm:mt-10 flex flex-wrap items-center justify-center gap-3 sm:gap-4">
         <Button
           asChild
           variant="brick"
@@ -188,9 +188,9 @@ export default function FeedbackSection() {
 // ---------------------------------------------------------------------------
 function ReviewCard({ review }: { review: Review }) {
   return (
-    <article className="w-80 p-5 bg-gray-50 rounded-2xl border border-gray-200 flex flex-col justify-start items-start gap-4 h-full">
+    <article className="w-full p-4 sm:p-5 bg-gray-50 rounded-2xl border border-gray-200 flex flex-col justify-start items-start gap-3 sm:gap-4 h-full">
       {/* ── Project Image with Service Chip ── */}
-      <div className="relative self-stretch h-40 rounded-md border border-gray-200 overflow-hidden">
+      <div className="relative self-stretch h-32 sm:h-40 rounded-md border border-gray-200 overflow-hidden">
         <Image
           src={review.image}
           alt={`${review.serviceTag} project by AllBrick Pavers`}

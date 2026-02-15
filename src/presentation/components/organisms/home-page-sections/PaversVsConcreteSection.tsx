@@ -2,24 +2,20 @@
 
 import React from "react";
 import Image from "next/image";
-import { Button } from "@/presentation/components/atoms/ui/button";
-import { RiPhoneLine } from "@remixicon/react";
 import { ComparisonSlider } from "@/presentation/components/atoms/ui/comparison-slider";
-import { useLeadModal } from "@/hooks/use-lead-modal";
+import { CtaButton } from "@/presentation/components/molecules/common/CtaButton";
 
 export const PaversVsConcreteSection = () => {
-  const { openModal } = useLeadModal();
-
   return (
-    <section id="pavers-vs-concrete" className="py-20 bg-white">
-      <div className="section-container flex flex-col items-center gap-12">
-        <h2 className="text-foreground text-3xl font-black font-hanken uppercase leading-7 tracking-wide text-center">
+    <section id="pavers-vs-concrete" className="py-10 sm:py-14 md:py-20 bg-white">
+      <div className="section-container flex flex-col items-center gap-8 sm:gap-10 md:gap-12">
+        <h2 className="text-foreground text-2xl sm:text-3xl font-black font-hanken uppercase leading-tight tracking-wide text-center">
           PAVERS VS CONCRETE
         </h2>
 
-        <div className="w-full flex flex-col xl:flex-row justify-start items-center gap-48">
+        <div className="w-full flex flex-col lg:flex-row justify-start items-center gap-8 md:gap-12 lg:gap-16 xl:gap-24">
           {/* Text Content */}
-          <div className="w-full xl:w-[500px] flex flex-col justify-center items-start gap-8">
+          <div className="w-full lg:w-105 xl:w-125 flex flex-col justify-center items-start gap-8">
             <div className="flex flex-col justify-start items-start gap-4">
               <h3 className="text-foreground text-xl font-bold font-hanken uppercase leading-tight tracking-tight">
                 Why Choose Pavers Over Concrete?
@@ -49,15 +45,7 @@ export const PaversVsConcreteSection = () => {
               </div>
             </div>
 
-            <Button
-              variant="brick"
-              size="lg"
-              onClick={openModal}
-              className="h-12 px-8 py-4 rounded-lg inline-flex justify-start items-center gap-4 text-base font-medium font-rubik uppercase"
-            >
-              contact us now
-              <RiPhoneLine className="size-5" />
-            </Button>
+            <CtaButton />
           </div>
 
           {/* Comparison Slider with Detail Images */}
@@ -68,11 +56,11 @@ export const PaversVsConcreteSection = () => {
               afterImage="/images/sections-images/patio-pavers-1-after-1.webp"
               beforeLabel="Concrete"
               afterLabel="Pavers"
-              className="w-full h-[300px] md:h-[400px] lg:h-[420px] rounded-xl"
+              className="w-full h-[250px] sm:h-[300px] md:h-[400px] lg:h-[420px] rounded-xl"
             />
 
             {/* Concrete floor — left side, vertically centered */}
-            <div className="absolute left-0 top-1/2 -translate-y-1/3 -translate-x-1/2 z-10 w-28 h-28 md:w-36 md:h-36 overflow-hidden">
+            <div className="absolute left-0 top-1/2 -translate-y-1/3 -translate-x-1/2 z-10 w-20 h-20 sm:w-28 sm:h-28 md:w-36 md:h-36 overflow-hidden hidden md:block">
               <Image
                 src="/images/sections-images/difference-section-concrete-floor.png"
                 alt="Concrete floor texture"
@@ -84,7 +72,7 @@ export const PaversVsConcreteSection = () => {
             </div>
 
             {/* Pavers floor — right side, vertically centered */}
-            <div className="absolute right-0 top-1/2 -translate-y-1/3 translate-x-1/2 z-10 w-28 h-28 md:w-36 md:h-36 overflow-hidden">
+            <div className="absolute right-0 top-1/2 -translate-y-1/3 translate-x-1/2 z-10 w-20 h-20 sm:w-28 sm:h-28 md:w-36 md:h-36 overflow-hidden hidden md:block">
               <Image
                 src="/images/sections-images/difference-section-pavers-floor.png"
                 alt="Paver floor texture"

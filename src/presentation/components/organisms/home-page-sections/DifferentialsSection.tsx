@@ -301,7 +301,7 @@ export default function DifferentialsSection() {
     >
       {/* ── Tabs ── */}
       <div className="section-container flex justify-center mb-6">
-        <div className="flex gap-1 p-1 rounded-xl border border-primary overflow-x-auto scrollbar-hide">
+        <div className="flex gap-1 p-1 rounded-xl border border-primary overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {TABS.map((tab, index) => (
             <button
               key={tab.label}
@@ -332,7 +332,7 @@ export default function DifferentialsSection() {
 
       {/* ── Comparison Cards ── */}
       <div className="section-container">
-        <div className="flex flex-col lg:flex-row gap-5">
+        <div className="flex flex-col md:flex-row gap-5">
           {/* Others Card */}
           <ComparisonCard
             title={currentTab.others.title}
@@ -375,7 +375,7 @@ function ComparisonCard({
   return (
     <div className="flex-1 rounded-[10px] flex flex-col gap-5 overflow-hidden">
       {/* -- Hero Image -- */}
-      <div className="relative h-48 lg:h-56 w-full rounded-[10px] overflow-hidden">
+      <div className="relative h-48 md:h-52 lg:h-56 w-full rounded-[10px] overflow-hidden">
         <Image
           src={image}
           alt={title}
@@ -390,11 +390,11 @@ function ComparisonCard({
       </div>
 
       {/* -- Features Grid (2x2) -- */}
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-2 gap-3 sm:gap-4">
         {features.map((feature) => (
           <div
             key={feature.title}
-            className="flex flex-col items-center gap-2 p-3 rounded-lg"
+            className="flex flex-col items-center gap-2 p-2 sm:p-3 rounded-lg"
           >
             <div
               className={cn(
@@ -408,10 +408,10 @@ function ComparisonCard({
                 <RiCloseLine className="size-5 text-red-500" />
               )}
             </div>
-            <h4 className="text-gray-900 text-sm lg:text-base font-medium font-hanken leading-5 tracking-tight text-center">
+            <h4 className="text-gray-900 text-xs sm:text-sm lg:text-base font-medium font-hanken leading-5 tracking-tight text-center">
               {feature.title}
             </h4>
-            <p className="text-gray-600 text-xs lg:text-sm font-normal font-rubik leading-5 text-center">
+            <p className="text-gray-600 text-[11px] sm:text-xs lg:text-sm font-normal font-rubik leading-4 sm:leading-5 text-center">
               {feature.description}
             </p>
           </div>

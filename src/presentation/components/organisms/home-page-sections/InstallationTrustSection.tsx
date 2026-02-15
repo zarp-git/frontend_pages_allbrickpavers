@@ -1,19 +1,18 @@
 import React from "react";
 import Image from "next/image";
-import { Button } from "@/presentation/components/atoms/ui/button";
-import { RiPhoneLine } from "@remixicon/react";
+import { CtaButton } from "@/presentation/components/molecules/common/CtaButton";
 
 export const InstallationTrustSection = () => {
   return (
-    <section id="installation-trust" className="py-20 bg-white">
-      <div className="section-container flex flex-col items-center gap-12">
-        <h2 className="text-foreground text-3xl font-black font-hanken uppercase leading-7 tracking-wide text-center">
+    <section id="installation-trust" className="py-10 sm:py-14 md:py-20 bg-white">
+      <div className="section-container flex flex-col items-center gap-8 sm:gap-10 md:gap-12">
+        <h2 className="text-foreground text-2xl sm:text-3xl font-black font-hanken uppercase leading-tight tracking-wide text-center">
           installation you can trust
         </h2>
 
-        <div className="w-full flex flex-col lg:flex-row justify-center items-center gap-12">
+        <div className="w-full flex flex-col md:flex-row justify-center items-center gap-8 sm:gap-10 md:gap-12">
           {/* Image */}
-          <div className="relative w-full lg:w-[618px] h-64 md:h-80 rounded-xl overflow-hidden">
+          <div className="relative w-full md:w-1/2 lg:w-[618px] h-48 sm:h-56 md:h-72 lg:h-80 rounded-xl overflow-hidden">
             <Image
               src="/images/sections-images/installation-trust-section-pavers-layers.png"
               alt="Professional installation layers"
@@ -42,14 +41,7 @@ export const InstallationTrustSection = () => {
               </div>
             </div>
 
-            <Button
-              variant="brick"
-              size="lg"
-              className="h-12 px-8 py-4 rounded-lg inline-flex justify-start items-center gap-4 text-base font-medium font-rubik uppercase"
-            >
-              contact us now
-              <RiPhoneLine className="size-5" />
-            </Button>
+            <CtaButton />
           </div>
         </div>
       </div>

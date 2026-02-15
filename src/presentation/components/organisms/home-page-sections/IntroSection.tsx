@@ -2,22 +2,19 @@
 
 import React from "react";
 import { Button } from "@/presentation/components/atoms/ui/button";
-import { RiPhoneLine } from "@remixicon/react";
 import NextImage from "next/image";
-import { useLeadModal } from "@/hooks/use-lead-modal";
+import { CtaButton } from "@/presentation/components/molecules/common/CtaButton";
 
 export default function IntroSection() {
-  const { openModal } = useLeadModal();
-
   return (
-    <section data-layer="section" className="py-20 bg-white">
-      <div className="section-container flex flex-col justify-center items-center gap-8">
+    <section data-layer="section" className="py-10 sm:py-14 md:py-20 bg-white">
+      <div className="section-container flex flex-col justify-center items-center gap-6 sm:gap-8">
         <div
           data-layer="div flex-col md:flex-row"
-          className="self-stretch flex flex-col md:flex-row justify-center items-center gap-12"
+          className="self-stretch flex flex-col md:flex-row justify-center items-center gap-8 md:gap-12"
         >
           {/* Image */}
-          <div className="flex-1 w-full md:w-auto h-80 relative rounded-[20px] overflow-hidden">
+          <div className="flex-1 w-full md:w-auto h-56 sm:h-64 md:h-80 relative rounded-[20px] overflow-hidden">
             <NextImage
               data-layer="cracked-pavers"
               className="object-cover"
@@ -39,7 +36,7 @@ export default function IntroSection() {
             >
               <h2
                 data-layer="DO ANY OF THESE SOUND FAMILIAR?"
-                className="justify-center text-gray-800 text-3xl font-extrabold font-hanken uppercase leading-7 tracking-wide"
+                className="justify-center text-gray-800 text-2xl sm:text-3xl font-extrabold font-hanken uppercase leading-tight tracking-wide"
               >
                 DO ANY OF THESE SOUND FAMILIAR?
               </h2>
@@ -77,19 +74,7 @@ export default function IntroSection() {
               data-layer="Frame 2095585693"
               className="inline-flex flex-wrap justify-start items-start gap-4"
             >
-              <Button
-                data-layer="PrimaryButton"
-                data-color="gradient"
-                data-icon="ON"
-                data-size="lg"
-                data-type="primary"
-                variant="brick"
-                onClick={openModal}
-                className="h-12 px-8 py-4 rounded-lg flex justify-start items-center gap-4 text-base font-medium font-rubik uppercase"
-              >
-                contact us now
-                <RiPhoneLine className="size-5" />
-              </Button>
+              <CtaButton />
 
               <Button
                 data-layer="PrimaryButton"

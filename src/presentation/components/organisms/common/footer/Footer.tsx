@@ -70,13 +70,13 @@ export default function Footer({ variant = "default" }: FooterProps) {
   return (
     <footer className="w-full">
       {/* ── Main Footer Section ── */}
-      <div className="bg-white py-10 lg:py-16 w-full flex flex-col items-center gap-8 lg:gap-12">
-        <div className="section-container flex flex-col items-center gap-8">
+      <div className="bg-white py-8 lg:py-16 w-full flex flex-col items-center gap-6 lg:gap-12">
+        <div className="section-container flex flex-col items-center gap-6 sm:gap-8">
           {/* ── Top Card (bordered) ── */}
           <div className="w-full rounded-[10px] border border-secondary overflow-hidden">
-            <div className="flex flex-col lg:flex-row">
+            <div className="flex flex-col md:flex-row">
               {/* Left Column · Business Info */}
-              <div className="flex-1 px-8 lg:px-14 py-10 lg:py-16 border-b lg:border-b-0 lg:border-r border-secondary">
+              <div className="flex-1 px-5 sm:px-8 md:px-10 lg:px-14 py-8 md:py-12 lg:py-16 border-b md:border-b-0 md:border-r border-secondary">
                 <div className="flex flex-col gap-6">
                   <CompanyLogo size="xl" />
 
@@ -109,7 +109,7 @@ export default function Footer({ variant = "default" }: FooterProps) {
               </div>
 
               {/* Right Column · Contact & Map */}
-              <div className="flex-1 px-8 lg:px-14 py-10 lg:py-16 flex flex-col md:flex-row justify-between items-start gap-8 lg:gap-12">
+              <div className="flex-1 px-5 sm:px-8 md:px-10 lg:px-14 py-8 md:py-12 lg:py-16 flex flex-col md:flex-row justify-between items-start gap-6 lg:gap-12">
                 {/* Contact Us */}
                 <div className="flex flex-col justify-between gap-6">
                   <div className="flex flex-col gap-2">
@@ -171,11 +171,11 @@ export default function Footer({ variant = "default" }: FooterProps) {
           </div>
 
           {/* ── Bottom Section · Navigation Links ── */}
-          <div className="w-full flex flex-col lg:flex-row justify-between items-start gap-10 lg:gap-20">
+          <div className="w-full flex flex-col md:flex-row justify-between items-start gap-8 md:gap-10 lg:gap-20">
             {/* Link Columns */}
             <nav
               aria-label="Footer Directory"
-              className="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-16"
+              className="w-full grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8 lg:gap-16"
             >
               {/* Company */}
               <FooterLinkColumn title="COMPANY" links={FOOTER_COMPANY_LINKS} />
@@ -258,7 +258,7 @@ export default function Footer({ variant = "default" }: FooterProps) {
               <Button
                 variant="default"
                 size="lg"
-                className="w-full h-10 px-5 py-4 bg-gray-800 hover:bg-gray-700 rounded-lg flex justify-start items-center gap-4"
+                className="w-full h-10 px-5 py-4 bg-gray-800 hover:bg-gray-700 rounded-lg flex justify-between items-center"
                 asChild
               >
                 <Link
@@ -278,14 +278,14 @@ export default function Footer({ variant = "default" }: FooterProps) {
       </div>
 
       {/* ── Copyright Bar ── */}
-      <div className="w-full py-6 lg:py-8 bg-black border-t border-gray-900">
-        <div className="section-container flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-gray-400 text-sm md:text-base font-normal font-rubik leading-5">
+      <div className="w-full py-5 lg:py-8 bg-black border-t border-gray-900">
+        <div className="section-container flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4">
+          <p className="text-gray-400 text-xs sm:text-sm md:text-base font-normal font-rubik leading-5 text-center sm:text-left">
             AllBrick Pavers &copy; Copyright <CurrentYear /> - All Rights
             Reserved.
           </p>
-          <div className="flex-1 flex justify-end items-center gap-4">
-            <span className="text-gray-500 text-sm md:text-base font-normal font-rubik underline leading-5">
+          <div className="flex-1 flex flex-col sm:flex-row justify-center sm:justify-end items-center gap-2 sm:gap-4">
+            <span className="text-gray-500 text-xs sm:text-sm md:text-base font-normal font-rubik underline leading-5">
               Developed and Maintained by
             </span>
             <Link

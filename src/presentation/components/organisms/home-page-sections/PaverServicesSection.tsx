@@ -2,10 +2,8 @@
 
 import React from "react";
 import Image from "next/image";
-import { Button } from "@/presentation/components/atoms/ui/button";
-import { RiPhoneLine } from "@remixicon/react";
 import { CyclingText } from "@/presentation/components/molecules/common/CyclingText";
-import { useLeadModal } from "@/hooks/use-lead-modal";
+import { CtaButton } from "@/presentation/components/molecules/common/CtaButton";
 
 // ---------------------------------------------------------------------------
 // Types
@@ -59,11 +57,9 @@ const SERVICES: ServiceItem[] = [
 // Component
 // ---------------------------------------------------------------------------
 export function PaverServicesSection() {
-  const { openModal } = useLeadModal();
-
   return (
-    <section id="paver-services" className="py-10 lg:py-20 bg-gray-50">
-      <div className="section-container flex flex-col justify-center items-center gap-8">
+    <section id="paver-services" className="py-10 sm:py-14 lg:py-20 bg-gray-50">
+      <div className="section-container flex flex-col justify-center items-center gap-6 sm:gap-8">
         {/* ── Heading ── */}
         <div className="flex flex-col justify-start items-center gap-2.5 text-center">
           <h2 className="text-gray-800 text-2xl md:text-3xl font-black font-hanken uppercase leading-tight tracking-wide">
@@ -83,22 +79,14 @@ export function PaverServicesSection() {
         </div>
 
         {/* ── Service Cards Grid ── */}
-        <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
           {SERVICES.map((service) => (
             <ServiceCard key={service.title} {...service} />
           ))}
         </div>
 
         {/* ── CTA Button ── */}
-        <Button
-          variant="brick"
-          size="lg"
-          onClick={openModal}
-          className="h-12 px-8 py-4 rounded-lg inline-flex justify-start items-center gap-4 text-base font-medium font-rubik uppercase"
-        >
-          contact us now
-          <RiPhoneLine className="size-5" />
-        </Button>
+        <CtaButton />
       </div>
     </section>
   );
@@ -109,7 +97,7 @@ export function PaverServicesSection() {
 // ---------------------------------------------------------------------------
 function ServiceCard({ title, description, image }: ServiceItem) {
   return (
-    <div className="relative h-96 rounded-2xl overflow-hidden group">
+    <div className="relative h-64 sm:h-80 lg:h-96 rounded-2xl overflow-hidden group">
       {/* Background Image */}
       <Image
         src={image}
@@ -123,8 +111,8 @@ function ServiceCard({ title, description, image }: ServiceItem) {
       <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent" />
 
       {/* Text Overlay */}
-      <div className="absolute bottom-0 left-0 right-0 px-4 pt-7 pb-4 bg-neutral-700/90 backdrop-blur-xs flex flex-col justify-start items-start gap-2.5">
-        <h3 className="text-white text-xl md:text-2xl font-medium font-hanken capitalize leading-6">
+      <div className="absolute bottom-0 left-0 right-0 px-3 sm:px-4 pt-5 sm:pt-7 pb-3 sm:pb-4 bg-neutral-700/90 backdrop-blur-xs flex flex-col justify-start items-start gap-1.5 sm:gap-2.5">
+        <h3 className="text-white text-lg sm:text-xl md:text-2xl font-medium font-hanken capitalize leading-6">
           {title}
         </h3>
         <p className="text-white text-sm md:text-base font-normal font-rubik leading-6">

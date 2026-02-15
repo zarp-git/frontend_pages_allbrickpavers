@@ -2,25 +2,24 @@
 
 import React from "react";
 import Image from "next/image";
-import { RiPhoneLine } from "@remixicon/react";
-import { Button } from "@/presentation/components/atoms/ui/button";
+import { CtaButton } from "@/presentation/components/molecules/common/CtaButton";
 
 export default function AboutSection() {
   return (
-    <section className="py-20 bg-white">
+    <section className="py-10 sm:py-14 md:py-20 bg-white">
       <div className="section-container">
         {/* Section Heading */}
-        <div className="text-center mb-16">
-          <h2 className="text-[28px] md:text-[36px] font-rubik font-semibold text-gray-900 leading-tight">
+        <div className="text-center mb-10 sm:mb-12 md:mb-16">
+          <h2 className="text-[24px] sm:text-[28px] md:text-[36px] font-rubik font-semibold text-gray-900 leading-tight">
             Meet ALLBRICK PAVERS
           </h2>
         </div>
 
         {/* Feature Block 1: Right Content, Left Image */}
-        <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-24 mb-24">
+        <div className="flex flex-col lg:flex-row items-center gap-8 sm:gap-10 lg:gap-24 mb-12 sm:mb-16 md:mb-24">
           {/* Left: Image with Angled Shape */}
           <div className="flex-1 w-full relative flex justify-center lg:justify-end">
-            <div className="relative w-full aspect-[6/3] drop-shadow-xl">
+            <div className="relative w-full aspect-[4/3] sm:aspect-[5/3] lg:aspect-[6/3] drop-shadow-xl">
               {/* Red Accent Background/Border Layer */}
               <div
                 className="absolute inset-0 bg-[#A52024] rounded-l-3xl"
@@ -48,10 +47,10 @@ export default function AboutSection() {
 
           {/* Right: Content */}
           <div className="flex-1 w-full text-left">
-            <h3 className="text-[28px] md:text-[32px] font-rubik font-medium text-gray-900 mb-6 leading-tight">
-              Upgrade Your Property With Central Florida’s Trusted Paver Experts
+            <h3 className="text-[22px] sm:text-[28px] md:text-[32px] font-rubik font-medium text-gray-900 mb-4 sm:mb-6 leading-tight">
+              Upgrade Your Property With Central Florida's Trusted Paver Experts
             </h3>
-            <p className="text-gray-600 text-base md:text-lg leading-relaxed mb-6 font-rubik">
+            <p className="text-gray-600 text-sm sm:text-base md:text-lg leading-relaxed mb-4 sm:mb-6 font-rubik">
               At ALLBRICK PAVERS, we're local specialists dedicated to
               revolutionizing outdoor spaces in Lakeland, Polk County, and
               Orlando's western suburbs. As a family-owned business, we blend
@@ -63,20 +62,20 @@ export default function AboutSection() {
         </div>
 
         {/* Feature Block 2: Left Content, Right Image */}
-        <div className="flex flex-col-reverse lg:flex-row items-center gap-12 lg:gap-24 mb-16">
+        <div className="flex flex-col-reverse lg:flex-row items-center gap-8 sm:gap-10 lg:gap-24 mb-10 sm:mb-12 md:mb-16">
           {/* Left: Content */}
           <div className="flex-1 w-full text-left">
-            <h3 className="text-[28px] md:text-[32px] font-rubik font-medium text-gray-900 mb-6 leading-tight">
+            <h3 className="text-[22px] sm:text-[28px] md:text-[32px] font-rubik font-medium text-gray-900 mb-4 sm:mb-6 leading-tight">
               Local Expertise, Guaranteed Quality
             </h3>
-            <p className="text-gray-600 text-base md:text-lg leading-relaxed mb-6 font-rubik">
+            <p className="text-gray-600 text-sm sm:text-base md:text-lg leading-relaxed mb-4 sm:mb-6 font-rubik">
               With over a decade of experience and dozens of successful
               projects, we know how to create lasting curb appeal. We're a
               family-owned team with deep ties to the communities we serve. Our
               commitment to quality and customer satisfaction drives everything
               we do.
             </p>
-            <p className="text-gray-600 text-base md:text-lg leading-relaxed font-rubik">
+            <p className="text-gray-600 text-sm sm:text-base md:text-lg leading-relaxed font-rubik">
               <span className="font-bold text-[#A52024]">
                 Authorized QUIKRETE® Dealer & Contractor
               </span>{" "}
@@ -87,7 +86,7 @@ export default function AboutSection() {
 
           {/* Right: Image with Angled Shape */}
           <div className="flex-1 w-full relative flex justify-center lg:justify-start">
-            <div className="relative w-full aspect-[6/3] drop-shadow-xl">
+            <div className="relative w-full aspect-[4/3] sm:aspect-[5/3] lg:aspect-[6/3] drop-shadow-xl">
               {/* Red Accent */}
               <div
                 className="absolute inset-0 bg-[#A52024] rounded-r-3xl"
@@ -118,13 +117,9 @@ export default function AboutSection() {
 
         {/* Bottom CTA */}
         <div className="flex justify-center mt-12">
-          <Button
-            variant="brick"
-            size="lg"
-            className="h-[52px] px-8 text-base font-bold uppercase tracking-wide flex items-center gap-2"
-          >
-            CONTACT US NOW <RiPhoneLine className="size-5" />
-          </Button>
+          <CtaButton
+            className="h-[52px] px-8 text-base font-bold tracking-wide"
+          />
         </div>
       </div>
     </section>
