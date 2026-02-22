@@ -30,7 +30,7 @@ interface FooterProps {
 }
 
 const GOOGLE_MAPS_EMBED_URL =
-  "https://maps.google.com/maps?q=99+6th+St+SW+Ste+109,+Winter+Haven+FL+33880&t=&z=14&ie=UTF8&iwloc=&output=embed";
+  "https://maps.google.com/maps?q=Allbrick+Pavers&t=&z=9&ie=UTF8&iwloc=&output=embed";
 
 export default function Footer({ variant = "default" }: FooterProps) {
   const { openModal } = useLeadModal();
@@ -42,16 +42,18 @@ export default function Footer({ variant = "default" }: FooterProps) {
             AllBrick Pavers &copy; Copyright <CurrentYear /> - All Rights
             Reserved.
           </p>
-          <div className="flex items-center gap-4">
-            <Link
-              href="https://www.zarpstudio.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:opacity-80 transition-opacity"
-            >
-              <span className="text-gray-500 text-sm md:text-base font-normal font-rubik underline leading-5">
-                Developed and Maintained by
-              </span>
+          <Link
+            href="https://www.zarpstudio.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:opacity-80 transition-opacity"
+          >
+            <div className="flex items-center gap-4">
+              <Link href="https://www.zarpstudio.com">
+                <span className="text-gray-500 text-sm md:text-base font-normal font-rubik underline leading-5">
+                  Developed and Maintained by
+                </span>
+              </Link>
 
               <Image
                 src="/images/brands/zarp-logomark.svg"
@@ -60,8 +62,8 @@ export default function Footer({ variant = "default" }: FooterProps) {
                 height={25}
                 className="h-6 w-auto"
               />
-            </Link>
-          </div>
+            </div>
+          </Link>
         </div>
       </footer>
     );
