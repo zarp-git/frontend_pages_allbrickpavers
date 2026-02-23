@@ -7,6 +7,7 @@ import { RiArrowDownSLine } from "@remixicon/react";
 import type { INavItem } from "@/types/header";
 import { NAV_ITEMS } from "@/constants";
 import { cn } from "@/lib/utils";
+import { useMaintenanceModal } from "@/hooks/use-maintenance-modal";
 
 interface NavigationProps {
   className?: string;
@@ -19,6 +20,7 @@ export default function Navigation({ className, navItems }: NavigationProps) {
   const [activeSection, setActiveSection] = useState<string>("");
   const navRef = useRef<HTMLElement>(null);
   const pathname = usePathname();
+  const { openModal } = useMaintenanceModal();
 
   // Detect active section via IntersectionObserver (for anchor links on home page)
   useEffect(() => {
@@ -89,6 +91,13 @@ export default function Navigation({ className, navItems }: NavigationProps) {
     return pathname === item.href;
   };
 
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href === "/learning-center") {
+      e.preventDefault();
+      openModal();
+    }
+  };
+
   return (
     <nav ref={navRef} className={cn("flex items-center gap-1", className)}>
       {items.map((item) => {
@@ -155,6 +164,7 @@ export default function Navigation({ className, navItems }: NavigationProps) {
               /* Regular Link */
               <Link
                 href={item.href}
+                onClick={(e) => handleLinkClick(e, item.href)}
                 className={cn(
                   "relative flex items-center px-3 py-2 rounded-lg text-sm font-medium font-rubik transition-colors group",
                   isActive

@@ -23,9 +23,9 @@ export const SOCIAL_LINKS = {
 // Contact information used across the site
 export const CONTACT = {
 	email: "allbrickpaving@gmail.com",
-	phoneDisplay: "+1 941-284-6466",
-	phoneHref: "tel:+19412846466",
-	phoneRaw: "+19412846466",
+	phoneDisplay: "+1 407-818-7876",
+	phoneHref: "tel:+14078187876",
+	phoneRaw: "+14078187876",
 	hours: "Mon-Sat: 9:00 AM - 5:00 PM",
 } as const;
 

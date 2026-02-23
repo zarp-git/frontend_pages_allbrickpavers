@@ -66,7 +66,7 @@ export const LocalBusinessJsonLd = () => {
 		description:
 			"Family-owned paver installation, repair, and maintenance company serving Central Florida homeowners. Specializing in driveways, patios, pool decks, walkways, and fire pits with quality craftsmanship since 2008.",
 		url: SITE_URL,
-		telephone: "+1-941-284-6466",
+		telephone: "+1-407-818-7876",
 		email: "allbrickpaving@gmail.com",
 		address: {
 			"@type": "PostalAddress",

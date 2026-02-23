@@ -8,8 +8,8 @@ export const FOOTER_COMPANY_INFO = {
   },
   contact: {
     hours: "FROM MON TO SAT : 9AM - 5PM",
-    phone: "+1 941-284-6466",
-    phoneDisplay: "+1 941-284-6466",
+    phone: "+1 407-818-7876",
+    phoneDisplay: "+1 407-818-7876",
   },
 } as const;
 

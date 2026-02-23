@@ -4,6 +4,7 @@ import "@/app/globals.css";
 import Header from "@/presentation/components/organisms/common/header/Header";
 import Footer from "@/presentation/components/organisms/common/footer/Footer";
 import { LeadCollectModal } from "@/presentation/components/organisms/common/lead-collect-modal/LeadCollectModal";
+import { MaintenanceModal } from "@/presentation/components/organisms/common/MaintenanceModal";
 
 const rubik = Rubik({
   variable: "--font-rubik",
@@ -36,6 +37,7 @@ export default function RootLayout({
         {children}
         <Footer />
         <LeadCollectModal />
+        <MaintenanceModal />
       </body>
     </html>
   );

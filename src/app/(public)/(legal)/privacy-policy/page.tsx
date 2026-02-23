@@ -382,8 +382,8 @@ export default function Page() {
             allbrickpaving@gmail.com
           </a>{" "}
           or call us at{" "}
-          <a href="tel:+19412846466" className="text-primary hover:underline">
-            +1 941-284-6466
+          <a href="tel:+14078187876" className="text-primary hover:underline">
+            +1 407-818-7876
           </a>
           . We will respond within 45 days of receiving your request.
         </p>
@@ -450,10 +450,10 @@ export default function Page() {
           <p>
             Phone:{" "}
             <a
-              href="tel:+19412846466"
+              href="tel:+14078187876"
               className="text-primary hover:underline"
             >
-              +1 941-284-6466
+              +1 407-818-7876
             </a>
           </p>
           <p>

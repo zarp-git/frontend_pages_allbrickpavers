@@ -21,6 +21,7 @@ import {
 import { SOCIAL_LINKS } from "@/constants";
 import CompanyLogo from "@/presentation/components/atoms/CompanyLogo";
 import { useLeadModal } from "@/hooks/use-lead-modal";
+import { useMaintenanceModal } from "@/hooks/use-maintenance-modal";
 
 export type FooterVariant = "default" | "simplified";
 
@@ -34,6 +35,7 @@ const GOOGLE_MAPS_EMBED_URL =
 
 export default function Footer({ variant = "default" }: FooterProps) {
   const { openModal } = useLeadModal();
+  const { openModal: openMaintenanceModal } = useMaintenanceModal();
   if (variant === "simplified") {
     return (
       <footer className="w-full bg-black border-t border-gray-900">
@@ -180,16 +182,16 @@ export default function Footer({ variant = "default" }: FooterProps) {
               className="w-full grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8 lg:gap-16"
             >
               {/* Company */}
-              <FooterLinkColumn title="COMPANY" links={FOOTER_COMPANY_LINKS} />
+              <FooterLinkColumn title="COMPANY" links={FOOTER_COMPANY_LINKS} onLinkClick={openMaintenanceModal} />
 
               {/* Locations */}
-              <FooterLinkColumn title="LOCATIONS" links={FOOTER_LOCATIONS} />
+              <FooterLinkColumn title="LOCATIONS" links={FOOTER_LOCATIONS} onLinkClick={openMaintenanceModal} />
 
               {/* Services */}
-              <FooterLinkColumn title="SERVICES" links={FOOTER_SERVICES} />
+              <FooterLinkColumn title="SERVICES" links={FOOTER_SERVICES} onLinkClick={openMaintenanceModal} />
 
               {/* Legal */}
-              <FooterLinkColumn title="LEGAL" links={FOOTER_LEGAL_LINKS} />
+              <FooterLinkColumn title="LEGAL" links={FOOTER_LEGAL_LINKS} onLinkClick={openMaintenanceModal} />
             </nav>
 
             {/* Find Us On */}
@@ -315,9 +317,17 @@ export default function Footer({ variant = "default" }: FooterProps) {
 interface FooterLinkColumnProps {
   title: string;
   links: ReadonlyArray<{ readonly label: string; readonly href: string }>;
+  onLinkClick: () => void;
 }
 
-function FooterLinkColumn({ title, links }: FooterLinkColumnProps) {
+function FooterLinkColumn({ title, links, onLinkClick }: FooterLinkColumnProps) {
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href === "/learning-center") {
+      e.preventDefault();
+      onLinkClick();
+    }
+  };
+
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-col gap-2">
@@ -331,6 +341,7 @@ function FooterLinkColumn({ title, links }: FooterLinkColumnProps) {
           <li key={link.href}>
             <Link
               href={link.href}
+              onClick={(e) => handleLinkClick(e, link.href)}
               className="text-gray-700 text-base font-normal font-rubik hover:text-primary transition-colors block"
             >
               {link.label}

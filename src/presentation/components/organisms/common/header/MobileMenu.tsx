@@ -14,6 +14,7 @@ import CompanyLogo from "@/presentation/components/atoms/CompanyLogo";
 import type { INavItem } from "@/types/header";
 import { cn } from "@/lib/utils";
 import { useLeadModal } from "@/hooks/use-lead-modal";
+import { useMaintenanceModal } from "@/hooks/use-maintenance-modal";
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -29,12 +30,23 @@ export default function MobileMenu({
   const [openSections, setOpenSections] = useState<Record<string, boolean>>({});
   const pathname = usePathname();
   const { openModal } = useLeadModal();
+  const { openModal: openMaintenanceModal } = useMaintenanceModal();
 
   const toggleSection = (title: string) => {
     setOpenSections((prev) => ({
       ...prev,
       [title]: !prev[title],
     }));
+  };
+
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href === "/learning-center") {
+      e.preventDefault();
+      onClose();
+      openMaintenanceModal();
+    } else {
+      onClose();
+    }
   };
 
   // Lock body scroll when menu is open
@@ -124,7 +136,7 @@ export default function MobileMenu({
                   /* Simple Link */
                   <Link
                     href={item.href}
-                    onClick={onClose}
+                    onClick={(e) => handleLinkClick(e, item.href)}
                     className={cn(
                       "flex items-center px-3 py-3 rounded-lg text-base font-rubik font-medium transition-colors",
                       isActive

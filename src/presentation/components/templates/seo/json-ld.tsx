@@ -76,7 +76,7 @@ export const OrganizationJsonLd = () => {
     "contactPoint": {
       "@type": "ContactPoint",
       "contactType": "customer service",
-      "telephone": "+1-941-284-6466",
+      "telephone": "+1-407-818-7876",
       "availableLanguage": "English"
     },
     "address": {

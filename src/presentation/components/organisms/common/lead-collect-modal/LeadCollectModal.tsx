@@ -20,6 +20,7 @@ import {
 } from "@/presentation/components/atoms/ui/dialog";
 import { useLeadModal } from "@/hooks/use-lead-modal";
 import { formatPhoneNumber } from "@/utils/phone-formatter";
+import { submitLeadAction } from "@/server/actions/submit-lead.action";
 import { z } from "zod";
 
 // --------------------------------------------------------------------------
@@ -58,6 +59,7 @@ export const LeadCollectModal = () => {
   const { isOpen, closeModal } = useLeadModal();
   const [currentStep, setCurrentStep] = useState<1 | 2 | 3>(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const {
     register,
@@ -89,10 +91,12 @@ export const LeadCollectModal = () => {
     setTimeout(() => {
       reset();
       setCurrentStep(1);
+      setSubmitError(null);
     }, 300);
   }, [closeModal, reset]);
 
   const handleStep1Continue = async () => {
+    setSubmitError(null);
     const isValid = await trigger(["fullName", "email", "phone"]);
     if (isValid) {
       setCurrentStep(2);
@@ -100,18 +104,51 @@ export const LeadCollectModal = () => {
   };
 
   const handleStep2Back = () => {
+    setSubmitError(null);
     setCurrentStep(1);
   };
 
   const onSubmit = handleSubmit(async (data) => {
     setIsSubmitting(true);
+    setSubmitError(null);
 
-    // Simulate a brief delay for better UX
-    await new Promise((resolve) => setTimeout(resolve, 800));
+    try {
+      // Format budget and contact time for message
+      const budgetLabels: Record<string, string> = {
+        "up-to-5k": "Up to $5,000",
+        "5k-10k": "$5,000 - $10,000",
+        "10k-20k": "$10,000 - $20,000",
+        "above-20k": "Above $20,000",
+      };
 
-    // Show success state
-    setCurrentStep(3);
-    setIsSubmitting(false);
+      const contactTimeLabels: Record<string, string> = {
+        morning: "Morning (8am-12pm)",
+        afternoon: "Afternoon (12pm-6pm)",
+        evening: "Evening (6pm-9pm)",
+      };
+
+      const message = `Budget Range: ${budgetLabels[data.budget] || data.budget}\nPreferred Contact Time: ${contactTimeLabels[data.contactTime] || data.contactTime}`;
+
+      // Submit to backend
+      const result = await submitLeadAction({
+        name: data.fullName,
+        email: data.email,
+        phone: data.phone,
+        message,
+        source: "free-consultation-modal",
+      });
+
+      if (result.success) {
+        setCurrentStep(3);
+      } else {
+        setSubmitError(result.error || "Failed to submit. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error submitting lead:", error);
+      setSubmitError("An unexpected error occurred. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   });
 
   return (
@@ -172,14 +209,14 @@ export const LeadCollectModal = () => {
                   </div>
                   
                   <a 
-                    href="tel:+19412846466"
+                    href="tel:+14078187876"
                     className="text-black text-3xl md:text-4xl font-bold font-rubik hover:text-red-800 transition-colors"
                   >
-                    +1 941-284-6466
+                    +1 407-818-7876
                   </a>
                   
                   <a
-                    href="tel:+19412846466"
+                    href="tel:+14078187876"
                     className="mt-2 w-full md:w-auto h-12 px-8 py-4 bg-red-800 hover:bg-red-900 transition-colors text-white rounded-lg inline-flex justify-center items-center gap-4 text-base font-medium font-rubik uppercase"
                   >
                     CALL US NOW
@@ -357,6 +394,13 @@ export const LeadCollectModal = () => {
                         )}
                       </div>
                     </div>
+
+                    {/* Error Message */}
+                    {submitError && (
+                      <div className="w-full p-3 bg-red-50 border border-red-200 rounded-lg">
+                        <p className="text-red-600 text-sm font-rubik">{submitError}</p>
+                      </div>
+                    )}
 
                     {/* Navigation Buttons */}
                     <div className="w-full flex gap-3 mt-2">
