@@ -40,7 +40,7 @@ export default function MobileMenu({
   };
 
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    if (href === "/learning-center") {
+    if (href === "/learning-center" || href === "/tools/design-visualizer") {
       e.preventDefault();
       onClose();
       openMaintenanceModal();
@@ -123,7 +123,7 @@ export default function MobileMenu({
                           <Link
                             key={subItem.title}
                             href={subItem.href}
-                            onClick={onClose}
+                            onClick={(e) => handleLinkClick(e, subItem.href)}
                             className="block px-3 py-2.5 text-sm font-rubik text-gray-600 hover:text-primary hover:bg-primary/5 rounded-lg transition-colors"
                           >
                             {subItem.title}

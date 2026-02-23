@@ -322,7 +322,7 @@ interface FooterLinkColumnProps {
 
 function FooterLinkColumn({ title, links, onLinkClick }: FooterLinkColumnProps) {
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    if (href === "/learning-center") {
+    if (href === "/learning-center" || href === "/tools/design-visualizer") {
       e.preventDefault();
       onLinkClick();
     }

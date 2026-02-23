@@ -92,7 +92,7 @@ export default function Navigation({ className, navItems }: NavigationProps) {
   };
 
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    if (href === "/learning-center") {
+    if (href === "/learning-center" || href === "/tools/design-visualizer") {
       e.preventDefault();
       openModal();
     }
@@ -145,7 +145,10 @@ export default function Navigation({ className, navItems }: NavigationProps) {
                         <Link
                           key={subItem.title}
                           href={subItem.href}
-                          onClick={() => setActiveDropdown(null)}
+                          onClick={(e) => {
+                            setActiveDropdown(null);
+                            handleLinkClick(e, subItem.href);
+                          }}
                           className={cn(
                             "flex items-center px-4 py-2.5 text-sm font-rubik transition-colors",
                             isSubActive

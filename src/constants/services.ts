@@ -88,8 +88,8 @@ export const SERVICES_DATA: ServiceData[] = [
     ],
     features: SERVICE_FEATURES,
     stats: [
-      { value: "95%", label: "Customer Satisfaction" },
-      { value: "98%", label: "Quality of Work" },
+      { value: "100%", label: "Customer Satisfaction" },
+      { value: "100%", label: "Quality of Work" },
     ],
     seo: {
       metaTitle: "Professional Pavers Installation | AllBrick Pavers",
@@ -146,8 +146,8 @@ export const SERVICES_DATA: ServiceData[] = [
     ],
     features: SERVICE_FEATURES,
     stats: [
-      { value: "93%", label: "Repair Success Rate" },
-      { value: "97%", label: "Quality of Work" },
+      { value: "100%", label: "Repair Success Rate" },
+      { value: "100%", label: "Quality of Work" },
     ],
     seo: {
       metaTitle: "Pavers Repair Services | AllBrick Pavers",
@@ -204,8 +204,8 @@ export const SERVICES_DATA: ServiceData[] = [
     ],
     features: SERVICE_FEATURES,
     stats: [
-      { value: "96%", label: "Client Retention" },
-      { value: "99%", label: "Satisfaction Rate" },
+      { value: "100%", label: "Client Retention" },
+      { value: "100%", label: "Satisfaction Rate" },
     ],
     seo: {
       metaTitle: "Paver Maintenance Plans | AllBrick Pavers",
@@ -265,8 +265,8 @@ export const SERVICES_DATA: ServiceData[] = [
     ],
     features: SERVICE_FEATURES,
     stats: [
-      { value: "95%", label: "Affordable Cost" },
-      { value: "98%", label: "Quality of Work" },
+      { value: "100%", label: "Affordable Cost" },
+      { value: "100%", label: "Quality of Work" },
     ],
     seo: {
       metaTitle: "Patio Pavers Installation | AllBrick Pavers",
@@ -323,8 +323,8 @@ export const SERVICES_DATA: ServiceData[] = [
     ],
     features: SERVICE_FEATURES,
     stats: [
-      { value: "97%", label: "Safety Rating" },
-      { value: "99%", label: "Quality of Work" },
+      { value: "100%", label: "Safety Rating" },
+      { value: "100%", label: "Quality of Work" },
     ],
     seo: {
       metaTitle: "Pool Deck Pavers Installation | AllBrick Pavers",
@@ -381,8 +381,8 @@ export const SERVICES_DATA: ServiceData[] = [
     ],
     features: SERVICE_FEATURES,
     stats: [
-      { value: "94%", label: "Affordable Cost" },
-      { value: "98%", label: "Quality of Work" },
+      { value: "100%", label: "Affordable Cost" },
+      { value: "100%", label: "Quality of Work" },
     ],
     seo: {
       metaTitle: "Driveway Pavers Installation | AllBrick Pavers",
@@ -439,8 +439,8 @@ export const SERVICES_DATA: ServiceData[] = [
     ],
     features: SERVICE_FEATURES,
     stats: [
-      { value: "96%", label: "Design Satisfaction" },
-      { value: "99%", label: "Quality of Work" },
+      { value: "100%", label: "Design Satisfaction" },
+      { value: "100%", label: "Quality of Work" },
     ],
     seo: {
       metaTitle: "Firepit Pavers Installation | AllBrick Pavers",

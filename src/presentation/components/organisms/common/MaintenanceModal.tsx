@@ -38,7 +38,7 @@ export const MaintenanceModal = () => {
 
           {/* Description */}
           <p className="text-base text-gray-600 mb-6 font-rubik leading-relaxed text-center">
-            Our Learning Center is currently undergoing maintenance to bring you an even better experience. We appreciate your patience and will be back online shortly.
+            This page is currently undergoing maintenance to bring you an even better experience. We appreciate your patience and will be back online shortly.
           </p>
 
           {/* CTA */}
