@@ -5,4 +5,3 @@
  */
 
 export * from "./lead.repository.interface"
-export * from "./lead.repository"
