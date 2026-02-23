@@ -33,8 +33,8 @@ export class ContactFormValidator implements IValidator<ContactFormInputDto, Con
     }
   }
 
-  private mapErrors(error: ZodError): PipeError[] {
-    return error.errors.map((err) => ({
+  private mapErrors(error: ZodError<unknown>): PipeError[] {
+    return error.issues.map((err) => ({
       field: err.path.join("."),
       message: err.message,
       code: err.code,
