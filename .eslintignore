@@ -7,6 +7,4 @@ coverage/
 **/*.min.js
 cypress/videos/
 cypress/screenshots/
-.prisma/
-prisma/generated/
 src/generated/
