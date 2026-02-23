@@ -5,13 +5,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   RiArrowRightLine,
+  RiArrowLeftLine,
   RiLoader4Line,
+  RiTimeLine,
   RiPhoneLine,
-  RiMailLine,
-  RiCheckLine,
 } from "@remixicon/react";
 import {
   Dialog,
@@ -19,39 +19,34 @@ import {
   DialogTitle,
 } from "@/presentation/components/atoms/ui/dialog";
 import { useLeadModal } from "@/hooks/use-lead-modal";
+import { z } from "zod";
 
 // --------------------------------------------------------------------------
-// Schema
+// Schema & Types
 // --------------------------------------------------------------------------
-const leadFormSchema = z
-  .object({
-    fullName: z
-      .string()
-      .min(2, "Name must be at least 2 characters")
-      .max(100, "Name must be less than 100 characters"),
-    preference: z.enum(["phone", "email"]),
-    email: z.string().optional(),
-    phone: z.string().optional(),
-  })
-  .superRefine((data, ctx) => {
-    if (
-      data.preference === "email" &&
-      (!data.email || !z.string().email().safeParse(data.email).success)
-    ) {
-      ctx.addIssue({
-        path: ["email"],
-        code: z.ZodIssueCode.custom,
-        message: "Please enter a valid email address",
-      });
-    }
-    if (data.preference === "phone" && (!data.phone || data.phone.length < 7)) {
-      ctx.addIssue({
-        path: ["phone"],
-        code: z.ZodIssueCode.custom,
-        message: "Please enter a valid phone number",
-      });
-    }
-  });
+const leadFormSchema = z.object({
+  fullName: z
+    .string()
+    .min(2, "Name must be at least 2 characters")
+    .max(100, "Name must be less than 100 characters"),
+  email: z.string().email("Please enter a valid email address"),
+  phone: z.string().min(7, "Please enter a valid phone number"),
+  budget: z.string().min(1, "Please select a budget range"),
+  contactTime: z.string().min(1, "Please select a preferred contact time"),
+});
+
+const budgetOptions = [
+  { value: "up-to-5k", label: "Up to $5,000" },
+  { value: "5k-10k", label: "$5,000 - $10,000" },
+  { value: "10k-20k", label: "$10,000 - $20,000" },
+  { value: "above-20k", label: "Above $20,000" },
+];
+
+const contactTimeOptions = [
+  { value: "morning", label: "Morning (8am-12pm)" },
+  { value: "afternoon", label: "Afternoon (12pm-6pm)" },
+  { value: "evening", label: "Evening (6pm-9pm)" },
+];
 
 type LeadFormValues = z.infer<typeof leadFormSchema>;
 
@@ -60,42 +55,75 @@ type LeadFormValues = z.infer<typeof leadFormSchema>;
 // --------------------------------------------------------------------------
 export const LeadCollectModal = () => {
   const { isOpen, closeModal } = useLeadModal();
+  const [currentStep, setCurrentStep] = useState<1 | 2 | 3>(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-    watch,
+    trigger,
     setValue,
-    clearErrors,
   } = useForm<LeadFormValues>({
     resolver: zodResolver(leadFormSchema),
     mode: "onBlur",
-    defaultValues: { fullName: "", email: "", phone: "", preference: "phone" },
+    defaultValues: {
+      fullName: "",
+      email: "",
+      phone: "",
+      budget: "",
+      contactTime: "",
+    },
   });
 
-  const preference = watch("preference");
+  const formatPhoneNumber = (value: string) => {
+    // Remove all non-numeric characters
+    const phoneNumber = value.replace(/\D/g, "");
+    
+    // Format as (XXX) XXX-XXXX
+    if (phoneNumber.length <= 3) {
+      return phoneNumber;
+    } else if (phoneNumber.length <= 6) {
+      return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3)}`;
+    } else {
+      return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3, 6)}-${phoneNumber.slice(6, 10)}`;
+    }
+  };
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const formatted = formatPhoneNumber(e.target.value);
+    setValue("phone", formatted, { shouldValidate: true });
+  };
 
   const handleClose = useCallback(() => {
     closeModal();
     // Reset after animation finishes
     setTimeout(() => {
       reset();
-      setIsSuccess(false);
+      setCurrentStep(1);
     }, 300);
   }, [closeModal, reset]);
 
+  const handleStep1Continue = async () => {
+    const isValid = await trigger(["fullName", "email", "phone"]);
+    if (isValid) {
+      setCurrentStep(2);
+    }
+  };
+
+  const handleStep2Back = () => {
+    setCurrentStep(1);
+  };
+
   const onSubmit = handleSubmit(async (data) => {
     setIsSubmitting(true);
-    
+
     // Simulate a brief delay for better UX
-    await new Promise(resolve => setTimeout(resolve, 800));
-    
+    await new Promise((resolve) => setTimeout(resolve, 800));
+
     // Show success state
-    setIsSuccess(true);
+    setCurrentStep(3);
     setIsSubmitting(false);
   });
 
@@ -124,175 +152,264 @@ export const LeadCollectModal = () => {
             </div>
 
             {/* Heading */}
-            <h2 className="text-black text-2xl md:text-3xl font-medium font-hanken leading-7 tracking-wide uppercase">
-              {isSuccess ? "REQUEST RECEIVED" : "BOOK YOUR FREE CONSULTATION"}
-            </h2>
-
-            {isSuccess ? (
-              /* ------ Success State ------ */
-              <div className="w-full flex-1 flex flex-col justify-start items-start gap-6 py-4">
-                <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mb-2">
-                  <RiCheckLine className="w-8 h-8 text-green-600" />
-                </div>
-                <div className="flex flex-col gap-2">
-                  <p className="text-gray-800 text-lg font-medium font-rubik">
-                    Thank you for reaching out!
-                  </p>
-                  <p className="text-gray-600 text-sm font-rubik leading-6 max-w-[320px]">
-                    Our team will contact you shortly via{" "}
-                    {preference === "phone" ? "a phone call" : "e-mail"} to
-                    schedule your free consultation. Looking forward to working
-                    together!
-                  </p>
-                </div>
-
-                <button
-                  type="button"
-                  onClick={handleClose}
-                  className="mt-4 h-12 px-8 py-4 bg-zinc-800 hover:bg-zinc-700 transition-colors text-white rounded-lg inline-flex justify-center items-center gap-4 text-base font-medium font-rubik uppercase w-full md:w-auto"
-                >
-                  Return to site
-                  <RiArrowRightLine className="size-5" />
-                </button>
-              </div>
-            ) : (
-              /* ------ Form State ------ */
-              <form
-                onSubmit={onSubmit}
-                className="w-full flex flex-col justify-start items-start gap-4"
-                noValidate
-              >
-                <div className="w-full flex flex-col justify-start items-start gap-3">
-                  {/* Name Input */}
-                  <div className="w-full flex flex-col gap-1">
-                    <input
-                      {...register("fullName")}
-                      type="text"
-                      placeholder="Your name"
-                      disabled={isSubmitting}
-                      className={`w-full h-12 px-3 py-2 bg-white rounded-md border text-sm font-medium font-rubik placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-zinc-800 transition-colors ${errors.fullName ? "border-red-500" : "border-gray-200"}`}
-                    />
-                    {errors.fullName && (
-                      <span className="text-red-500 text-xs font-rubik mt-1">
-                        {errors.fullName.message}
-                      </span>
-                    )}
-                  </div>
-
-                  {/* Preference Label */}
-                  <div className="text-gray-600 text-sm font-normal font-rubik leading-5 mt-2">
-                    How do you prefer contact?
-                  </div>
-
-                  {/* Preference Toggle */}
-                  <div className="w-full inline-flex justify-start items-start gap-3">
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setValue("preference", "phone");
-                        clearErrors(["email", "phone"]);
-                      }}
-                      className={`flex-1 h-12 px-3 py-2 rounded-md border flex justify-center items-center gap-2.5 transition-all outline-none ${
-                        preference === "phone"
-                          ? "bg-zinc-800 border-zinc-800 text-white shadow-sm"
-                          : "bg-white border-gray-200 text-gray-700 hover:bg-gray-50"
-                      }`}
-                    >
-                      <RiPhoneLine
-                        className={`size-4 opacity-80 ${preference === "phone" ? "text-white" : "text-gray-500"}`}
-                      />
-                      <span className="text-sm font-medium font-rubik leading-5 whitespace-nowrap">
-                        By phone call
-                      </span>
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setValue("preference", "email");
-                        clearErrors(["email", "phone"]);
-                      }}
-                      className={`flex-1 h-12 px-3 py-2 rounded-md border flex justify-center items-center gap-2.5 transition-all outline-none ${
-                        preference === "email"
-                          ? "bg-zinc-800 border-zinc-800 text-white shadow-sm"
-                          : "bg-white border-gray-200 text-gray-700 hover:bg-gray-50"
-                      }`}
-                    >
-                      <RiMailLine
-                        className={`size-4 opacity-80 ${preference === "email" ? "text-white" : "text-gray-500"}`}
-                      />
-                      <span className="text-sm font-medium font-rubik leading-5 whitespace-nowrap">
-                        By e-mail
-                      </span>
-                    </button>
-                  </div>
-
-                  {/* Dynamic Contact Input */}
-                  <div className="w-full flex flex-col gap-1 mt-1">
-                    {preference === "phone" ? (
-                      <>
-                        <input
-                          {...register("phone")}
-                          type="tel"
-                          placeholder="(000) 000-0000"
-                          disabled={isSubmitting}
-                          className={`w-full h-12 px-3 py-2 bg-white rounded-md border text-sm font-medium font-rubik placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-zinc-800 transition-colors ${errors.phone ? "border-red-500" : "border-gray-200"}`}
-                        />
-                        {errors.phone && (
-                          <span className="text-red-500 text-xs font-rubik mt-1">
-                            {errors.phone.message}
-                          </span>
-                        )}
-                      </>
-                    ) : (
-                      <>
-                        <input
-                          {...register("email")}
-                          type="email"
-                          placeholder="Your email address"
-                          disabled={isSubmitting}
-                          className={`w-full h-12 px-3 py-2 bg-white rounded-md border text-sm font-medium font-rubik placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-zinc-800 transition-colors ${errors.email ? "border-red-500" : "border-gray-200"}`}
-                        />
-                        {errors.email && (
-                          <span className="text-red-500 text-xs font-rubik mt-1">
-                            {errors.email.message}
-                          </span>
-                        )}
-                      </>
-                    )}
-                  </div>
-                </div>
-
-                {/* Submit Button */}
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="mt-2 self-stretch h-12 px-8 py-4 bg-red-800 hover:bg-red-900 transition-colors text-white border-0 shadow-sm rounded-lg inline-flex justify-center items-center gap-4 w-full outline-none focus:ring-2 focus:ring-red-800 focus:ring-offset-2 disabled:opacity-75"
-                >
-                  {isSubmitting ? (
-                    <RiLoader4Line className="size-5 animate-spin" />
-                  ) : (
-                    <>
-                      <span className="text-center text-base font-medium font-rubik uppercase">
-                        CONTACT US NOW
-                      </span>
-                      <RiArrowRightLine className="size-5" />
-                    </>
-                  )}
-                </button>
-
-                <div className="text-gray-500 text-xs font-normal font-rubik leading-4 mt-2">
-                  By submitting this form, you agree to our{" "}
-                  <Link
-                    href="/privacy-policy"
-                    onClick={handleClose}
-                    className="underline hover:text-gray-800 transition-colors"
-                  >
-                    Privacy Policy
-                  </Link>
-                  .
-                </div>
-              </form>
+            {currentStep === 1 && (
+              <h2 className="text-black text-2xl md:text-3xl font-medium font-hanken leading-7 tracking-wide uppercase">
+                BOOK YOUR FREE CONSULTATION
+              </h2>
             )}
+
+            <AnimatePresence mode="wait">
+              {currentStep === 3 ? (
+                /* ------ Success State (Step 3) ------ */
+                <motion.div
+                  key="success"
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.25 }}
+                  className="w-full flex-1 flex flex-col justify-start items-start gap-6 py-4"
+                >
+                  {/* Título grande */}
+                  <h3 className="text-black text-2xl md:text-3xl font-bold font-hanken leading-tight uppercase">
+                    SUCCESS! WE WILL BE REACHING OUT YOU SOON...
+                  </h3>
+                  
+                  {/* Texto descritivo */}
+                  <p className="text-gray-600 text-base font-rubik leading-6">
+                    One of our consultants will reach out soon to talk about your project. Can't wait? Call us directly now
+                  </p>
+                  
+                  {/* Horário com ícone de relógio */}
+                  <div className="flex items-center gap-2">
+                    <RiTimeLine className="w-5 h-5 text-red-800" />
+                    <span className="text-gray-600 text-sm font-rubik uppercase">
+                      FROM MON TO SAT : 9AM - 5PM
+                    </span>
+                  </div>
+                  
+                  {/* Telefone grande */}
+                  <a 
+                    href="tel:+19412846466"
+                    className="text-black text-3xl md:text-4xl font-bold font-rubik hover:text-red-800 transition-colors"
+                  >
+                    +1 941-284-6466
+                  </a>
+                  
+                  {/* Botão vermelho CALL US NOW */}
+                  <a
+                    href="tel:+19412846466"
+                    className="mt-2 w-full md:w-auto h-12 px-8 py-4 bg-red-800 hover:bg-red-900 transition-colors text-white rounded-lg inline-flex justify-center items-center gap-4 text-base font-medium font-rubik uppercase"
+                  >
+                    CALL US NOW
+                    <RiPhoneLine className="size-5" />
+                  </a>
+                  
+                  {/* Privacy policy */}
+                  <div className="text-gray-500 text-xs font-normal font-rubik leading-4 mt-2">
+                    By submitting this form, you agree to our{" "}
+                    <Link
+                      href="/privacy-policy"
+                      onClick={handleClose}
+                      className="underline hover:text-gray-800 transition-colors"
+                    >
+                      Privacy Policy
+                    </Link>
+                    .
+                  </div>
+                </motion.div>
+              ) : currentStep === 1 ? (
+                /* ------ Step 1: Personal Info ------ */
+                <motion.div
+                  key="step1"
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.25 }}
+                  className="w-full flex flex-col justify-start items-start gap-4"
+                >
+                  <div className="w-full flex flex-col justify-start items-start gap-3">
+                    {/* Name Input */}
+                    <div className="w-full flex flex-col gap-1">
+                      <input
+                        {...register("fullName")}
+                        type="text"
+                        placeholder="Your name"
+                        className={`w-full h-12 px-3 py-2 bg-white rounded-md border text-sm font-medium font-rubik placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-zinc-800 transition-colors ${errors.fullName ? "border-red-500" : "border-gray-200"}`}
+                      />
+                      {errors.fullName && (
+                        <span className="text-red-500 text-xs font-rubik mt-1">
+                          {errors.fullName.message}
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Email Input */}
+                    <div className="w-full flex flex-col gap-1">
+                      <input
+                        {...register("email")}
+                        type="email"
+                        placeholder="Your email address"
+                        className={`w-full h-12 px-3 py-2 bg-white rounded-md border text-sm font-medium font-rubik placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-zinc-800 transition-colors ${errors.email ? "border-red-500" : "border-gray-200"}`}
+                      />
+                      {errors.email && (
+                        <span className="text-red-500 text-xs font-rubik mt-1">
+                          {errors.email.message}
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Phone Input */}
+                    <div className="w-full flex flex-col gap-1">
+                      <input
+                        {...register("phone")}
+                        type="tel"
+                        placeholder="(000) 000-0000"
+                        onChange={handlePhoneChange}
+                        maxLength={14}
+                        className={`w-full h-12 px-3 py-2 bg-white rounded-md border text-sm font-medium font-rubik placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-zinc-800 transition-colors ${errors.phone ? "border-red-500" : "border-gray-200"}`}
+                      />
+                      {errors.phone && (
+                        <span className="text-red-500 text-xs font-rubik mt-1">
+                          {errors.phone.message}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Continue Button */}
+                  <button
+                    type="button"
+                    onClick={handleStep1Continue}
+                    className="mt-2 self-stretch h-12 px-8 py-4 bg-red-800 hover:bg-red-900 transition-colors text-white border-0 shadow-sm rounded-lg inline-flex justify-center items-center gap-4 w-full outline-none focus:ring-2 focus:ring-red-800 focus:ring-offset-2"
+                  >
+                    <span className="text-center text-base font-medium font-rubik uppercase">
+                      CONTINUE
+                    </span>
+                    <RiArrowRightLine className="size-5" />
+                  </button>
+
+                  <div className="text-gray-500 text-xs font-normal font-rubik leading-4 mt-2">
+                    By submitting this form, you agree to our{" "}
+                    <Link
+                      href="/privacy-policy"
+                      onClick={handleClose}
+                      className="underline hover:text-gray-800 transition-colors"
+                    >
+                      Privacy Policy
+                    </Link>
+                    .
+                  </div>
+                </motion.div>
+              ) : (
+                /* ------ Step 2: Preferences ------ */
+                <motion.div
+                  key="step2"
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.25 }}
+                  className="w-full"
+                >
+                  <form
+                    onSubmit={onSubmit}
+                    className="w-full flex flex-col justify-start items-start gap-4"
+                    noValidate
+                  >
+                    <div className="w-full flex flex-col justify-start items-start gap-4">
+                      {/* Budget Selection */}
+                      <div className="w-full flex flex-col gap-2">
+                        <label className="text-gray-700 text-sm font-medium font-rubik leading-5">
+                          Budget Range
+                        </label>
+                        <div className="w-full flex flex-col gap-2">
+                          {budgetOptions.map((option) => (
+                            <label
+                              key={option.value}
+                              className="flex items-center gap-3 cursor-pointer group"
+                            >
+                              <input
+                                {...register("budget")}
+                                type="radio"
+                                value={option.value}
+                                className="w-4 h-4 text-red-800 border-gray-300 focus:ring-2 focus:ring-red-800 cursor-pointer"
+                              />
+                              <span className="text-sm font-rubik text-gray-700 group-hover:text-gray-900">
+                                {option.label}
+                              </span>
+                            </label>
+                          ))}
+                        </div>
+                        {errors.budget && (
+                          <span className="text-red-500 text-xs font-rubik mt-1">
+                            {errors.budget.message}
+                          </span>
+                        )}
+                      </div>
+
+                      {/* Contact Time Selection */}
+                      <div className="w-full flex flex-col gap-2">
+                        <label className="text-gray-700 text-sm font-medium font-rubik leading-5">
+                          Preferred Contact Time
+                        </label>
+                        <div className="w-full flex flex-col gap-2">
+                          {contactTimeOptions.map((option) => (
+                            <label
+                              key={option.value}
+                              className="flex items-center gap-3 cursor-pointer group"
+                            >
+                              <input
+                                {...register("contactTime")}
+                                type="radio"
+                                value={option.value}
+                                className="w-4 h-4 text-red-800 border-gray-300 focus:ring-2 focus:ring-red-800 cursor-pointer"
+                              />
+                              <span className="text-sm font-rubik text-gray-700 group-hover:text-gray-900">
+                                {option.label}
+                              </span>
+                            </label>
+                          ))}
+                        </div>
+                        {errors.contactTime && (
+                          <span className="text-red-500 text-xs font-rubik mt-1">
+                            {errors.contactTime.message}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Navigation Buttons */}
+                    <div className="w-full flex gap-3 mt-2">
+                      <button
+                        type="button"
+                        onClick={handleStep2Back}
+                        className="flex-1 h-12 px-8 py-4 bg-white hover:bg-gray-50 transition-colors text-zinc-800 border border-gray-300 rounded-lg inline-flex justify-center items-center gap-4 outline-none focus:ring-2 focus:ring-zinc-800 focus:ring-offset-2"
+                      >
+                        <RiArrowLeftLine className="size-5" />
+                        <span className="text-center text-base font-medium font-rubik uppercase">
+                          BACK
+                        </span>
+                      </button>
+                      <button
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="flex-1 h-12 px-8 py-4 bg-red-800 hover:bg-red-900 transition-colors text-white border-0 shadow-sm rounded-lg inline-flex justify-center items-center gap-4 outline-none focus:ring-2 focus:ring-red-800 focus:ring-offset-2 disabled:opacity-75"
+                      >
+                        {isSubmitting ? (
+                          <RiLoader4Line className="size-5 animate-spin" />
+                        ) : (
+                          <>
+                            <span className="text-center text-base font-medium font-rubik uppercase">
+                              CONTINUE
+                            </span>
+                            <RiArrowRightLine className="size-5" />
+                          </>
+                        )}
+                      </button>
+                    </div>
+                  </form>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
 
           {/* Right Area: Progress & Mockup */}
@@ -303,27 +420,35 @@ export const LeadCollectModal = () => {
               <div className="flex justify-start items-center gap-3">
                 <div className="w-24 md:w-28 flex flex-col justify-start items-start gap-1">
                   <span
-                    className={`text-sm font-normal font-rubik leading-5 ${!isSuccess ? "text-black font-medium" : "text-gray-400"}`}
+                    className={`text-xs md:text-sm font-normal font-rubik leading-5 whitespace-nowrap ${currentStep === 1 ? "text-black font-medium" : currentStep > 1 ? "text-gray-400" : "text-gray-400"}`}
                   >
                     CONTACT INFO
                   </span>
                   <div
-                    className={`self-stretch h-1.5 rounded-[10px] transition-colors ${!isSuccess ? "bg-zinc-800" : "bg-green-500"}`}
+                    className={`self-stretch h-1.5 rounded-[10px] transition-colors ${currentStep === 1 ? "bg-zinc-800" : currentStep > 1 ? "bg-green-500" : "bg-gray-200"}`}
                   />
                 </div>
                 <div className="w-24 md:w-28 flex flex-col justify-start items-start gap-1">
                   <span
-                    className={`text-sm font-normal font-rubik leading-5 ${isSuccess ? "text-black font-medium" : "text-gray-400"}`}
+                    className={`text-xs md:text-sm font-normal font-rubik leading-5 whitespace-nowrap ${currentStep === 2 ? "text-black font-medium" : currentStep > 2 ? "text-gray-400" : "text-gray-400"}`}
+                  >
+                    PREFERENCES
+                  </span>
+                  <div
+                    className={`self-stretch h-1.5 rounded-[10px] transition-colors ${currentStep === 2 ? "bg-zinc-800" : currentStep > 2 ? "bg-green-500" : "bg-gray-200"}`}
+                  />
+                </div>
+                <div className="w-24 md:w-28 flex flex-col justify-start items-start gap-1">
+                  <span
+                    className={`text-xs md:text-sm font-normal font-rubik leading-5 whitespace-nowrap ${currentStep === 3 ? "text-black font-medium" : "text-gray-400"}`}
                   >
                     SUCCESS
                   </span>
                   <div
-                    className={`self-stretch h-1.5 rounded-[10px] transition-colors ${isSuccess ? "bg-green-500" : "bg-gray-200"}`}
+                    className={`self-stretch h-1.5 rounded-[10px] transition-colors ${currentStep === 3 ? "bg-green-500" : "bg-gray-200"}`}
                   />
                 </div>
               </div>
-
-            
             </div>
 
             {/* Mockup Image */}
