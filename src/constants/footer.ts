@@ -1,10 +1,10 @@
 export const FOOTER_COMPANY_INFO = {
   name: "AllBrick Pavers",
   tagline:
-    "Transforming ordinary outdoor spaces into stunning landscapes that last a lifetime. Serving Central Florida homeowners since 2008.",
+    "Transforming ordinary outdoor spaces into stunning landscapes that last a lifetime. Serving Central Florida homeowners since 2018.",
   address: {
     label: "WINTER HAVEN OFFICE",
-    street: "99 6th St SW Ste 109, Winter Haven FL 33880-7902",
+    street: "99 6th St SW Ste 109, Winter Haven FL 33880",
   },
   contact: {
     hours: "FROM MON TO SAT : 9AM - 5PM",

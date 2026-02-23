@@ -64,7 +64,7 @@ export const LocalBusinessJsonLd = () => {
 		"@id": `${SITE_URL}/#business`,
 		name: "AllBrick Pavers",
 		description:
-			"Family-owned paver installation, repair, and maintenance company serving Central Florida homeowners. Specializing in driveways, patios, pool decks, walkways, and fire pits with quality craftsmanship since 2008.",
+			"Family-owned paver installation, repair, and maintenance company serving Central Florida homeowners. Specializing in driveways, patios, pool decks, walkways, and fire pits with quality craftsmanship since 2018.",
 		url: SITE_URL,
 		telephone: "+1-407-818-7876",
 		email: "allbrickpaving@gmail.com",
@@ -140,7 +140,7 @@ export const WebSiteJsonLd = () => {
 		alternateName: "AllBrick Pavers",
 		url: SITE_URL,
 		description:
-			"Transform your outdoor space with AllBrick Pavers. Professional paver installation, repair, and maintenance services in Central Florida. Serving Winter Haven, Lakeland, Davenport, and surrounding areas since 2008.",
+			"Transform your outdoor space with AllBrick Pavers. Professional paver installation, repair, and maintenance services in Central Florida. Serving Winter Haven, Lakeland, Davenport, and surrounding areas since 2018.",
 		inLanguage: "en-US",
 		copyrightYear: 2025,
 		copyrightHolder: {

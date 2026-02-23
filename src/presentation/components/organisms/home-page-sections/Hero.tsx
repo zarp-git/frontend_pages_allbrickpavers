@@ -171,7 +171,7 @@ export default function Hero() {
           {/* Description */}
           <p className="text-gray-600 font-rubik text-sm md:text-base lg:text-lg leading-relaxed max-w-md text-center lg:text-left">
             Transforming ordinary outdoor spaces into stunning landscapes that
-            last a lifetime. Serving Central Florida homeowners since 2008.
+            last a lifetime. Serving Central Florida homeowners since 2018.
           </p>
 
           {/* CTA Buttons */}

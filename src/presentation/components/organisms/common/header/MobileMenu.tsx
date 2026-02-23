@@ -40,7 +40,7 @@ export default function MobileMenu({
   };
 
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    if (href === "/learning-center" || href === "/tools/design-visualizer") {
+    if (href === "/learning-center" || href === "/tools/design-visualizer" || href === "/tools/cost-calculator") {
       e.preventDefault();
       onClose();
       openMaintenanceModal();
