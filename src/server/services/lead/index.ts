@@ -1,8 +1,8 @@
 /**
- * Lead Service Index
- * ====================
- * Re-exports lead service interface and implementation.
+ * Lead Services Barrel Export
  */
 
-export * from "./lead.service.interface"
-export * from "./lead.service"
+export { LeadService, leadService } from "./lead.service"
+export { LeadApiService, leadApiService } from "./lead-api.service"
+export type { ILeadService } from "./lead.service.interface"
+export type { ILeadApiService } from "./lead-api.service"

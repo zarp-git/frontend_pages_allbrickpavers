@@ -79,3 +79,31 @@ export interface LeadSubmissionRecord {
 export type CreateLeadResult =
   | { success: true; leadId: number; submissionId: number }
   | { success: false; error: string }
+
+/**
+ * DTO for submitting lead to public API endpoint
+ */
+export interface SubmitPublicLeadDTO {
+  name: string
+  email: string
+  phone?: string
+  message?: string
+  source?: string
+  ipAddress?: string
+  userAgent?: string
+}
+
+/**
+ * Response from public lead API endpoint
+ */
+export type PublicLeadApiResponse =
+  | {
+      success: true
+      data: { leadId: number }
+      status: number
+    }
+  | {
+      success: false
+      error: string
+      status: number
+    }
