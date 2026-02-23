@@ -16,7 +16,7 @@ export function Container({
     <div
       id="container"
       className={cn(
-        "mx-auto w-full max-w-[1200px] px-4",
+        "mx-auto w-full max-w-screen-xl px-4",
         section ? "md:py-16 py-8" : "",
         className,
       )}

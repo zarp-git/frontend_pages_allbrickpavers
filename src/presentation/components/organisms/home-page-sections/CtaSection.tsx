@@ -33,7 +33,7 @@ export function CtaSection() {
             />
 
             {/* ── Text content ── */}
-            <div className="relative z-10 max-w-full sm:max-w-xl md:max-w-sm lg:max-w-[677px] text-center sm:text-left">
+            <div className="relative z-10 max-w-full sm:max-w-xl md:max-w-sm lg:max-w-2xl text-center sm:text-left">
               <h2 className="text-white text-xl sm:text-2xl md:text-3xl font-semibold font-rubik leading-snug md:leading-10">
                 Your neighbors already upgraded.
                 <br />

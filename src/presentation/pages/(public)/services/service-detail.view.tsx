@@ -155,7 +155,7 @@ function ServiceContentSection({ service }: { service: ServiceData }) {
         </div>
 
         {/* -- Right column: Sidebar -- */}
-        <div className="w-full lg:w-[340px] shrink-0 flex flex-col gap-8">
+        <div className="w-full lg:w-80 shrink-0 flex flex-col gap-8">
           <ServiceNavSidebar currentSlug={service.slug} />
           <WhoWeAreCard />
         </div>

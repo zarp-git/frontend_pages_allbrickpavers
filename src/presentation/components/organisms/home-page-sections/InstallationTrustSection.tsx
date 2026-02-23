@@ -12,7 +12,7 @@ export const InstallationTrustSection = () => {
 
         <div className="w-full flex flex-col md:flex-row justify-center items-center gap-8 sm:gap-10 md:gap-12">
           {/* Image */}
-          <div className="relative w-full md:w-1/2 lg:w-[618px] h-48 sm:h-56 md:h-72 lg:h-80 rounded-xl overflow-hidden">
+          <div className="relative w-full md:w-1/2 lg:w-[600px] h-48 sm:h-56 md:h-72 lg:h-80 rounded-xl overflow-hidden">
             <Image
               src="/images/sections-images/installation-trust-section-pavers-layers.png"
               alt="Professional installation layers"

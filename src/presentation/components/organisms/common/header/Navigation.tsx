@@ -129,7 +129,7 @@ export default function Navigation({ className, navItems }: NavigationProps) {
 
                 {/* Dropdown Panel */}
                 {activeDropdown === item.title && (
-                  <div className="absolute top-full left-0 mt-2 min-w-[220px] bg-white rounded-xl shadow-xl border border-gray-100 py-2 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+                  <div className="absolute top-full left-0 mt-2 min-w-56 bg-white rounded-xl shadow-xl border border-gray-100 py-2 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
                     {item.dropdownItems.map((subItem) => {
                       const isSubActive = pathname === subItem.href;
                       return (

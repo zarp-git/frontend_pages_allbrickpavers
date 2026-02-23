@@ -110,7 +110,7 @@ export default function ClientPagination({ currentPage, totalPages }: ClientPagi
               onClick={() => goToPage(pageNumber)}
               disabled={isLoading}
               className={`
-                flex items-center justify-center min-w-[40px] h-10 px-3 py-2 rounded-lg
+                flex items-center justify-center min-w-10 h-10 px-3 py-2 rounded-lg
                 text-sm font-medium transition-all duration-200
                 ${isCurrentPage
                   ? "bg-primary text-primary-foreground shadow-sm"

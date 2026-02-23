@@ -19,6 +19,7 @@ import {
   DialogTitle,
 } from "@/presentation/components/atoms/ui/dialog";
 import { useLeadModal } from "@/hooks/use-lead-modal";
+import { formatPhoneNumber } from "@/utils/phone-formatter";
 import { z } from "zod";
 
 // --------------------------------------------------------------------------
@@ -77,20 +78,6 @@ export const LeadCollectModal = () => {
     },
   });
 
-  const formatPhoneNumber = (value: string) => {
-    // Remove all non-numeric characters
-    const phoneNumber = value.replace(/\D/g, "");
-    
-    // Format as (XXX) XXX-XXXX
-    if (phoneNumber.length <= 3) {
-      return phoneNumber;
-    } else if (phoneNumber.length <= 6) {
-      return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3)}`;
-    } else {
-      return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3, 6)}-${phoneNumber.slice(6, 10)}`;
-    }
-  };
-
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const formatted = formatPhoneNumber(e.target.value);
     setValue("phone", formatted, { shouldValidate: true });
@@ -130,7 +117,7 @@ export const LeadCollectModal = () => {
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
       <DialogContent
-        className="w-full max-w-[848px] p-5 pb-6 rounded-3xl outline outline-1 outline-offset-[-1px] outline-gray-200 border-none bg-white gap-0 overflow-hidden shadow-2xl"
+        className="w-full max-w-3xl p-5 pb-6 rounded-3xl outline outline-1 outline-offset-[-1px] outline-gray-200 border-none bg-white gap-0 overflow-hidden shadow-2xl"
         aria-describedby={undefined}
       >
         <DialogTitle className="sr-only">
@@ -139,7 +126,7 @@ export const LeadCollectModal = () => {
 
         <div className="flex flex-col-reverse md:flex-row items-stretch justify-start w-full gap-8 md:gap-12">
           {/* Left Form / Success Area */}
-          <div className="flex-1 flex flex-col justify-start md:justify-center items-start gap-8 min-w-[280px]">
+          <div className="flex-1 flex flex-col justify-start md:justify-center items-start gap-8 min-w-72">
             {/* Logo */}
             <div className="w-40 h-14 relative shrink-0">
               <Image
@@ -169,17 +156,14 @@ export const LeadCollectModal = () => {
                   transition={{ duration: 0.25 }}
                   className="w-full flex-1 flex flex-col justify-start items-start gap-6 py-4"
                 >
-                  {/* Título grande */}
                   <h3 className="text-black text-2xl md:text-3xl font-bold font-hanken leading-tight uppercase">
                     SUCCESS! WE WILL BE REACHING OUT YOU SOON...
                   </h3>
                   
-                  {/* Texto descritivo */}
                   <p className="text-gray-600 text-base font-rubik leading-6">
                     One of our consultants will reach out soon to talk about your project. Can't wait? Call us directly now
                   </p>
                   
-                  {/* Horário com ícone de relógio */}
                   <div className="flex items-center gap-2">
                     <RiTimeLine className="w-5 h-5 text-red-800" />
                     <span className="text-gray-600 text-sm font-rubik uppercase">
@@ -187,7 +171,6 @@ export const LeadCollectModal = () => {
                     </span>
                   </div>
                   
-                  {/* Telefone grande */}
                   <a 
                     href="tel:+19412846466"
                     className="text-black text-3xl md:text-4xl font-bold font-rubik hover:text-red-800 transition-colors"
@@ -195,7 +178,6 @@ export const LeadCollectModal = () => {
                     +1 941-284-6466
                   </a>
                   
-                  {/* Botão vermelho CALL US NOW */}
                   <a
                     href="tel:+19412846466"
                     className="mt-2 w-full md:w-auto h-12 px-8 py-4 bg-red-800 hover:bg-red-900 transition-colors text-white rounded-lg inline-flex justify-center items-center gap-4 text-base font-medium font-rubik uppercase"
@@ -204,7 +186,6 @@ export const LeadCollectModal = () => {
                     <RiPhoneLine className="size-5" />
                   </a>
                   
-                  {/* Privacy policy */}
                   <div className="text-gray-500 text-xs font-normal font-rubik leading-4 mt-2">
                     By submitting this form, you agree to our{" "}
                     <Link
@@ -413,41 +394,34 @@ export const LeadCollectModal = () => {
           </div>
 
           {/* Right Area: Progress & Mockup */}
-          <div className="flex-1 w-full bg-white rounded-sm inline-flex flex-col justify-start items-start gap-6 overflow-hidden min-w-[300px]">
-            {/* Header with Progress Steps and Close Button */}
+          <div className="flex-1 w-full bg-white rounded-sm inline-flex flex-col justify-start items-start gap-6 overflow-hidden min-w-80">
             <div className="w-full inline-flex justify-between items-center">
-              {/* Progress Bar */}
               <div className="flex justify-start items-center gap-3">
-                <div className="w-24 md:w-28 flex flex-col justify-start items-start gap-1">
-                  <span
-                    className={`text-xs md:text-sm font-normal font-rubik leading-5 whitespace-nowrap ${currentStep === 1 ? "text-black font-medium" : currentStep > 1 ? "text-gray-400" : "text-gray-400"}`}
-                  >
-                    CONTACT INFO
-                  </span>
-                  <div
-                    className={`self-stretch h-1.5 rounded-[10px] transition-colors ${currentStep === 1 ? "bg-zinc-800" : currentStep > 1 ? "bg-green-500" : "bg-gray-200"}`}
-                  />
-                </div>
-                <div className="w-24 md:w-28 flex flex-col justify-start items-start gap-1">
-                  <span
-                    className={`text-xs md:text-sm font-normal font-rubik leading-5 whitespace-nowrap ${currentStep === 2 ? "text-black font-medium" : currentStep > 2 ? "text-gray-400" : "text-gray-400"}`}
-                  >
-                    PREFERENCES
-                  </span>
-                  <div
-                    className={`self-stretch h-1.5 rounded-[10px] transition-colors ${currentStep === 2 ? "bg-zinc-800" : currentStep > 2 ? "bg-green-500" : "bg-gray-200"}`}
-                  />
-                </div>
-                <div className="w-24 md:w-28 flex flex-col justify-start items-start gap-1">
-                  <span
-                    className={`text-xs md:text-sm font-normal font-rubik leading-5 whitespace-nowrap ${currentStep === 3 ? "text-black font-medium" : "text-gray-400"}`}
-                  >
-                    SUCCESS
-                  </span>
-                  <div
-                    className={`self-stretch h-1.5 rounded-[10px] transition-colors ${currentStep === 3 ? "bg-green-500" : "bg-gray-200"}`}
-                  />
-                </div>
+                {[
+                  { step: 1, label: "CONTACT INFO" },
+                  { step: 2, label: "PREFERENCES" },
+                  { step: 3, label: "SUCCESS" },
+                ].map(({ step, label }) => {
+                  const isActive = currentStep === step;
+                  const isCompleted = currentStep > step;
+                  
+                  return (
+                    <div key={step} className="w-24 md:w-28 flex flex-col justify-start items-start gap-1">
+                      <span
+                        className={`text-xs md:text-sm font-rubik leading-5 whitespace-nowrap ${
+                          isActive ? "text-black font-medium" : "text-gray-400 font-normal"
+                        }`}
+                      >
+                        {label}
+                      </span>
+                      <div
+                        className={`self-stretch h-1.5 rounded-[10px] transition-colors ${
+                          isActive ? "bg-zinc-800" : isCompleted ? "bg-green-500" : "bg-gray-200"
+                        }`}
+                      />
+                    </div>
+                  );
+                })}
               </div>
             </div>
 

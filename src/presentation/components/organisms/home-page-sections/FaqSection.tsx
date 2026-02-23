@@ -79,7 +79,7 @@ export default function FaqSection() {
             <h2 className="text-2xl sm:text-3xl md:text-[28px] lg:text-4xl font-semibold font-hanken text-primary">
               YOUR PAVERS SECURED
             </h2>
-            <p className="text-gray-600 text-base font-normal font-rubik leading-6 max-w-[480px]">
+            <p className="text-gray-600 text-base font-normal font-rubik leading-6 max-w-md">
               When you choose AllBrick Pavers, you&apos;re protected. Our
               comprehensive 7-year warranty covers workmanship and installation
               defects, giving you complete peace of mind. We stand behind every
@@ -102,7 +102,7 @@ export default function FaqSection() {
         </div>
 
         {/* Right Column - FAQ Accordion */}
-        <div className="w-full md:flex-1 lg:max-w-[598px] flex flex-col gap-6">
+        <div className="w-full md:flex-1 lg:max-w-xl flex flex-col gap-6">
           <h2 className="text-[24px] sm:text-[28px] lg:text-4xl font-semibold font-hanken text-gray-800 uppercase leading-tight sm:leading-10">
             FREQUENTLY ASKED QUESTIONS
           </h2>

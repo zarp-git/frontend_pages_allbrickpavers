@@ -169,7 +169,7 @@ export default function Hero() {
           </h1>
 
           {/* Description */}
-          <p className="text-gray-600 font-rubik text-sm md:text-base lg:text-lg leading-relaxed max-w-[480px] text-center lg:text-left">
+          <p className="text-gray-600 font-rubik text-sm md:text-base lg:text-lg leading-relaxed max-w-md text-center lg:text-left">
             Transforming ordinary outdoor spaces into stunning landscapes that
             last a lifetime. Serving Central Florida homeowners since 2008.
           </p>
@@ -184,7 +184,7 @@ export default function Hero() {
 
         {/* 3D Card Carousel Area */}
         <div
-          className="flex-1 w-full max-w-[800px] h-[240px] sm:h-[340px] md:h-[400px] lg:h-[450px] relative flex items-center justify-center perspective-1000"
+          className="flex-1 w-full max-w-3xl h-[240px] sm:h-[340px] md:h-[400px] lg:h-[450px] relative flex items-center justify-center perspective-1000"
           onMouseEnter={pauseAutoPlay}
           onMouseLeave={resumeAutoPlay}
         >
@@ -206,7 +206,7 @@ export default function Hero() {
           </button>
 
           {/* Cards */}
-          <div className="relative w-full max-w-[534px] h-[200px] sm:h-[300px] md:h-[360px] lg:h-[400px] flex items-center justify-center">
+          <div className="relative w-full max-w-lg h-[200px] sm:h-[300px] md:h-[360px] lg:h-[400px] flex items-center justify-center">
             {SLIDES.map((slide, index) => {
               const style = getSlideStyles(index);
               const isActive = index === activeIndex;
