@@ -40,7 +40,7 @@ export class LeadApiService implements ILeadApiService {
 
   async submitLead(data: SubmitPublicLeadDTO): Promise<PublicLeadApiResponse> {
     try {
-      const response = await this.client.post<PublicLeadApiResponse>(
+      const response = await this.client.post<{ leadId: number }>(
         "/api/public/leads/submit",
         data,
         {
@@ -52,7 +52,7 @@ export class LeadApiService implements ILeadApiService {
 
       return {
         success: true,
-        data: response.data.data,
+        data: response.data,
         status: response.status,
       }
     } catch (error) {
