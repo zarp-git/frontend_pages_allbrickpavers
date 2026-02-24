@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils";
 import type { INavItem } from "@/types/header";
 import { NAV_ITEMS } from "@/constants";
 import { useLeadModal } from "@/hooks/use-lead-modal";
+import { useContactModal } from "@/hooks/use-contact-modal";
 
 interface HeaderProps {
   navItems?: INavItem[];
@@ -19,6 +20,7 @@ export default function Header({ navItems }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const { openModal } = useLeadModal();
+  const { openModal: openContactModal } = useContactModal();
 
   const items = navItems || NAV_ITEMS;
 
@@ -61,7 +63,7 @@ export default function Header({ navItems }: HeaderProps) {
               <Button
                 variant="brick"
                 className="px-5 h-10 font-rubik text-sm font-bold uppercase tracking-wide flex items-center gap-2"
-                onClick={openModal}
+                onClick={openContactModal}
               >
                 Contact Us <RiPhoneLine className="size-4" />
               </Button>

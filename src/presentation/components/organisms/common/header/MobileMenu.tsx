@@ -14,6 +14,7 @@ import CompanyLogo from "@/presentation/components/atoms/CompanyLogo";
 import type { INavItem } from "@/types/header";
 import { cn } from "@/lib/utils";
 import { useLeadModal } from "@/hooks/use-lead-modal";
+import { useContactModal } from "@/hooks/use-contact-modal";
 import { useMaintenanceModal } from "@/hooks/use-maintenance-modal";
 
 interface MobileMenuProps {
@@ -30,6 +31,7 @@ export default function MobileMenu({
   const [openSections, setOpenSections] = useState<Record<string, boolean>>({});
   const pathname = usePathname();
   const { openModal } = useLeadModal();
+  const { openModal: openContactModal } = useContactModal();
   const { openModal: openMaintenanceModal } = useMaintenanceModal();
 
   const toggleSection = (title: string) => {
@@ -172,7 +174,7 @@ export default function MobileMenu({
             className="w-full text-sm font-bold uppercase tracking-wide flex items-center justify-center gap-2"
             onClick={() => {
               onClose();
-              openModal();
+              openContactModal();
             }}
           >
             Contact Us <RiPhoneLine className="size-5" />

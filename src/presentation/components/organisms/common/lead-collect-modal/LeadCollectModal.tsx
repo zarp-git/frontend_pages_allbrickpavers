@@ -68,9 +68,10 @@ export const LeadCollectModal = () => {
     reset,
     trigger,
     setValue,
+    clearErrors,
   } = useForm<LeadFormValues>({
     resolver: zodResolver(leadFormSchema),
-    mode: "onBlur",
+    mode: "onSubmit",
     defaultValues: {
       fullName: "",
       email: "",
@@ -90,10 +91,11 @@ export const LeadCollectModal = () => {
     // Reset after animation finishes
     setTimeout(() => {
       reset();
+      clearErrors();
       setCurrentStep(1);
       setSubmitError(null);
     }, 300);
-  }, [closeModal, reset]);
+  }, [closeModal, reset, clearErrors]);
 
   const handleStep1Continue = async () => {
     setSubmitError(null);
@@ -450,7 +452,7 @@ export const LeadCollectModal = () => {
                   const isCompleted = currentStep > step;
                   
                   return (
-                    <div key={step} className="w-24 md:w-28 flex flex-col justify-start items-start gap-1">
+                    <div key={step} className="flex flex-col justify-start items-start gap-1">
                       <span
                         className={`text-xs md:text-sm font-rubik leading-5 whitespace-nowrap ${
                           isActive ? "text-black font-medium" : "text-gray-400 font-normal"
@@ -459,9 +461,10 @@ export const LeadCollectModal = () => {
                         {label}
                       </span>
                       <div
-                        className={`self-stretch h-1.5 rounded-[10px] transition-colors ${
+                        className={`h-1.5 rounded-[10px] transition-colors ${
                           isActive ? "bg-zinc-800" : isCompleted ? "bg-green-500" : "bg-gray-200"
                         }`}
+                        style={{ width: '100%' }}
                       />
                     </div>
                   );
