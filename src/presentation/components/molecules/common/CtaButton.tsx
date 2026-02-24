@@ -3,7 +3,7 @@
 import React from "react";
 import { RiPhoneLine } from "@remixicon/react";
 import { Button } from "@/presentation/components/atoms/ui/button";
-import { useLeadModal } from "@/hooks/use-lead-modal";
+import { useContactModal } from "@/hooks/use-contact-modal";
 import { cn } from "@/lib/utils";
 
 interface CtaButtonProps {
@@ -19,7 +19,7 @@ const CtaButton = ({
   className,
   showIcon = true,
 }: CtaButtonProps) => {
-  const { openModal } = useLeadModal();
+  const { openModal } = useContactModal();
 
   return (
     <Button
