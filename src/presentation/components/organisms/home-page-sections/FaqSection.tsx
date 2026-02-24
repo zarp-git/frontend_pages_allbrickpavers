@@ -22,7 +22,7 @@ const FAQS = [
   {
     question: "Do you offer a warranty on your work?",
     answer:
-      "Yes! We offer a comprehensive 7-year warranty on workmanship and installation defects to ensure your peace of mind.",
+      "Yes! We offer a comprehensive 3-Year Workmanship Warranty covering defects directly related to our installation. Most true workmanship issues, if they exist, reveal themselves within the first 12–24 months. Extended warranty timelines in hardscaping are largely marketing — proper base preparation and compaction are what actually determine long-term performance. We build it right the first time.",
   },
   {
     question: "How long do pavers last?",
@@ -66,8 +66,8 @@ export default function FaqSection() {
           {/* Warranty Badge */}
           <div className="w-48 h-48 md:w-52 md:h-52 lg:w-64 lg:h-64 relative shrink-0">
             <Image
-              src="/images/7-years-warranty-badge.svg"
-              alt="7 Years Exclusive Warranty Badge"
+              src="/images/3-years-warranty-badge.svg"
+              alt="3 Years Workmanship Warranty Badge"
               width={256}
               height={256}
               className="w-full h-full object-contain"
@@ -81,8 +81,8 @@ export default function FaqSection() {
             </h2>
             <p className="text-gray-600 text-base font-normal font-rubik leading-6 max-w-md">
               When you choose AllBrick Pavers, you&apos;re protected. Our
-              comprehensive 7-year warranty covers workmanship and installation
-              defects, giving you complete peace of mind. We stand behind every
+              comprehensive 3-Year Workmanship Warranty covers defects directly
+              related to our installation, giving you complete peace of mind. We stand behind every
               square foot we install because we do it right the first time.
             </p>
           </div>

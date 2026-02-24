@@ -130,7 +130,7 @@ export const LOCATIONS_DATA: LocationData[] = [
       metaTitle:
         "Paver Installation & Outdoor Living in Winter Haven, FL | AllBrick Pavers",
       metaDescription:
-        "Expert paver installation and outdoor living services in Winter Haven, FL. Patios, driveways, pool decks, and fire pits with 7-year warranty. Free consultation.",
+        "Expert paver installation and outdoor living services in Winter Haven, FL. Patios, driveways, pool decks, and fire pits with 3-year workmanship warranty. Free consultation.",
     },
   },
   {
@@ -198,7 +198,7 @@ export const LOCATIONS_DATA: LocationData[] = [
       metaTitle:
         "Paver Installation & Outdoor Living in Lakeland, FL | AllBrick Pavers",
       metaDescription:
-        "Expert paver installation and outdoor living services in Lakeland, FL. Patios, driveways, pool decks, and fire pits. 7-year warranty. Get a free consultation.",
+        "Expert paver installation and outdoor living services in Lakeland, FL. Patios, driveways, pool decks, and fire pits. 3-year workmanship warranty. Get a free consultation.",
     },
   },
   {
@@ -264,7 +264,7 @@ export const LOCATIONS_DATA: LocationData[] = [
       metaTitle:
         "Paver Installation & Outdoor Living in Haines City, FL | AllBrick Pavers",
       metaDescription:
-        "Expert paver installation and outdoor living services in Haines City, FL. Patios, driveways, pool decks, and fire pits. 7-year warranty. Free consultation.",
+        "Expert paver installation and outdoor living services in Haines City, FL. Patios, driveways, pool decks, and fire pits. 3-year workmanship warranty. Free consultation.",
     },
   },
   {
@@ -329,7 +329,7 @@ export const LOCATIONS_DATA: LocationData[] = [
       metaTitle:
         "Paver Installation & Outdoor Living in Davenport, FL | AllBrick Pavers",
       metaDescription:
-        "Expert paver installation and outdoor living services in Davenport, FL. Patios, driveways, pool decks, and fire pits. 7-year warranty. Free consultation.",
+        "Expert paver installation and outdoor living services in Davenport, FL. Patios, driveways, pool decks, and fire pits. 3-year workmanship warranty. Free consultation.",
     },
   },
   {
@@ -394,7 +394,7 @@ export const LOCATIONS_DATA: LocationData[] = [
       metaTitle:
         "Paver Installation & Outdoor Living in Auburndale, FL | AllBrick Pavers",
       metaDescription:
-        "Expert paver installation and outdoor living services in Auburndale, FL. Patios, driveways, pool decks, and fire pits. 7-year warranty. Free consultation.",
+        "Expert paver installation and outdoor living services in Auburndale, FL. Patios, driveways, pool decks, and fire pits. 3-year workmanship warranty. Free consultation.",
     },
   },
   {
@@ -461,7 +461,7 @@ export const LOCATIONS_DATA: LocationData[] = [
       metaTitle:
         "Paver Installation & Outdoor Living in Horizon West, FL | AllBrick Pavers",
       metaDescription:
-        "Expert paver installation and outdoor living services in Horizon West, FL. HOA-compliant designs, premium materials, and 7-year warranty. Free consultation.",
+        "Expert paver installation and outdoor living services in Horizon West, FL. HOA-compliant designs, premium materials, and 3-year workmanship warranty. Free consultation.",
     },
   },
 ];

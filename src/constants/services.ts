@@ -73,7 +73,7 @@ export const SERVICES_DATA: ServiceData[] = [
       {
         question: "Do you provide a warranty on installation?",
         answer:
-          "Yes! We offer a comprehensive 7-year warranty on workmanship and installation defects, giving you complete peace of mind.",
+          "Yes! We offer a comprehensive 3-Year Workmanship Warranty covering defects directly related to our installation, giving you complete peace of mind.",
       },
       {
         question: "How do I prepare my yard for installation?",
@@ -94,7 +94,7 @@ export const SERVICES_DATA: ServiceData[] = [
     seo: {
       metaTitle: "Professional Pavers Installation | AllBrick Pavers",
       metaDescription:
-        "Expert paver installation services in Central Florida. High-quality materials, meticulous craftsmanship, and a 7-year warranty. Get a free consultation today.",
+        "Expert paver installation services in Central Florida. High-quality materials, meticulous craftsmanship, and a 3-year workmanship warranty. Get a free consultation today.",
     },
   },
   {
@@ -152,7 +152,7 @@ export const SERVICES_DATA: ServiceData[] = [
     seo: {
       metaTitle: "Pavers Repair Services | AllBrick Pavers",
       metaDescription:
-        "Professional paver repair in Central Florida. Fix sunken, cracked, or uneven pavers. Color-matched replacements and a 7-year warranty.",
+        "Professional paver repair in Central Florida. Fix sunken, cracked, or uneven pavers. Color-matched replacements and a 3-year workmanship warranty.",
     },
   },
   {
@@ -271,7 +271,7 @@ export const SERVICES_DATA: ServiceData[] = [
     seo: {
       metaTitle: "Patio Pavers Installation | AllBrick Pavers",
       metaDescription:
-        "Expert patio paver installation in Central Florida. Custom designs, premium materials, and a 7-year warranty. Transform your outdoor space today.",
+        "Expert patio paver installation in Central Florida. Custom designs, premium materials, and a 3-year workmanship warranty. Transform your outdoor space today.",
     },
   },
   {
@@ -329,7 +329,7 @@ export const SERVICES_DATA: ServiceData[] = [
     seo: {
       metaTitle: "Pool Deck Pavers Installation | AllBrick Pavers",
       metaDescription:
-        "Safe, beautiful pool deck pavers in Central Florida. Slip-resistant, heat-reflective materials with expert installation and 7-year warranty.",
+        "Safe, beautiful pool deck pavers in Central Florida. Slip-resistant, heat-reflective materials with expert installation and 3-year workmanship warranty.",
     },
   },
   {
@@ -387,7 +387,7 @@ export const SERVICES_DATA: ServiceData[] = [
     seo: {
       metaTitle: "Driveway Pavers Installation | AllBrick Pavers",
       metaDescription:
-        "Custom driveway paver installation in Central Florida. Durable, beautiful, and built to last. Free consultation with 7-year warranty.",
+        "Custom driveway paver installation in Central Florida. Durable, beautiful, and built to last. Free consultation with 3-year workmanship warranty.",
     },
   },
   {
@@ -445,7 +445,7 @@ export const SERVICES_DATA: ServiceData[] = [
     seo: {
       metaTitle: "Firepit Pavers Installation | AllBrick Pavers",
       metaDescription:
-        "Custom fire pit and paver installations in Central Florida. Heat-rated materials, beautiful designs, and a 7-year warranty.",
+        "Custom fire pit and paver installations in Central Florida. Heat-rated materials, beautiful designs, and a 3-year workmanship warranty.",
     },
   },
 ];
