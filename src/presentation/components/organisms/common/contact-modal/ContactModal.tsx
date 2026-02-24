@@ -62,6 +62,7 @@ export const ContactModal = () => {
   const { isOpen, closeModal } = useContactModal();
   const [isSuccess, setIsSuccess] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const {
     register,
@@ -96,11 +97,13 @@ export const ContactModal = () => {
       reset();
       clearErrors();
       setIsSuccess(false);
+      setSubmitError(null);
     }, 300);
   }, [closeModal, reset, clearErrors]);
 
   const onSubmit = handleSubmit(async (data) => {
     setIsSubmitting(true);
+    setSubmitError(null);
 
     try {
       // Simulate a brief delay for better UX
@@ -109,9 +112,12 @@ export const ContactModal = () => {
       const message = `Contact Preference: ${preference === "phone" ? "Phone Call" : "Email"}`;
 
       // Submit to backend
+      // If preference is phone and no email, use a placeholder
+      const emailToSend = data.email || (preference === "phone" ? "noemail@placeholder.com" : "");
+      
       const result = await submitLeadAction({
         name: data.fullName,
-        email: data.email || "",
+        email: emailToSend,
         phone: data.phone || "",
         message,
         source: "contact-us-modal",
@@ -120,10 +126,15 @@ export const ContactModal = () => {
       if (result.success) {
         setIsSuccess(true);
       } else {
-        console.error("Lead submission failed:", result.error);
+        // Show user-friendly error message
+        const errorMessage = result.status === 404 
+          ? "Service temporarily unavailable. Please try again later or call us directly."
+          : "Failed to submit. Please try again.";
+        setSubmitError(errorMessage);
       }
     } catch (error) {
       console.error("Error submitting contact:", error);
+      setSubmitError("Service temporarily unavailable. Please try again later or call us directly.");
     } finally {
       setIsSubmitting(false);
     }
@@ -329,6 +340,13 @@ export const ContactModal = () => {
                       )}
                     </div>
                   </div>
+
+                  {/* Error Message */}
+                  {submitError && (
+                    <div className="w-full p-3 bg-red-50 border border-red-200 rounded-lg">
+                      <p className="text-red-600 text-sm font-rubik">{submitError}</p>
+                    </div>
+                  )}
 
                   {/* Submit Button */}
                   <button

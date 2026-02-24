@@ -12,6 +12,7 @@ import {
   RiLoader4Line,
   RiTimeLine,
   RiPhoneLine,
+  RiMailLine,
 } from "@remixicon/react";
 import {
   Dialog,
@@ -26,16 +27,34 @@ import { z } from "zod";
 // --------------------------------------------------------------------------
 // Schema & Types
 // --------------------------------------------------------------------------
-const leadFormSchema = z.object({
-  fullName: z
-    .string()
-    .min(2, "Name must be at least 2 characters")
-    .max(100, "Name must be less than 100 characters"),
-  email: z.string().email("Please enter a valid email address"),
-  phone: z.string().min(7, "Please enter a valid phone number"),
-  budget: z.string().min(1, "Please select a budget range"),
-  contactTime: z.string().min(1, "Please select a preferred contact time"),
-});
+const leadFormSchema = z
+  .object({
+    fullName: z
+      .string()
+      .min(2, "Name must be at least 2 characters")
+      .max(100, "Name must be less than 100 characters"),
+    email: z.string().optional(),
+    phone: z.string().optional(),
+    preference: z.enum(["phone", "email"]),
+    budget: z.string().min(1, "Please select a budget range"),
+    contactTime: z.string().min(1, "Please select a preferred contact time"),
+  })
+  .superRefine((data, ctx) => {
+    if (data.preference === "email" && (!data.email || !z.string().email().safeParse(data.email).success)) {
+      ctx.addIssue({
+        path: ["email"],
+        code: z.ZodIssueCode.custom,
+        message: "Please enter a valid email address",
+      });
+    }
+    if (data.preference === "phone" && (!data.phone || data.phone.length < 7)) {
+      ctx.addIssue({
+        path: ["phone"],
+        code: z.ZodIssueCode.custom,
+        message: "Please enter a valid phone number",
+      });
+    }
+  });
 
 const budgetOptions = [
   { value: "up-to-5k", label: "Up to $5,000" },
@@ -69,6 +88,7 @@ export const LeadCollectModal = () => {
     trigger,
     setValue,
     clearErrors,
+    watch,
   } = useForm<LeadFormValues>({
     resolver: zodResolver(leadFormSchema),
     mode: "onSubmit",
@@ -76,10 +96,13 @@ export const LeadCollectModal = () => {
       fullName: "",
       email: "",
       phone: "",
+      preference: "phone",
       budget: "",
       contactTime: "",
     },
   });
+
+  const preference = watch("preference");
 
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const formatted = formatPhoneNumber(e.target.value);
@@ -99,7 +122,7 @@ export const LeadCollectModal = () => {
 
   const handleStep1Continue = async () => {
     setSubmitError(null);
-    const isValid = await trigger(["fullName", "email", "phone"]);
+    const isValid = await trigger(["fullName", preference === "phone" ? "phone" : "email"]);
     if (isValid) {
       setCurrentStep(2);
     }
@@ -131,11 +154,14 @@ export const LeadCollectModal = () => {
 
       const message = `Budget Range: ${budgetLabels[data.budget] || data.budget}\nPreferred Contact Time: ${contactTimeLabels[data.contactTime] || data.contactTime}`;
 
+      // If preference is phone and no email, use a placeholder
+      const emailToSend = data.email || (preference === "phone" ? "noemail@placeholder.com" : "");
+
       // Submit to backend
       const result = await submitLeadAction({
         name: data.fullName,
-        email: data.email,
-        phone: data.phone,
+        email: emailToSend,
+        phone: data.phone || "",
         message,
         source: "free-consultation-modal",
       });
@@ -143,11 +169,15 @@ export const LeadCollectModal = () => {
       if (result.success) {
         setCurrentStep(3);
       } else {
-        setSubmitError(result.error || "Failed to submit. Please try again.");
+        // Show user-friendly error message
+        const errorMessage = result.status === 404 
+          ? "Service temporarily unavailable. Please try again later or call us directly."
+          : "Failed to submit. Please try again.";
+        setSubmitError(errorMessage);
       }
     } catch (error) {
       console.error("Error submitting lead:", error);
-      setSubmitError("An unexpected error occurred. Please try again.");
+      setSubmitError("Service temporarily unavailable. Please try again later or call us directly.");
     } finally {
       setIsSubmitting(false);
     }
@@ -263,35 +293,88 @@ export const LeadCollectModal = () => {
                       )}
                     </div>
 
-                    {/* Email Input */}
-                    <div className="w-full flex flex-col gap-1">
-                      <input
-                        {...register("email")}
-                        type="email"
-                        placeholder="Your email address"
-                        className={`w-full h-12 px-3 py-2 bg-white rounded-md border text-sm font-medium font-rubik placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-zinc-800 transition-colors ${errors.email ? "border-red-500" : "border-gray-200"}`}
-                      />
-                      {errors.email && (
-                        <span className="text-red-500 text-xs font-rubik mt-1">
-                          {errors.email.message}
-                        </span>
-                      )}
+                    {/* Preference Label */}
+                    <div className="text-gray-600 text-sm font-normal font-rubik leading-5 mt-2">
+                      How do you prefer contact?
                     </div>
 
-                    {/* Phone Input */}
-                    <div className="w-full flex flex-col gap-1">
-                      <input
-                        {...register("phone")}
-                        type="tel"
-                        placeholder="(000) 000-0000"
-                        onChange={handlePhoneChange}
-                        maxLength={14}
-                        className={`w-full h-12 px-3 py-2 bg-white rounded-md border text-sm font-medium font-rubik placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-zinc-800 transition-colors ${errors.phone ? "border-red-500" : "border-gray-200"}`}
-                      />
-                      {errors.phone && (
-                        <span className="text-red-500 text-xs font-rubik mt-1">
-                          {errors.phone.message}
+                    {/* Preference Toggle */}
+                    <div className="w-full inline-flex justify-start items-start gap-3">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setValue("preference", "phone");
+                          setValue("email", "");
+                          clearErrors(["email", "phone"]);
+                        }}
+                        className={`flex-1 h-12 px-3 py-2 rounded-md border flex justify-center items-center gap-2.5 transition-all outline-none ${
+                          preference === "phone"
+                            ? "bg-zinc-800 border-zinc-800 text-white shadow-sm"
+                            : "bg-white border-gray-200 text-gray-700 hover:bg-gray-50"
+                        }`}
+                      >
+                        <RiPhoneLine
+                          className={`size-4 opacity-80 ${preference === "phone" ? "text-white" : "text-gray-500"}`}
+                        />
+                        <span className="text-sm font-medium font-rubik leading-5 whitespace-nowrap">
+                          By phone call
                         </span>
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setValue("preference", "email");
+                          setValue("phone", "");
+                          clearErrors(["email", "phone"]);
+                        }}
+                        className={`flex-1 h-12 px-3 py-2 rounded-md border flex justify-center items-center gap-2.5 transition-all outline-none ${
+                          preference === "email"
+                            ? "bg-zinc-800 border-zinc-800 text-white shadow-sm"
+                            : "bg-white border-gray-200 text-gray-700 hover:bg-gray-50"
+                        }`}
+                      >
+                        <RiMailLine
+                          className={`size-4 opacity-80 ${preference === "email" ? "text-white" : "text-gray-500"}`}
+                        />
+                        <span className="text-sm font-medium font-rubik leading-5 whitespace-nowrap">
+                          By e-mail
+                        </span>
+                      </button>
+                    </div>
+
+                    {/* Dynamic Contact Input */}
+                    <div className="w-full flex flex-col gap-1 mt-1">
+                      {preference === "phone" ? (
+                        <>
+                          <input
+                            {...register("phone")}
+                            type="tel"
+                            placeholder="(000) 000-0000"
+                            onChange={handlePhoneChange}
+                            maxLength={14}
+                            className={`w-full h-12 px-3 py-2 bg-white rounded-md border text-sm font-medium font-rubik placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-zinc-800 transition-colors ${errors.phone ? "border-red-500" : "border-gray-200"}`}
+                          />
+                          {errors.phone && (
+                            <span className="text-red-500 text-xs font-rubik mt-1">
+                              {errors.phone.message}
+                            </span>
+                          )}
+                        </>
+                      ) : (
+                        <>
+                          <input
+                            {...register("email")}
+                            type="email"
+                            placeholder="Your email address"
+                            className={`w-full h-12 px-3 py-2 bg-white rounded-md border text-sm font-medium font-rubik placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-zinc-800 transition-colors ${errors.email ? "border-red-500" : "border-gray-200"}`}
+                          />
+                          {errors.email && (
+                            <span className="text-red-500 text-xs font-rubik mt-1">
+                              {errors.email.message}
+                            </span>
+                          )}
+                        </>
                       )}
                     </div>
                   </div>
