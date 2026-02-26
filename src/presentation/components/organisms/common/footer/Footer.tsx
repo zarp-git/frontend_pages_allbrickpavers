@@ -182,16 +182,32 @@ export default function Footer({ variant = "default" }: FooterProps) {
               className="w-full grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8 lg:gap-16"
             >
               {/* Company */}
-              <FooterLinkColumn title="COMPANY" links={FOOTER_COMPANY_LINKS} onLinkClick={openMaintenanceModal} />
+              <FooterLinkColumn
+                title="COMPANY"
+                links={FOOTER_COMPANY_LINKS}
+                onLinkClick={openMaintenanceModal}
+              />
 
               {/* Locations */}
-              <FooterLinkColumn title="LOCATIONS" links={FOOTER_LOCATIONS} onLinkClick={openMaintenanceModal} />
+              <FooterLinkColumn
+                title="LOCATIONS"
+                links={FOOTER_LOCATIONS}
+                onLinkClick={openMaintenanceModal}
+              />
 
               {/* Services */}
-              <FooterLinkColumn title="SERVICES" links={FOOTER_SERVICES} onLinkClick={openMaintenanceModal} />
+              <FooterLinkColumn
+                title="SERVICES"
+                links={FOOTER_SERVICES}
+                onLinkClick={openMaintenanceModal}
+              />
 
               {/* Legal */}
-              <FooterLinkColumn title="LEGAL" links={FOOTER_LEGAL_LINKS} onLinkClick={openMaintenanceModal} />
+              <FooterLinkColumn
+                title="LEGAL"
+                links={FOOTER_LEGAL_LINKS}
+                onLinkClick={openMaintenanceModal}
+              />
             </nav>
 
             {/* Find Us On */}
@@ -205,6 +221,23 @@ export default function Footer({ variant = "default" }: FooterProps) {
 
               {/* Social Icons */}
               <ul className="flex items-center gap-6 list-none m-0 p-0">
+                <li>
+                  <Link
+                    href={SOCIAL_LINKS.whatsapp}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Contact us on WhatsApp"
+                    className="transition-transform hover:scale-110 block"
+                  >
+                    <Image
+                      src="/images/brands/whatsapp-icon.svg"
+                      alt="WhatsApp"
+                      width={40}
+                      height={40}
+                      className="w-10 h-10"
+                    />
+                  </Link>
+                </li>
                 <li>
                   <Link
                     href={SOCIAL_LINKS.instagram}
@@ -320,9 +353,20 @@ interface FooterLinkColumnProps {
   onLinkClick: () => void;
 }
 
-function FooterLinkColumn({ title, links, onLinkClick }: FooterLinkColumnProps) {
-  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    if (href === "/learning-center" || href === "/tools/design-visualizer" || href === "/tools/cost-calculator") {
+function FooterLinkColumn({
+  title,
+  links,
+  onLinkClick,
+}: FooterLinkColumnProps) {
+  const handleLinkClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string,
+  ) => {
+    if (
+      href === "/learning-center" ||
+      href === "/tools/design-visualizer" ||
+      href === "/tools/cost-calculator"
+    ) {
       e.preventDefault();
       onLinkClick();
     }

@@ -44,6 +44,10 @@
   --radius-2xl: calc(var(--radius) + 8px);
   --radius-3xl: calc(var(--radius) + 12px);
   --radius-4xl: calc(var(--radius) + 16px);
+
+  /* Marquee animations */
+  --animate-marquee-left: marquee-left linear infinite;
+  --animate-marquee-right: marquee-right linear infinite;
 }
 
 :root {
@@ -314,4 +318,23 @@
 .btn-signup.is-glowing::before {
   --glow-color: rgb(252 129 83);
   --glow-size: 10px;
+}
+
+/* Marquee Animations */
+@keyframes marquee-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-right {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }

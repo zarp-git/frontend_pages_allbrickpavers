@@ -9,6 +9,7 @@ import { PaversVsConcreteSection } from "@/presentation/components/organisms/hom
 import { InstallationTrustSection } from "@/presentation/components/organisms/home-page-sections/InstallationTrustSection";
 import { PaverServicesSection } from "@/presentation/components/organisms/home-page-sections/PaverServicesSection";
 import { CtaSection } from "@/presentation/components/organisms/home-page-sections/CtaSection";
+import { OurWorkSection } from "@/presentation/components/organisms/home-page-sections/OurWorkSection";
 
 export default function Home() {
   return (
@@ -21,6 +22,7 @@ export default function Home() {
       <FeedbackSection />
       <PaversVsConcreteSection />
       <InstallationTrustSection />
+      <OurWorkSection />
       <CtaSection />
       <FaqSection />
     </main>
