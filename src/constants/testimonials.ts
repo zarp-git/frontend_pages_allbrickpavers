@@ -1,0 +1,243 @@
+// ---------------------------------------------------------------------------
+// Testimonials / Reviews — Single Source of Truth
+// ---------------------------------------------------------------------------
+
+export interface Review {
+  id: number;
+  name: string;
+  daysAgo: string;
+  rating: number;
+  serviceTag: string;
+  images: string[];
+  text: string;
+}
+
+const IMG = "/images/testimonials-reviews/review-photos";
+
+export const REVIEWS: Review[] = [
+  {
+    id: 1,
+    name: "Audania Taylor",
+    daysAgo: "a month ago",
+    rating: 5,
+    serviceTag: "Patio Pavers",
+    images: [
+      `${IMG}/allbrickpavers_testimonial_audania-taylor-1.jpeg`,
+      `${IMG}/allbrickpavers_testimonial_audania-taylor-2.jpeg`,
+      `${IMG}/allbrickpavers_testimonial_audania-taylor-3.jpeg`,
+      `${IMG}/allbrickpavers_testimonial_audania-taylor-4.jpeg`,
+      `${IMG}/allbrickpavers_testimonial_audania-taylor-5.jpeg`,
+      `${IMG}/allbrickpavers_testimonial_audania-taylor-6.jpeg`,
+    ],
+    text: "Look at this! LOOK AT THIS!!! Is this not gorgeous! Rael and his Davenport-based team meticulously planned, communicated, and completed my back lanai in excellent time. He worked with other contractors for a seamless installation so there were no pauses in the work. ALLBRICK's prices were reasonable and Rael even offered to throw in a fire pit for free (which was appreciated but eventually declined). My husband and I are so happy with the work ALLBRICK did. Highly, HIGHLY recommend!!",
+  },
+  {
+    id: 2,
+    name: "Billy Dinkins",
+    daysAgo: "4 months ago",
+    rating: 5,
+    serviceTag: "Paver Installation",
+    images: [],
+    text: "I was taken back by AllBrick Pavers customer service. From my initial contact with Armand to get my consultation and my quote. Their variety of different brick and styles were amazing. Their crew was very courteous, outstanding workmanship through and through. When a company has a good team in place everything just seems to fall in place. These guys were quick and on the job promptly. My property looks so much better with All Brick Pavers In place. I couldn't ask for better service and now my property is absolutely stunning to the neighborhood. Thank you All Brick Pavers!",
+  },
+  {
+    id: 3,
+    name: "Connor Read",
+    daysAgo: "a month ago",
+    rating: 5,
+    serviceTag: "Patio Pavers",
+    images: [],
+    text: "We hired Rael and his team to install our paved patio, we are ecstatic with the final results absolutely fantastic work and communication highly recommend",
+  },
+  {
+    id: 4,
+    name: "Daniel H",
+    daysAgo: "9 months ago",
+    rating: 5,
+    serviceTag: "Paver Installation",
+    images: [`${IMG}/allbrickpavers_testimonial_daniel-h.jpeg`],
+    text: "Being in the real estate industry, I've worked with many different professionals. If you're like me and looking to start a project, you do research, compare quotes and meet different contractors to get a feel for who would be best suited for the job. By FAR, Rael and his team are the right company for the task. His team was professional, started 2 days AFTER the initial quote, gave a competitive price and went above and beyond in delivering great service and product. They didn't cut any corners, worked hard and I would highly recommend them! Rael is a great guy and now I consider him a friend!",
+  },
+  {
+    id: 5,
+    name: "Doug Wilson",
+    daysAgo: "a month ago",
+    rating: 5,
+    serviceTag: "Pool Deck",
+    images: [],
+    text: "I'm extremely happy with the work Allbrick Pavers did at my home. They re-leveled the travertine pavers around my pool and added a brand-new walkway, and everything turned out absolutely beautiful. The crew was professional, skilled, and clearly knew exactly what they were doing. The job was completed in a timely manner and the craftsmanship was excellent from start to finish. I highly recommend Allbrick Pavers to anyone looking for expert paver work and quality results!",
+  },
+  {
+    id: 6,
+    name: "Heloisa Kingston",
+    daysAgo: "5 months ago",
+    rating: 5,
+    serviceTag: "Paver Installation",
+    images: [],
+    text: "All Brick Pavers did an amazing job! The team was professional, fast, and the quality of their work is outstanding. My pavers look beautiful, and the whole process was smooth from start to finish. Highly recommend! Thank you guys!!!",
+  },
+  {
+    id: 7,
+    name: "James Parra",
+    daysAgo: "10 months ago",
+    rating: 5,
+    serviceTag: "Patio Pavers",
+    images: [
+      `${IMG}/allbrickpavers_testimonial_james-parra-1.jpeg`,
+      `${IMG}/allbrickpavers_testimonial_james-parra-2.jpeg`,
+      `${IMG}/allbrickpavers_testimonial_james-parra-3.jpeg`,
+    ],
+    text: "Very professional service, from the time we inquired about project Rail was very reachable by call and text. He always dedicate the time to answer all our questions and came up with ideas for a backyard project. He works with high quality materials and the job only took one 1 day for a 500qf area. It came out amazing! I highly recommend working with them! You wont regret it!",
+  },
+  {
+    id: 8,
+    name: "John Foskey",
+    daysAgo: "a year ago",
+    rating: 5,
+    serviceTag: "Patio Pavers",
+    images: [
+      `${IMG}/allbrickpavers_testimonial_john-foskey-1.jpeg`,
+      `${IMG}/allbrickpavers_testimonial_john-foskey-2.jpeg`,
+      `${IMG}/allbrickpavers_testimonial_john-foskey-3.jpeg`,
+    ],
+    text: "I Highly recommend Rael and his team. They did an amazing job. On time, respectful, professional and talented. We love our new back patio. They delivered what they promised, on schedule and as cost quoted. Thank you Allbrick Pavers.",
+  },
+  {
+    id: 9,
+    name: "John Wiegand",
+    daysAgo: "a month ago",
+    rating: 5,
+    serviceTag: "Patio Pavers",
+    images: [],
+    text: "We had an excellent experience working with Rael from ALLBRICK PAVERS. From start to finish, Rael was incredibly professional, prompt, and dependable. He installed pavers in our backyard and completed the work efficiently, with great attention to detail. What really stood out was that he came back the following day just to make sure everything was absolutely perfect \u2014 that kind of follow-through is rare and very appreciated. Rael took the time to walk us through the entire process and explained exactly what he was doing at each step. My wife is very meticulous, and Rael went out of his way to adjust the design slightly to meet her exact specifications. He never rushed us, listened carefully, and made sure every detail was done right. You can tell he genuinely takes pride in his work. On top of all that, his pricing was very reasonable for the quality of work he delivers. There are no loose ends or unresolved issues \u2014 everything was completed exactly as promised. If you're looking for a paver company that does high-quality work without the risk of disappointment, I highly recommend Rael and ALLBRICK PAVERS. We couldn't be happier with the final result.",
+  },
+  {
+    id: 10,
+    name: "Julie Walsh",
+    daysAgo: "10 months ago",
+    rating: 5,
+    serviceTag: "Driveway",
+    images: [
+      `${IMG}/allbrickpavers_testimonial_julie-walsh-1.jpeg`,
+      `${IMG}/allbrickpavers_testimonial_julie-walsh-2.jpeg`,
+      `${IMG}/allbrickpavers_testimonial_julie-walsh-3.jpeg`,
+      `${IMG}/allbrickpavers_testimonial_julie-walsh-4.jpeg`,
+    ],
+    text: "FANTASTIC COMPANY!!!! We had a beautiful new paver driveway AND sidewalk within about one week from quote to installation! The crew was phenomenal and we are SO pleased with the finished product. HIGHLY recommend!!!!",
+  },
+  {
+    id: 11,
+    name: "Justin Boehm",
+    daysAgo: "7 months ago",
+    rating: 5,
+    serviceTag: "Paver Installation",
+    images: [
+      `${IMG}/allbrickpavers_testimonial_justin-boehm-1.jpeg`,
+      `${IMG}/allbrickpavers_testimonial_justin-boehm-2.jpeg`,
+      `${IMG}/allbrickpavers_testimonial_justin-boehm-3.jpeg`,
+    ],
+    text: "I'm thrilled with the exceptional service provided by All Brick Paving. From start to finish, the experience was outstanding. They promptly came out to provide a quote, and our salesman, Rael, was incredibly friendly, transparent, and helpful\u2014offering us a variety of options to suit our needs. The pricing was unbeatable, making the decision easy for us. The crew was not only hardworking but also very courteous, completing the entire project in just one day. The quality of their work exceeded our expectations, and we couldn't be happier with the results. We'll definitely be using All Brick Paving again for future projects!",
+  },
+  {
+    id: 12,
+    name: "Liz Pratt",
+    daysAgo: "a month ago",
+    rating: 5,
+    serviceTag: "Patio Pavers",
+    images: [],
+    text: "We shopped around for months for the best paver company to redo our patio in Providence, Davenport, FL. Through our search we found many scammers and large companies that don't give you the time of day and don't care about your money or the quality. We chose Allbrick Pavers specifically because of all the extra time they spent with us free of charge to help us feel comfortable, understand all of our options thoroughly and worked with our budget without pressure to pick our forever patio. This is a small business that cares and will go out of their way to make sure you are happy! We couldn't find the right materials and didn't love the options in the catalogs and the specific material we wanted was out of our budget. Rael spent a lot of time speaking with us and other vendors. After lots of research, he miraculously found the marble we wanted on sale and in our budget! As the deconstruction started there were some extra issues they found that needed addressing, they were on top of it, didn't charge extra and saved us from further damage to our patio, pool and home. When the material came in, there was an issue with the amount of tiles for the pool and we needed more tile to cover it all, Rael remedied the problem same day and once again, did not charge extra! Rael and his crew are respectful and kind, hardworking and take pride in it. We enjoyed having them around during this experience, and will be solely giving our business to them for future jobs like this. We couldn't be happier to have found a company we can truly trust.",
+  },
+  {
+    id: 13,
+    name: "Marshall Darden",
+    daysAgo: "a month ago",
+    rating: 5,
+    serviceTag: "Paver Installation",
+    images: [],
+    text: "All Brick Pavers did an incredible job from start to finish. You can tell right away that they actually care about the work they do. The crew showed up on time, communicated clearly, and didn't leave me guessing about anything. The quality of the work honestly surprised me in a good way. The whole project looks like something you'd see in a professional portfolio. They don't rush, they don't cut corners, and they make sure everything is done the right way. What stood out most was how easy they were to work with. They listened to what I wanted, and made the whole process smooth.",
+  },
+  {
+    id: 14,
+    name: "Moses Berry",
+    daysAgo: "3 months ago",
+    rating: 5,
+    serviceTag: "Paver Installation",
+    images: [],
+    text: "Owner was respectful and was knowledgeable. If i needed to ask anything about the process, he was a phone call away. The workers were fast and quiet. they were respectful and cleaned up after everything was done. i greatly recommend this business.",
+  },
+  {
+    id: 15,
+    name: "Paul Kolzow",
+    daysAgo: "3 months ago",
+    rating: 5,
+    serviceTag: "Driveway",
+    images: [],
+    text: "Exceptional work. Fulfilled every promise made about the job. Could not have asked for a better job. Exceeded all expectations. Large job of 3 car driveway and patio completed in a couple days. They are perfectionists that will do an amazing job at a great price. Highly recommended!",
+  },
+  {
+    id: 16,
+    name: "Robert LaFlamme",
+    daysAgo: "8 months ago",
+    rating: 5,
+    serviceTag: "Walkway",
+    images: [`${IMG}/allbrickpavers_testimonial_robert-laflamme.jpeg`],
+    text: "We recently had All Brick Pavers install a new walkway at our home after a previous contractor had done a poor job, and we couldn't be happier with the results. From start to finish, the team at All Brick Pavers was professional, responsive, and thorough. Their communication was excellent \u2014 we always knew what to expect and when \u2014 and they were able to get us on the schedule quickly, which we greatly appreciated. The craftsmanship and attention to detail in their work was outstanding. They took the time to do things right, correcting the mistakes from the prior installation with care and expertise. The finished walkway looks fantastic and truly enhances the curb appeal of our home. We highly recommend All Brick Pavers to anyone looking for high-quality hardscaping done by people who genuinely care about the work they do.",
+  },
+  {
+    id: 17,
+    name: "Scott Demoulpied",
+    daysAgo: "5 months ago",
+    rating: 5,
+    serviceTag: "Patio Pavers",
+    images: [],
+    text: "I was referred to AllBrick by a friend and I can say that I am beyond ecstatic. Had my back patio area and walkways done and it came out better than I ever expected. The owner was very attentive throughout the whole process and communication before and after the job was above and beyond. Definitely will recommend to anyone I know that's looking for such work. Thank you again!!!!",
+  },
+  {
+    id: 18,
+    name: "Solomon Berry",
+    daysAgo: "9 months ago",
+    rating: 5,
+    serviceTag: "Patio Pavers",
+    images: [
+      `${IMG}/allbrickpavers_testimonial_solomon-berry-1.jpeg`,
+      `${IMG}/allbrickpavers_testimonial_solomon-berry-2.jpeg`,
+      `${IMG}/allbrickpavers_testimonial_solomon-berry-3.jpeg`,
+    ],
+    text: "AllBrick Pavers provides exceptional work and professionalism at its best! From a drawing I sketched four years ago and a badly sloped, dead grass & sand like dirt here in Polk County, Rael and Leno worked their magic and brought our dreams to life. My wife and I love the work they did leveling my yard with retaining walls and paving my backyard patio, grilling station, walkway and lounge. The Munich wall and two posts/columns are a beautiful addition as well! I recommend their services to any and everyone. \u2014Solomon & family.",
+  },
+  {
+    id: 19,
+    name: "Stacey Grant",
+    daysAgo: "6 months ago",
+    rating: 5,
+    serviceTag: "Driveway",
+    images: [
+      `${IMG}/allbrickpavers_testimonial_stacey-grant-1.jpeg`,
+      `${IMG}/allbrickpavers_testimonial_stacey-grant-2.jpeg`,
+      `${IMG}/allbrickpavers_testimonial_stacey-grant-3.jpeg`,
+    ],
+    text: "What a beautiful job these guys did on our driveway and stairs! From start to finish Rael and his team were professional, personable, and skillful. Such a huge job that was done on schedule. We are so happy we chose ALLBRICK Pavers to add more character to this old home and can't thank you enough!",
+  },
+  {
+    id: 20,
+    name: "Stacy Shawna",
+    daysAgo: "9 months ago",
+    rating: 5,
+    serviceTag: "Walkway",
+    images: [
+      `${IMG}/allbrickpavers_testimonial_stacy-shawna-1.jpeg`,
+      `${IMG}/allbrickpavers_testimonial_stacy-shawna-2.jpeg`,
+      `${IMG}/allbrickpavers_testimonial_stacy-shawna-3.jpeg`,
+    ],
+    text: "I had AllBrick pavers come out and remove the shrubbery and mulch around my home and replace that area with a brick paver walkway. From the time I contacted them for a quote they were very professional and reasonable and honest they have great customer service. ALLBRICK stood out from all the other companies with their attention to detail, warranty and quality products they use. Once we signed the contract they kept us in the loop of everything. The crew that came the day of the job were friendly knowledgeable and take pride in their work. They went above and beyond to make sure I was happy from start to finish. I am highly impressed with the job they did it's outstanding. If you are looking to have paver work done give them a call.",
+  },
+  {
+    id: 21,
+    name: "Thomas Tracy",
+    daysAgo: "11 months ago",
+    rating: 5,
+    serviceTag: "Paver Installation",
+    images: [`${IMG}/allbrickpavers_testimonial_thomas-tracy.jpeg`],
+    text: "All brick Pavers is an amazing company. Their customer service is impeccable. On time and ready to go when it comes to doing your paving. I appreciate Rael and his whole crew for the professionalism and attention to detail. I highly recommend this company and will back them all the way. My biggest thanks to Rael and all brick Pavers",
+  },
+];

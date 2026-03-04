@@ -2,6 +2,7 @@ export * from "./footer";
 export * from "./navigation";
 export * from "./services";
 export * from "./locations";
+export * from "./testimonials";
 
 // Site configuration
 export const SITE_CONFIG = {

@@ -1,13 +1,14 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useRef, useState, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Autoplay } from "swiper/modules";
+import { Navigation, Autoplay, Pagination } from "swiper/modules";
 import type { Swiper as SwiperType } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
+import "swiper/css/pagination";
 import {
   RiPhoneLine,
   RiArrowRightUpLine,
@@ -17,70 +18,13 @@ import {
 
 import { Button } from "@/presentation/components/atoms/ui/button";
 import StarRating from "@/presentation/components/atoms/ui/StarRating";
-import { SOCIAL_LINKS, CONTACT } from "@/constants";
+import { SOCIAL_LINKS, CONTACT, REVIEWS } from "@/constants";
+import type { Review } from "@/constants";
 
 // ---------------------------------------------------------------------------
-// Review data
+// Constants
 // ---------------------------------------------------------------------------
-interface Review {
-  id: number;
-  name: string;
-  daysAgo: string;
-  rating: number;
-  serviceTag: string;
-  image: string;
-  text: string;
-}
-
 const DEFAULT_AVATAR = "/images/avatars/default-avatar-profile-picture.svg";
-
-const REVIEWS: Review[] = [
-  {
-    id: 1,
-    name: "Liz Pratt",
-    daysAgo: "20 days ago",
-    rating: 5,
-    serviceTag: "Patio Pavers",
-    image: "/images/sections-images/patio-pavers-1-after-1.webp",
-    text: "We shopped around for months for the best paver company to redo our patio in Providence, Davenport, FL. Through our search we found many scammers and large companies that don't give you the time of day and don't care about your money or the quality. We chose Allbrick Pavers specifically because of all the extra time they spent with us free of charge to help us feel comfortable, understand all of our options thoroughly and worked with our budget without pressure to pick our forever patio.",
-  },
-  {
-    id: 2,
-    name: "Doug Wilson",
-    daysAgo: "13 days ago",
-    rating: 5,
-    serviceTag: "Pool Deck",
-    image: "/images/sections-images/pool-deck-after.jpg",
-    text: "I'm extremely happy with the work Allbrick Pavers did at my home. They re-leveled the travertine pavers around my pool and added a brand-new walkway, and everything turned out absolutely beautiful. The crew was professional, skilled, and clearly knew exactly what they were doing. The job was completed in a timely manner and the craftsmanship was excellent from start to finish. I highly recommend Allbrick Pavers to anyone looking for expert paver work and quality results!",
-  },
-  {
-    id: 3,
-    name: "57iglesias",
-    daysAgo: "13 days ago",
-    rating: 5,
-    serviceTag: "Fire Pit",
-    image: "/images/sections-images/firepit-pavers-1-after-1.webp",
-    text: "I reached out to Allbrick for an expansion of my pavers. They were very professional from the first call throughout the entire process. They were on time, work in a clean and orderly manner. The team works extremely well together. Once completed, they left my front lawn neat and clean. I live in Winter Haven and they provided all the necessary documentation for the HOA approval. Highly recommend this company, they were a pleasure to work with them.",
-  },
-  {
-    id: 4,
-    name: "Audania Taylor",
-    daysAgo: "15 days ago",
-    rating: 5,
-    serviceTag: "Patio Pavers",
-    image: "/images/sections-images/patio-pavers-2-after-1.webp",
-    text: "Look at this! LOOK AT THIS!!! Is this not gorgeous! Rael and his Davenport team meticulously planned, communicated, and completed my back lanai in excellent time. He worked with other contractors for a seamless installation so there were no pauses in the work. ALLBRICK's prices were reasonable and Rael even offered to throw in a fire pit for free (which was appreciated but eventually declined). My husband and I are so happy with the work ALLBRICK did. Highly, HIGHLY recommend!!",
-  },
-  {
-    id: 5,
-    name: "Liz Pratt",
-    daysAgo: "20 days ago",
-    rating: 5,
-    serviceTag: "Patio Pavers",
-    image: "/images/sections-images/patio-pavers-3-after-1.webp",
-    text: "We shopped around for months for the best paver company to redo our patio in Providence, Davenport, FL. Through our search we found many scammers and large companies that don't give you the time of day and don't care about your money or the quality. We chose Allbrick Pavers specifically because of all the extra time they spent with us free of charge to help us feel comfortable, understand all of our options thoroughly and worked with our budget without pressure to pick our forever patio.",
-  },
-];
 
 // ---------------------------------------------------------------------------
 // Component
@@ -187,21 +131,39 @@ export default function FeedbackSection() {
 // ReviewCard sub-component
 // ---------------------------------------------------------------------------
 function ReviewCard({ review }: { review: Review }) {
+  const hasImages = review.images.length > 0;
+  const hasMultipleImages = review.images.length > 1;
+
   return (
     <article className="w-full p-4 sm:p-5 bg-gray-50 rounded-2xl border border-gray-200 flex flex-col justify-start items-start gap-3 sm:gap-4 h-full">
-      {/* ── Project Image with Service Chip ── */}
-      <div className="relative self-stretch h-32 sm:h-40 rounded-md border border-gray-200 overflow-hidden">
-        <Image
-          src={review.image}
-          alt={`${review.serviceTag} project by AllBrick Pavers`}
-          fill
-          sizes="320px"
-          className="object-cover"
-        />
-        <span className="absolute top-3 left-3 px-3 py-1.5 bg-stone-50/90 backdrop-blur-sm rounded-full border border-gray-200 text-gray-700 text-xs font-medium font-rubik">
+      {/* ── Project Image(s) with Service Chip ── */}
+      {hasImages && (
+        <div className="relative self-stretch h-32 sm:h-40 rounded-md border border-gray-200 overflow-hidden">
+          {hasMultipleImages ? (
+            <ImageCarousel images={review.images} serviceTag={review.serviceTag} />
+          ) : (
+            <>
+              <Image
+                src={review.images[0]}
+                alt={`${review.serviceTag} project by AllBrick Pavers`}
+                fill
+                sizes="320px"
+                className="object-cover"
+              />
+              <span className="absolute top-3 left-3 z-10 px-3 py-1.5 bg-stone-50/90 backdrop-blur-sm rounded-full border border-gray-200 text-gray-700 text-xs font-medium font-rubik">
+                {review.serviceTag}
+              </span>
+            </>
+          )}
+        </div>
+      )}
+
+      {/* ── Service tag (shown inline when no images) ── */}
+      {!hasImages && (
+        <span className="px-3 py-1.5 bg-stone-50 rounded-full border border-gray-200 text-gray-700 text-xs font-medium font-rubik">
           {review.serviceTag}
         </span>
-      </div>
+      )}
 
       {/* ── Reviewer Info ── */}
       <div className="self-stretch flex flex-col gap-3.5">
@@ -246,5 +208,70 @@ function ReviewCard({ review }: { review: Review }) {
         {review.text}
       </p>
     </article>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// ImageCarousel — mini Swiper with bullet pagination inside a ReviewCard
+// ---------------------------------------------------------------------------
+function ImageCarousel({
+  images,
+  serviceTag,
+}: {
+  images: string[];
+  serviceTag: string;
+}) {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const handleSlideChange = useCallback((swiper: SwiperType) => {
+    setActiveIndex(swiper.realIndex);
+  }, []);
+
+  return (
+    <>
+      <Swiper
+        modules={[Pagination]}
+        pagination={{
+          clickable: true,
+          el: null, // we render custom bullets below
+        }}
+        spaceBetween={0}
+        slidesPerView={1}
+        loop
+        onSlideChange={handleSlideChange}
+        className="h-full w-full"
+      >
+        {images.map((src, idx) => (
+          <SwiperSlide key={src} className="relative h-full">
+            <Image
+              src={src}
+              alt={`${serviceTag} project by AllBrick Pavers - photo ${idx + 1}`}
+              fill
+              sizes="320px"
+              className="object-cover"
+            />
+          </SwiperSlide>
+        ))}
+      </Swiper>
+
+      {/* Service tag chip */}
+      <span className="absolute top-3 left-3 z-10 px-3 py-1.5 bg-stone-50/90 backdrop-blur-sm rounded-full border border-gray-200 text-gray-700 text-xs font-medium font-rubik">
+        {serviceTag}
+      </span>
+
+      {/* Custom bullet indicators */}
+      <div className="absolute bottom-2 left-1/2 -translate-x-1/2 z-10 flex items-center gap-1.5">
+        {images.map((_, idx) => (
+          <span
+            key={idx}
+            className={`block rounded-full transition-all duration-300 ${
+              idx === activeIndex
+                ? "w-4 h-1.5 bg-white"
+                : "size-1.5 bg-white/60"
+            }`}
+          />
+        ))}
+      </div>
+    </>
   );
 }
