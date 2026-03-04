@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import { Button } from "@/presentation/components/atoms/ui/button";
 import NextImage from "next/image";
 import { CtaButton } from "@/presentation/components/molecules/common/CtaButton";
@@ -76,17 +77,12 @@ export default function IntroSection() {
             >
               <CtaButton />
 
-              <Button
-                data-layer="PrimaryButton"
-                data-color="gradient"
-                data-icon="OFF"
-                data-size="lg"
-                data-type="secondary"
-                variant="brick-outline"
-                className="h-12 px-8 py-4 rounded-lg flex justify-center items-center gap-4 text-base font-medium font-rubik uppercase"
+              <Link
+                href="/gallery"
+                className="h-12 px-8 py-4 rounded-lg flex justify-center items-center gap-4 text-base font-medium font-rubik uppercase bg-white border-2 border-red-800 text-red-800 hover:bg-red-50 transition-colors"
               >
                 gallery
-              </Button>
+              </Link>
             </div>
           </div>
         </div>
