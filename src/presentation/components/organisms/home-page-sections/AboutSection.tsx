@@ -53,10 +53,10 @@ export default function AboutSection() {
             <p className="text-gray-600 text-sm sm:text-base md:text-lg leading-relaxed mb-4 sm:mb-6 font-rubik">
               At ALLBRICK PAVERS, we're local specialists dedicated to
               revolutionizing outdoor spaces in Lakeland, Polk County, and
-              Orlando's western suburbs. As a family-owned business, we blend
-              artistry with precision engineering to deliver custom solutions
-              designed for Florida's climate. From residential driveways to pool
-              decks, we serve all of Central Florida with unmatched quality.
+              Orlando's western suburbs. We blend artistry with precision
+              engineering to deliver custom solutions designed for Florida's
+              climate. From residential driveways to pool decks, we serve all of
+              Central Florida with unmatched quality.
             </p>
           </div>
         </div>
@@ -70,10 +70,9 @@ export default function AboutSection() {
             </h3>
             <p className="text-gray-600 text-sm sm:text-base md:text-lg leading-relaxed mb-4 sm:mb-6 font-rubik">
               With over a decade of experience and dozens of successful
-              projects, we know how to create lasting curb appeal. We're a
-              family-owned team with deep ties to the communities we serve. Our
-              commitment to quality and customer satisfaction drives everything
-              we do.
+              projects, we know how to create lasting curb appeal. Our deep ties
+              to the communities we serve and our commitment to quality and
+              customer satisfaction drive everything we do.
             </p>
             <p className="text-gray-600 text-sm sm:text-base md:text-lg leading-relaxed font-rubik">
               <span className="font-bold text-[#A52024]">
@@ -117,9 +116,7 @@ export default function AboutSection() {
 
         {/* Bottom CTA */}
         <div className="flex justify-center mt-12">
-          <CtaButton
-            className="h-[52px] px-8 text-base font-bold tracking-wide"
-          />
+          <CtaButton className="h-[52px] px-8 text-base font-bold tracking-wide" />
         </div>
       </div>
     </section>

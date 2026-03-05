@@ -419,7 +419,7 @@ function LocationCta({ cityName }: { cityName: string }) {
             <Button
               variant="brick-outline"
               size="lg"
-              className="h-12 px-8 py-4 rounded-lg flex items-center gap-4 mt-2 border-white text-white hover:bg-white/10"
+              className="h-12 px-8 py-4 rounded-lg flex items-center gap-4 mt-2 border-2 border-white bg-transparent text-white hover:bg-white/10"
               onClick={openModal}
             >
               <span className="uppercase text-base font-medium">

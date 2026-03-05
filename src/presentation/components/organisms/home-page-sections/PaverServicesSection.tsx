@@ -4,6 +4,11 @@ import React from "react";
 import Image from "next/image";
 import { CyclingText } from "@/presentation/components/molecules/common/CyclingText";
 import { CtaButton } from "@/presentation/components/molecules/common/CtaButton";
+import {
+  DRIVEWAY_IMAGES,
+  POOL_DECK_IMAGES,
+  PATIO_IMAGES,
+} from "@/constants";
 
 // ---------------------------------------------------------------------------
 // Types
@@ -31,25 +36,25 @@ const SERVICES: ServiceItem[] = [
     title: "Driveway Pavers",
     description:
       "Weather-resistant installations that combat Lakeland's summer storms and prevent erosion.",
-    image: "/images/sections-images/driveway-pavers-2-after.webp",
+    image: DRIVEWAY_IMAGES[2],
   },
   {
     title: "Patio & Pool Deck Pavers",
     description:
       "Design entertainment spaces perfect for Winter Haven lakeside homes or Horizon West resorts.",
-    image: "/images/sections-images/pool-deck-after.jpg",
+    image: POOL_DECK_IMAGES[2],
   },
   {
     title: "Paver Repair",
     description:
       "Fix sunken/cracked pavers in Lakeland neighborhoods and Auburndale commercial properties.",
-    image: "/images/sections-images/cracked-pavers.jpg",
+    image: DRIVEWAY_IMAGES[1],
   },
   {
     title: "Maintenance Plans",
     description:
       "Protect your investment against Central Florida sun, rain, and humidity year-round.",
-    image: "/images/sections-images/patio-pavers-5.webp",
+    image: PATIO_IMAGES[11],
   },
 ];
 

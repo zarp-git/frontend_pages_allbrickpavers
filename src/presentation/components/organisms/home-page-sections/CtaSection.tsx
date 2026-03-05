@@ -9,7 +9,10 @@ import { CtaButton } from "@/presentation/components/molecules/common/CtaButton"
 // ---------------------------------------------------------------------------
 export function CtaSection() {
   return (
-    <section id="cta" className="py-10 sm:py-14 md:py-20 lg:py-28 bg-gray-50 overflow-hidden">
+    <section
+      id="cta"
+      className="py-10 sm:py-14 md:py-20 lg:py-28 bg-gray-50 overflow-hidden"
+    >
       <div className="section-container">
         {/* ── Card wrapper (relative for the absolute image) ── */}
         <div className="relative">
@@ -38,9 +41,8 @@ export function CtaSection() {
                 Your neighbors already upgraded.
                 <br />
                 <span className="font-normal">
-                  Get a free, no-pressure quote
-                  <br className="hidden md:block" />
-                  and see what&apos;s possible for your home.
+                  Get a free quote and see <br className="hidden md:block" />
+                  what&apos;s possible for your home.
                 </span>
               </h2>
             </div>
@@ -64,8 +66,8 @@ export function CtaSection() {
             />
           </div>
 
-          {/* ── Desktop absolute image (right side) ── */}
-          <div className="hidden md:block absolute right-4 lg:right-6 xl:right-12 -top-8 bottom-0 w-56 lg:w-80 xl:w-96">
+          {/* ── Desktop image (absolutely positioned, overlapping card right) ── */}
+          <div className="hidden md:block absolute right-6 xl:right-12 -top-16 -bottom-16 w-56 lg:w-72 xl:w-80 z-10">
             <div className="relative h-full w-full">
               <Image
                 src="/images/sections-images/cta-section-placing-a-paver.jpg"

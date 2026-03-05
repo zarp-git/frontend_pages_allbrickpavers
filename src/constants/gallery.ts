@@ -2,6 +2,12 @@ import type {
   GalleryItem,
   GalleryCategoryTab,
 } from "@/types/gallery.type";
+import {
+  PATIO_IMAGES,
+  DRIVEWAY_IMAGES,
+  POOL_DECK_IMAGES,
+  FIREPIT_IMAGES,
+} from "./service-images";
 
 // ---------------------------------------------------------------------------
 // Category filter tabs
@@ -13,156 +19,59 @@ export const GALLERY_CATEGORIES: GalleryCategoryTab[] = [
   { label: "Driveways", value: "driveways" },
   { label: "Pool Decks", value: "pool-decks" },
   { label: "Fire Pits", value: "fire-pits" },
-  { label: "Walkways", value: "walkways" },
 ];
 
 // ---------------------------------------------------------------------------
 // Gallery items — SSOT
 // ---------------------------------------------------------------------------
 
+const FL_CITIES = [
+  "Winter Haven, FL",
+  "Lakeland, FL",
+  "Auburndale, FL",
+  "Haines City, FL",
+  "Davenport, FL",
+  "Horizon West, FL",
+];
+
+function city(i: number) {
+  return FL_CITIES[i % FL_CITIES.length];
+}
+
 export const GALLERY_ITEMS: GalleryItem[] = [
   // ── Patios ──────────────────────────────────────────────────────────────
-  {
-    id: "patio-01",
-    title: "Elegant Patio Transformation",
-    src: "/images/sections-images/patio-pavers-1-after-1.webp",
-    category: "patios",
-    location: "Winter Haven, FL",
-    featured: true,
-  },
-  {
-    id: "patio-02",
-    title: "Contemporary Patio Design",
-    src: "/images/sections-images/patio-pavers-1-after-2.webp",
-    category: "patios",
-    location: "Lakeland, FL",
-  },
-  {
-    id: "patio-03",
-    title: "Modern Outdoor Living Space",
-    src: "/images/sections-images/patio-pavers-1-after-3.webp",
-    category: "patios",
-    location: "Auburndale, FL",
-  },
-  {
-    id: "patio-04",
-    title: "Classic Brick Patio Installation",
-    src: "/images/sections-images/patio-pavers-1-after-4.webp",
-    category: "patios",
-    location: "Haines City, FL",
-  },
-  {
-    id: "patio-05",
-    title: "Premium Patio with Custom Layout",
-    src: "/images/sections-images/patio-pavers-2-after-1.webp",
-    category: "patios",
-    location: "Davenport, FL",
-    featured: true,
-  },
-  {
-    id: "patio-06",
-    title: "Spacious Backyard Patio",
-    src: "/images/sections-images/patio-pavers-2-after-2.webp",
-    category: "patios",
-    location: "Horizon West, FL",
-  },
-  {
-    id: "patio-07",
-    title: "Multi-Level Patio Design",
-    src: "/images/sections-images/patio-pavers-3-after-1.webp",
-    category: "patios",
-    location: "Winter Haven, FL",
-  },
-  {
-    id: "patio-08",
-    title: "Herringbone Pattern Patio",
-    src: "/images/sections-images/patio-pavers-4.webp",
-    category: "patios",
-    location: "Lakeland, FL",
-    featured: true,
-  },
-  {
-    id: "patio-09",
-    title: "Intimate Patio Space",
-    src: "/images/sections-images/patio-pavers-5.webp",
-    category: "patios",
-    location: "Auburndale, FL",
-  },
-  {
-    id: "patio-10",
-    title: "Curved Patio Edge Detail",
-    src: "/images/sections-images/patiop-pavers-6.webp",
-    category: "patios",
-    location: "Haines City, FL",
-  },
-  {
-    id: "patio-11",
-    title: "Outdoor Entertaining Patio",
-    src: "/images/sections-images/patio-pavers-7.webp",
-    category: "patios",
-    location: "Davenport, FL",
-  },
-  {
-    id: "patio-12",
-    title: "Full Patio Renovation",
-    src: "/images/sections-images/patio-pavers-2.webp",
-    category: "patios",
-    location: "Horizon West, FL",
-  },
+  { id: "patio-01", title: "Elegant Patio Transformation", src: PATIO_IMAGES[0], category: "patios", location: city(0), featured: true },
+  { id: "patio-02", title: "Contemporary Patio Design", src: PATIO_IMAGES[2], category: "patios", location: city(1) },
+  { id: "patio-03", title: "Modern Outdoor Living Space", src: PATIO_IMAGES[4], category: "patios", location: city(2) },
+  { id: "patio-04", title: "Classic Brick Patio Installation", src: PATIO_IMAGES[6], category: "patios", location: city(3) },
+  { id: "patio-05", title: "Premium Patio with Custom Layout", src: PATIO_IMAGES[8], category: "patios", location: city(4), featured: true },
+  { id: "patio-06", title: "Spacious Backyard Patio", src: PATIO_IMAGES[10], category: "patios", location: city(5) },
+  { id: "patio-07", title: "Multi-Level Patio Design", src: PATIO_IMAGES[12], category: "patios", location: city(0) },
+  { id: "patio-08", title: "Herringbone Pattern Patio", src: PATIO_IMAGES[14], category: "patios", location: city(1), featured: true },
+  { id: "patio-09", title: "Intimate Patio Space", src: PATIO_IMAGES[16], category: "patios", location: city(2) },
+  { id: "patio-10", title: "Curved Patio Edge Detail", src: PATIO_IMAGES[18], category: "patios", location: city(3) },
+  { id: "patio-11", title: "Outdoor Entertaining Patio", src: PATIO_IMAGES[20], category: "patios", location: city(4) },
+  { id: "patio-12", title: "Full Patio Renovation", src: PATIO_IMAGES[22], category: "patios", location: city(5) },
 
   // ── Driveways ───────────────────────────────────────────────────────────
-  {
-    id: "driveway-01",
-    title: "Wide Paver Driveway",
-    src: "/images/sections-images/driveway-pavers-1-after.webp",
-    category: "driveways",
-    location: "Lakeland, FL",
-    featured: true,
-  },
-  {
-    id: "driveway-02",
-    title: "Modern Driveway Installation",
-    src: "/images/sections-images/driveway-pavers-2-after.webp",
-    category: "driveways",
-    location: "Davenport, FL",
-  },
+  { id: "driveway-01", title: "Wide Paver Driveway", src: DRIVEWAY_IMAGES[0], category: "driveways", location: city(1), featured: true },
+  { id: "driveway-02", title: "Modern Driveway Installation", src: DRIVEWAY_IMAGES[2], category: "driveways", location: city(4) },
+  { id: "driveway-03", title: "Herringbone Driveway Pattern", src: DRIVEWAY_IMAGES[4], category: "driveways", location: city(0) },
+  { id: "driveway-04", title: "Custom Driveway Design", src: DRIVEWAY_IMAGES[6], category: "driveways", location: city(3) },
+  { id: "driveway-05", title: "Three-Car Driveway", src: DRIVEWAY_IMAGES[8], category: "driveways", location: city(2) },
 
   // ── Pool Decks ──────────────────────────────────────────────────────────
-  {
-    id: "pool-deck-01",
-    title: "Pool Deck Renovation",
-    src: "/images/sections-images/pool-deck-after.jpg",
-    category: "pool-decks",
-    location: "Winter Haven, FL",
-    featured: true,
-  },
+  { id: "pool-deck-01", title: "Pool Deck Renovation", src: POOL_DECK_IMAGES[0], category: "pool-decks", location: city(0), featured: true },
+  { id: "pool-deck-02", title: "Travertine Pool Surround", src: POOL_DECK_IMAGES[2], category: "pool-decks", location: city(1) },
+  { id: "pool-deck-03", title: "Modern Pool Deck Design", src: POOL_DECK_IMAGES[4], category: "pool-decks", location: city(4) },
+  { id: "pool-deck-04", title: "Resort-Style Pool Area", src: POOL_DECK_IMAGES[6], category: "pool-decks", location: city(5) },
+  { id: "pool-deck-05", title: "Elegant Pool Deck Pavers", src: POOL_DECK_IMAGES[8], category: "pool-decks", location: city(3) },
 
   // ── Fire Pits ──────────────────────────────────────────────────────────
-  {
-    id: "firepit-01",
-    title: "Custom Fire Pit Area",
-    src: "/images/sections-images/firepit-pavers-1-after-1.webp",
-    category: "fire-pits",
-    location: "Horizon West, FL",
-    featured: true,
-  },
-  {
-    id: "firepit-02",
-    title: "Round Fire Pit with Seating",
-    src: "/images/sections-images/firepit-pavers-1-after-2.webp",
-    category: "fire-pits",
-    location: "Auburndale, FL",
-  },
-
-  // ── Walkways ────────────────────────────────────────────────────────────
-  {
-    id: "walkway-01",
-    title: "Garden Walkway Installation",
-    src: "/images/sections-images/walkway-pavers.webp",
-    category: "walkways",
-    location: "Lakeland, FL",
-    featured: true,
-  },
+  { id: "firepit-01", title: "Custom Fire Pit Area", src: FIREPIT_IMAGES[0], category: "fire-pits", location: city(5), featured: true },
+  { id: "firepit-02", title: "Round Fire Pit with Seating", src: FIREPIT_IMAGES[1], category: "fire-pits", location: city(2) },
+  { id: "firepit-03", title: "Backyard Fire Pit Lounge", src: FIREPIT_IMAGES[3], category: "fire-pits", location: city(0) },
+  { id: "firepit-04", title: "Paver Fire Pit Design", src: FIREPIT_IMAGES[5], category: "fire-pits", location: city(4) },
 ];
 
 // ---------------------------------------------------------------------------

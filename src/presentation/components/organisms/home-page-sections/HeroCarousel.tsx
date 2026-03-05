@@ -10,6 +10,7 @@ import {
 import { cn } from "@/lib/utils";
 import { CyclingText } from "@/presentation/components/molecules/common/CyclingText";
 import { CtaButton } from "@/presentation/components/molecules/common/CtaButton";
+import { HERO_CAROUSEL_IMAGES } from "@/constants";
 
 const CITIES = [
   "WINTER HAVEN",
@@ -30,35 +31,18 @@ const SERVICES = [
   "FIREPIT PAVERS",
 ];
 
-const CAROUSEL_IMAGES = [
-  {
-    src: "/images/sections-images/pool-deck-after.jpg",
-    label: "Pool Deck",
-    id: 1,
-  },
-  {
-    src: "/images/sections-images/driveway-pavers-1-after.webp",
-    label: "Driveway Pavers",
-    id: 2,
-  },
-  {
-    src: "/images/sections-images/difference-section-driveway-paver-ours.webp",
-    label: "Patio Pavers",
-    id: 3,
-  },
-];
-
 export default function HeroCarousel() {
+  const totalImages = HERO_CAROUSEL_IMAGES.length;
   const [activeIndex, setActiveIndex] = useState(0);
   const [isAutoPlay, setIsAutoPlay] = useState(true);
 
   const handleNext = useCallback(() => {
-    setActiveIndex((current) => (current + 1) % CAROUSEL_IMAGES.length);
-  }, []);
+    setActiveIndex((current) => (current + 1) % totalImages);
+  }, [totalImages]);
 
   const handlePrev = useCallback(() => {
-    setActiveIndex((current) => (current - 1 + CAROUSEL_IMAGES.length) % CAROUSEL_IMAGES.length);
-  }, []);
+    setActiveIndex((current) => (current - 1 + totalImages) % totalImages);
+  }, [totalImages]);
 
   // Auto-play logic
   useEffect(() => {
@@ -73,18 +57,20 @@ export default function HeroCarousel() {
   const pauseAutoPlay = () => setIsAutoPlay(false);
   const resumeAutoPlay = () => setIsAutoPlay(true);
 
-  // Helper to get visual position relative to active index (-1, 0, 1)
-  const getSlideStyles = (index: number) => {
-    const total = CAROUSEL_IMAGES.length;
-    // Calculate distance accounting for wrap-around
-    let offset = (index - activeIndex + total) % total;
-    if (offset > total / 2) offset -= total;
+  // Build a 3-element visible window: [prev, current, next]
+  // This keeps the same visual behavior as when there were only 3-4 images.
+  const prevIndex = (activeIndex - 1 + totalImages) % totalImages;
+  const nextIndex = (activeIndex + 1) % totalImages;
 
-    // We only really care about -1 (Left), 0 (Center), and 1 (Right)
-    const isCenter = offset === 0;
-    const isLeft = offset === -1 || offset === total - 1;
+  const visibleSlides = [
+    { image: HERO_CAROUSEL_IMAGES[prevIndex], position: "left" as const },
+    { image: HERO_CAROUSEL_IMAGES[activeIndex], position: "center" as const },
+    { image: HERO_CAROUSEL_IMAGES[nextIndex], position: "right" as const },
+  ];
 
-    if (isCenter) {
+  // Styles based on position in the 3-element window
+  const getSlideStyles = (position: "left" | "center" | "right") => {
+    if (position === "center") {
       return {
         zIndex: 20,
         opacity: 1,
@@ -94,7 +80,7 @@ export default function HeroCarousel() {
         filter: "blur(0px)",
         pointerEvents: "auto" as const,
       };
-    } else if (isLeft) {
+    } else if (position === "left") {
       return {
         zIndex: 10,
         opacity: 0.6,
@@ -109,7 +95,7 @@ export default function HeroCarousel() {
         pointerEvents: "none" as const,
       };
     } else {
-      // Right
+      // right
       return {
         zIndex: 10,
         opacity: 0.6,
@@ -170,9 +156,7 @@ export default function HeroCarousel() {
 
           {/* CTA Buttons */}
           <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
-            <CtaButton
-              className="h-12 md:h-14 px-6 md:px-8 text-sm md:text-base font-bold tracking-wide shadow-lg hover:shadow-xl transition-all"
-            />
+            <CtaButton className="h-12 md:h-14 px-6 md:px-8 text-sm md:text-base font-bold tracking-wide shadow-lg hover:shadow-xl transition-all" />
           </div>
         </div>
 
@@ -199,11 +183,11 @@ export default function HeroCarousel() {
             <RiArrowRightLine className="w-5 h-5 md:w-6 md:h-6" />
           </button>
 
-          {/* Images */}
+          {/* Images — only 3 visible at a time (prev, current, next) */}
           <div className="relative w-full max-w-lg h-[200px] sm:h-[300px] md:h-[360px] lg:h-[400px] flex items-center justify-center">
-            {CAROUSEL_IMAGES.map((image, index) => {
-              const style = getSlideStyles(index);
-              const isActive = index === activeIndex;
+            {visibleSlides.map(({ image, position }) => {
+              const style = getSlideStyles(position);
+              const isActive = position === "center";
 
               return (
                 <div
@@ -225,7 +209,7 @@ export default function HeroCarousel() {
                       fill
                       sizes="(max-width: 768px) 100vw, 534px"
                       className="object-cover"
-                      priority={index === 0}
+                      priority={isActive}
                     />
 
                     {/* Floating Label - Only on active */}

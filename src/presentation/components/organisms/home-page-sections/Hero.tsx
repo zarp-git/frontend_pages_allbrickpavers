@@ -10,6 +10,11 @@ import {
 import { cn } from "@/lib/utils";
 import { CyclingText } from "@/presentation/components/molecules/common/CyclingText";
 import { CtaButton } from "@/presentation/components/molecules/common/CtaButton";
+import {
+  POOL_DECK_IMAGES,
+  DRIVEWAY_IMAGES,
+  PATIO_IMAGES,
+} from "@/constants";
 
 const CITIES = [
   "WINTER HAVEN",
@@ -32,22 +37,20 @@ const SERVICES = [
 
 const SLIDES = [
   {
-    before: "/images/sections-images/pool-deck-before.jpeg",
-    after: "/images/sections-images/pool-deck-after.jpg",
+    before: POOL_DECK_IMAGES[1],
+    after: POOL_DECK_IMAGES[0],
     label: "Pool Deck",
     id: 1,
   },
   {
-    before: "/images/sections-images/cracked-pavers.jpg",
-    after: "/images/sections-images/driveway-pavers-1-after.webp",
+    before: DRIVEWAY_IMAGES[1],
+    after: DRIVEWAY_IMAGES[0],
     label: "Driveway Pavers",
     id: 2,
   },
   {
-    before:
-      "/images/sections-images/difference-section-driveway-paver-others.jpg",
-    after:
-      "/images/sections-images/difference-section-driveway-paver-ours.webp",
+    before: PATIO_IMAGES[15],
+    after: PATIO_IMAGES[14],
     label: "Patio Pavers",
     id: 3,
   },

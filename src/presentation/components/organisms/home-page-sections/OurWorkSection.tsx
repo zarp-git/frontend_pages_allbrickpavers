@@ -71,14 +71,15 @@ function PhotoMarquee({ photos }: { photos: typeof TEAM_PHOTOS }) {
         {duplicated.map((photo, idx) => (
           <div
             key={`${photo.src}-${idx}`}
-            className="relative w-48 h-36 sm:w-60 sm:h-44 md:w-72 md:h-48 rounded-xl overflow-hidden shrink-0 group"
+            className="relative h-36 sm:h-44 md:h-56 rounded-xl overflow-hidden shrink-0 group"
           >
             <Image
               src={photo.src}
               alt={photo.alt}
-              fill
+              width={400}
+              height={400}
               sizes="(max-width: 640px) 192px, (max-width: 768px) 240px, 288px"
-              className="object-cover transition-transform duration-500 group-hover:scale-110"
+              className="h-full w-auto object-contain transition-transform duration-500 group-hover:scale-110"
             />
             <div className="absolute inset-0 bg-linear-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           </div>

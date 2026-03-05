@@ -1,4 +1,10 @@
 import type { ServiceData, ServiceFeature } from "@/types/service.type";
+import {
+  PATIO_IMAGES,
+  DRIVEWAY_IMAGES,
+  POOL_DECK_IMAGES,
+  FIREPIT_IMAGES,
+} from "./service-images";
 
 // ---------------------------------------------------------------------------
 // Shared — reused across all services
@@ -30,7 +36,7 @@ export const SERVICE_FEATURES: ServiceFeature[] = [
 export const SERVICE_SIDEBAR_INFO = {
   title: "Who we are?",
   description:
-    "We are a family-owned business in Central Florida, committed to creating stunning, durable outdoor spaces. Our expertise lies in paver installation and repair, delivering quality craftsmanship that stands the test of time.",
+    "We are a locally established company in Central Florida, committed to creating stunning, durable outdoor spaces. Our expertise lies in paver installation and repair, delivering quality craftsmanship that stands the test of time.",
 } as const;
 
 // ---------------------------------------------------------------------------
@@ -43,7 +49,7 @@ export const SERVICES_DATA: ServiceData[] = [
     title: "Pavers Installation",
     breadcrumbLabel: "Pavers Installation",
     heroSubtitle: "Best Construction Services",
-    heroImage: "/images/sections-images/patio-pavers-2-after-1.webp",
+    heroImage: PATIO_IMAGES[0],
     content: {
       heading: "Transform Your Outdoor Space with Professional Paver Installation",
       paragraphs: [
@@ -53,12 +59,7 @@ export const SERVICES_DATA: ServiceData[] = [
         "Contact us today to start planning your perfect outdoor project!",
       ],
     },
-    galleryImages: [
-      "/images/sections-images/patio-pavers-1-after-1.webp",
-      "/images/sections-images/patio-pavers-1-after-2.webp",
-      "/images/sections-images/patio-pavers-1-after-3.webp",
-      "/images/sections-images/patio-pavers-1-after-4.webp",
-    ],
+    galleryImages: [PATIO_IMAGES[1], PATIO_IMAGES[2], PATIO_IMAGES[3], PATIO_IMAGES[4]],
     faqs: [
       {
         question: "How long does paver installation take?",
@@ -102,7 +103,7 @@ export const SERVICES_DATA: ServiceData[] = [
     title: "Pavers Repair",
     breadcrumbLabel: "Pavers Repair",
     heroSubtitle: "Best Construction Services",
-    heroImage: "/images/sections-images/cracked-pavers.jpg",
+    heroImage: PATIO_IMAGES[5],
     content: {
       heading: "Restore Your Pavers to Their Original Beauty",
       paragraphs: [
@@ -112,11 +113,7 @@ export const SERVICES_DATA: ServiceData[] = [
         "Don't let damaged pavers diminish your outdoor space. Contact us for a free assessment and get your pavers looking like new again!",
       ],
     },
-    galleryImages: [
-      "/images/sections-images/cracked-pavers.jpg",
-      "/images/sections-images/patio-pavers-2-after-1.webp",
-      "/images/sections-images/driveway-pavers-1-after.webp",
-    ],
+    galleryImages: [PATIO_IMAGES[6], PATIO_IMAGES[7], DRIVEWAY_IMAGES[0]],
     faqs: [
       {
         question: "Can individual pavers be replaced?",
@@ -160,7 +157,7 @@ export const SERVICES_DATA: ServiceData[] = [
     title: "Maintenance Plans",
     breadcrumbLabel: "Maintenance Plans",
     heroSubtitle: "Best Construction Services",
-    heroImage: "/images/sections-images/patio-pavers-5.webp",
+    heroImage: PATIO_IMAGES[8],
     content: {
       heading: "Protect Your Investment with Professional Paver Maintenance",
       paragraphs: [
@@ -170,11 +167,7 @@ export const SERVICES_DATA: ServiceData[] = [
         "Join our satisfied clients who enjoy worry-free, beautiful outdoor spaces. Contact us to learn about our flexible maintenance plan options!",
       ],
     },
-    galleryImages: [
-      "/images/sections-images/patio-pavers-5.webp",
-      "/images/sections-images/patio-pavers-4.webp",
-      "/images/sections-images/patio-pavers-7.webp",
-    ],
+    galleryImages: [PATIO_IMAGES[9], PATIO_IMAGES[10], PATIO_IMAGES[11]],
     faqs: [
       {
         question: "How often should pavers be sealed?",
@@ -218,7 +211,7 @@ export const SERVICES_DATA: ServiceData[] = [
     title: "Patio Pavers",
     breadcrumbLabel: "Patio Pavers",
     heroSubtitle: "Best Construction Services",
-    heroImage: "/images/sections-images/patio-pavers-1-after-1.webp",
+    heroImage: PATIO_IMAGES[12],
     content: {
       heading: "Transform Your Outdoor Space with Expert Patio Installation",
       paragraphs: [
@@ -229,12 +222,8 @@ export const SERVICES_DATA: ServiceData[] = [
       ],
     },
     galleryImages: [
-      "/images/sections-images/patio-pavers-1-after-1.webp",
-      "/images/sections-images/patio-pavers-1-after-2.webp",
-      "/images/sections-images/patio-pavers-1-after-3.webp",
-      "/images/sections-images/patio-pavers-1-after-4.webp",
-      "/images/sections-images/patio-pavers-2-after-1.webp",
-      "/images/sections-images/patio-pavers-2-after-2.webp",
+      PATIO_IMAGES[13], PATIO_IMAGES[14], PATIO_IMAGES[15],
+      PATIO_IMAGES[16], PATIO_IMAGES[17], PATIO_IMAGES[18],
     ],
     faqs: [
       {
@@ -279,7 +268,7 @@ export const SERVICES_DATA: ServiceData[] = [
     title: "Pool Deck Pavers",
     breadcrumbLabel: "Pool Deck Pavers",
     heroSubtitle: "Best Construction Services",
-    heroImage: "/images/sections-images/pool-deck-after.jpg",
+    heroImage: POOL_DECK_IMAGES[0],
     content: {
       heading: "Create a Safe and Stylish Pool Deck with Expert Installation",
       paragraphs: [
@@ -289,11 +278,7 @@ export const SERVICES_DATA: ServiceData[] = [
         "Ready to transform your pool area into a stunning outdoor retreat? Contact us today to start planning your custom pool deck!",
       ],
     },
-    galleryImages: [
-      "/images/sections-images/pool-deck-after.jpg",
-      "/images/sections-images/patio-pavers-3-after-1.webp",
-      "/images/sections-images/patio-pavers-7.webp",
-    ],
+    galleryImages: [POOL_DECK_IMAGES[1], POOL_DECK_IMAGES[2], POOL_DECK_IMAGES[3]],
     faqs: [
       {
         question: "Are pavers safe around pools?",
@@ -337,7 +322,7 @@ export const SERVICES_DATA: ServiceData[] = [
     title: "Driveway Pavers",
     breadcrumbLabel: "Driveway Pavers",
     heroSubtitle: "Best Construction Services",
-    heroImage: "/images/sections-images/driveway-pavers-2-after.webp",
+    heroImage: DRIVEWAY_IMAGES[0],
     content: {
       heading: "Elevate Your Curb Appeal with a Custom Driveway Installation",
       paragraphs: [
@@ -347,11 +332,7 @@ export const SERVICES_DATA: ServiceData[] = [
         "Ready to upgrade your home's entrance? Contact us for a free driveway consultation and estimate!",
       ],
     },
-    galleryImages: [
-      "/images/sections-images/driveway-pavers-2-after.webp",
-      "/images/sections-images/driveway-pavers-1-after.webp",
-      "/images/sections-images/patio-pavers-2.webp",
-    ],
+    galleryImages: [DRIVEWAY_IMAGES[1], DRIVEWAY_IMAGES[2], DRIVEWAY_IMAGES[3]],
     faqs: [
       {
         question: "Can pavers handle heavy vehicles?",
@@ -395,7 +376,7 @@ export const SERVICES_DATA: ServiceData[] = [
     title: "Firepit Pavers",
     breadcrumbLabel: "Firepit Pavers",
     heroSubtitle: "Best Construction Services",
-    heroImage: "/images/sections-images/firepit-pavers-1-after-1.webp",
+    heroImage: FIREPIT_IMAGES[0],
     content: {
       heading: "Create the Perfect Gathering Spot with a Custom Fire Pit",
       paragraphs: [
@@ -405,11 +386,7 @@ export const SERVICES_DATA: ServiceData[] = [
         "Imagine gathering around your own custom fire pit on a cool evening. Contact us today to make that vision a reality!",
       ],
     },
-    galleryImages: [
-      "/images/sections-images/firepit-pavers-1-after-1.webp",
-      "/images/sections-images/firepit-pavers-1-after-2.webp",
-      "/images/sections-images/patio-pavers-4.webp",
-    ],
+    galleryImages: [FIREPIT_IMAGES[1], FIREPIT_IMAGES[2], FIREPIT_IMAGES[3]],
     faqs: [
       {
         question: "What type of fire pit is best for Florida?",

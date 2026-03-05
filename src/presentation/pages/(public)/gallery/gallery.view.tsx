@@ -18,6 +18,7 @@ import { GALLERY_ITEMS, GALLERY_CATEGORIES } from "@/constants/gallery";
 import { FOOTER_COMPANY_INFO } from "@/constants/footer";
 import { useLeadModal } from "@/hooks/use-lead-modal";
 import type { GalleryCategory, GalleryItem } from "@/types/gallery.type";
+import { PATIO_IMAGES } from "@/constants";
 
 // ===========================================================================
 // Root view
@@ -76,7 +77,7 @@ function GalleryHero() {
     >
       {/* Background image */}
       <Image
-        src="/images/sections-images/patio-pavers-2-after-1.webp"
+        src={PATIO_IMAGES[25]}
         alt="AllBrick Pavers project gallery"
         fill
         sizes="100vw"

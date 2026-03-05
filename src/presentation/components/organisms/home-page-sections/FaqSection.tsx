@@ -62,9 +62,9 @@ export default function FaqSection() {
     <section id="faq" className="w-full bg-gray-50 py-10 sm:py-14 lg:py-20">
       <div className="section-container flex flex-col md:flex-row justify-between items-start gap-8 sm:gap-10 md:gap-12 lg:gap-16">
         {/* Left Column - Warranty Badge + CTA */}
-        <div className="w-full md:w-80 lg:w-138.5 flex flex-col items-center gap-6 sm:gap-8 md:shrink-0">
+        <div className="w-full md:w-80 lg:w-138.5 flex flex-col items-center md:items-start gap-6 sm:gap-8 md:shrink-0">
           {/* Warranty Badge */}
-          <div className="w-48 h-48 md:w-52 md:h-52 lg:w-64 lg:h-64 relative shrink-0 mx-auto">
+          <div className="w-48 h-48 md:w-52 md:h-52 lg:w-64 lg:h-64 relative shrink-0 mx-auto md:mx-0">
             <Image
               src="/images/3-years-warranty-badge.svg"
               alt="3 Years Workmanship Warranty Badge"
