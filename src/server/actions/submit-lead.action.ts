@@ -17,6 +17,7 @@ export interface SubmitLeadInput {
   phone?: string
   message?: string
   source?: string
+  data?: Record<string, unknown>
 }
 
 export async function submitLeadAction(
@@ -63,6 +64,7 @@ export async function submitLeadAction(
       phone: input.phone?.trim(),
       message: input.message?.trim(),
       source: input.source || "landing-page",
+      data: input.data,
       ipAddress,
       userAgent,
     }

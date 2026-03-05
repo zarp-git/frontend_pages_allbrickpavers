@@ -41,7 +41,7 @@ export class LeadApiService implements ILeadApiService {
   async submitLead(data: SubmitPublicLeadDTO): Promise<PublicLeadApiResponse> {
     try {
       const response = await this.client.post<{ leadId: number }>(
-        "/api/public/leads/submit",
+        "/api/leads/submit",
         data,
         {
           headers: {

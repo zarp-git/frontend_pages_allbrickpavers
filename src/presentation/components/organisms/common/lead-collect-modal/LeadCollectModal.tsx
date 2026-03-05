@@ -36,7 +36,9 @@ const leadFormSchema = z
     email: z.string().optional(),
     phone: z.string().optional(),
     preference: z.enum(["phone", "email"]),
-    budget: z.string().min(1, "Please select a budget range"),
+    projectTypes: z.array(z.string()).min(1, "Please select at least one project type"),
+    timelineStart: z.number().min(1, "Please select a timeline"),
+    timelineEnd: z.number().min(1, "Please select a timeline"),
     contactTime: z.string().min(1, "Please select a preferred contact time"),
   })
   .superRefine((data, ctx) => {
@@ -54,13 +56,36 @@ const leadFormSchema = z
         message: "Please enter a valid phone number",
       });
     }
+    if (data.timelineEnd < data.timelineStart) {
+      ctx.addIssue({
+        path: ["timelineEnd"],
+        code: z.ZodIssueCode.custom,
+        message: "End date must be after start date",
+      });
+    }
   });
 
-const budgetOptions = [
-  { value: "up-to-5k", label: "Up to $5,000" },
-  { value: "5k-10k", label: "$5,000 - $10,000" },
-  { value: "10k-20k", label: "$10,000 - $20,000" },
-  { value: "above-20k", label: "Above $20,000" },
+const projectTypeOptions = [
+  { 
+    value: "patio", 
+    label: "Patio Pavers",
+    description: "Transform your outdoor living space with beautiful, durable patio pavers perfect for entertaining and relaxation."
+  },
+  { 
+    value: "driveway", 
+    label: "Driveway Pavers",
+    description: "Enhance your home's curb appeal with premium driveway pavers that combine strength and aesthetic appeal."
+  },
+  { 
+    value: "pool-deck", 
+    label: "Pool Deck",
+    description: "Create a safe, slip-resistant pool deck area with pavers designed for wet environments and high traffic."
+  },
+  { 
+    value: "walkway", 
+    label: "Walkway",
+    description: "Design elegant pathways connecting different areas of your property with durable walkway pavers."
+  },
 ];
 
 const contactTimeOptions = [
@@ -97,12 +122,17 @@ export const LeadCollectModal = () => {
       email: "",
       phone: "",
       preference: "phone",
-      budget: "",
+      projectTypes: [],
+      timelineStart: 7,
+      timelineEnd: 30,
       contactTime: "",
     },
   });
 
   const preference = watch("preference");
+  const projectTypes = watch("projectTypes");
+  const timelineStart = watch("timelineStart");
+  const timelineEnd = watch("timelineEnd");
 
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const formatted = formatPhoneNumber(e.target.value);
@@ -138,32 +168,28 @@ export const LeadCollectModal = () => {
     setSubmitError(null);
 
     try {
-      // Format budget and contact time for message
-      const budgetLabels: Record<string, string> = {
-        "up-to-5k": "Up to $5,000",
-        "5k-10k": "$5,000 - $10,000",
-        "10k-20k": "$10,000 - $20,000",
-        "above-20k": "Above $20,000",
-      };
-
-      const contactTimeLabels: Record<string, string> = {
-        morning: "Morning (8am-12pm)",
-        afternoon: "Afternoon (12pm-6pm)",
-        evening: "Evening (6pm-9pm)",
-      };
-
-      const message = `Budget Range: ${budgetLabels[data.budget] || data.budget}\nPreferred Contact Time: ${contactTimeLabels[data.contactTime] || data.contactTime}`;
-
       // If preference is phone and no email, use a placeholder
       const emailToSend = data.email || (preference === "phone" ? "noemail@placeholder.com" : "");
+
+      // Prepare structured data object
+      const structuredData = {
+        projectTypes: data.projectTypes,
+        timeline: {
+          start: data.timelineStart,
+          end: data.timelineEnd,
+          label: `${data.timelineStart}-${data.timelineEnd} days`
+        },
+        contactTime: data.contactTime,
+      };
 
       // Submit to backend
       const result = await submitLeadAction({
         name: data.fullName,
         email: emailToSend,
         phone: data.phone || "",
-        message,
+        message: `Project Types: ${data.projectTypes.join(", ")}\nTimeline: ${data.timelineStart}-${data.timelineEnd} days\nPreferred Contact Time: ${data.contactTime}`,
         source: "free-consultation-modal",
+        data: structuredData,
       });
 
       if (result.success) {
@@ -419,32 +445,84 @@ export const LeadCollectModal = () => {
                     noValidate
                   >
                     <div className="w-full flex flex-col justify-start items-start gap-4">
-                      {/* Budget Selection */}
+                      {/* Project Type Selection */}
                       <div className="w-full flex flex-col gap-2">
                         <label className="text-gray-700 text-sm font-medium font-rubik leading-5">
-                          Budget Range
+                          Project Type
                         </label>
                         <div className="w-full flex flex-col gap-2">
-                          {budgetOptions.map((option) => (
-                            <label
-                              key={option.value}
-                              className="flex items-center gap-3 cursor-pointer group"
-                            >
-                              <input
-                                {...register("budget")}
-                                type="radio"
-                                value={option.value}
-                                className="w-4 h-4 text-red-800 border-gray-300 focus:ring-2 focus:ring-red-800 cursor-pointer"
-                              />
-                              <span className="text-sm font-rubik text-gray-700 group-hover:text-gray-900">
-                                {option.label}
-                              </span>
-                            </label>
-                          ))}
+                          {projectTypeOptions.map((option) => {
+                            const isSelected = projectTypes.includes(option.value);
+                            return (
+                              <div key={option.value} className="flex flex-col gap-1">
+                                <label className="flex items-start gap-3 cursor-pointer group">
+                                  <input
+                                    type="checkbox"
+                                    value={option.value}
+                                    checked={isSelected}
+                                    onChange={(e) => {
+                                      const newTypes = e.target.checked
+                                        ? [...projectTypes, option.value]
+                                        : projectTypes.filter(t => t !== option.value);
+                                      setValue("projectTypes", newTypes, { shouldValidate: true });
+                                    }}
+                                    className="w-4 h-4 mt-0.5 text-red-800 border-gray-300 rounded focus:ring-2 focus:ring-red-800 cursor-pointer"
+                                  />
+                                  <span className="text-sm font-rubik text-gray-700 group-hover:text-gray-900 flex-1">
+                                    {option.label}
+                                  </span>
+                                </label>
+                                {isSelected && (
+                                  <div className="ml-7 p-2 bg-blue-50 border border-blue-200 rounded-md">
+                                    <p className="text-xs font-rubik text-blue-800">
+                                      {option.description}
+                                    </p>
+                                  </div>
+                                )}
+                              </div>
+                            );
+                          })}
                         </div>
-                        {errors.budget && (
+                        {errors.projectTypes && (
                           <span className="text-red-500 text-xs font-rubik mt-1">
-                            {errors.budget.message}
+                            {errors.projectTypes.message}
+                          </span>
+                        )}
+                      </div>
+
+                      {/* Timeline Selection */}
+                      <div className="w-full flex flex-col gap-2">
+                        <label className="text-gray-700 text-sm font-medium font-rubik leading-5">
+                          Project Timeline (days)
+                        </label>
+                        <div className="flex items-center gap-3">
+                          <div className="flex-1">
+                            <input
+                              type="number"
+                              min="1"
+                              max="365"
+                              value={timelineStart}
+                              onChange={(e) => setValue("timelineStart", parseInt(e.target.value) || 1, { shouldValidate: true })}
+                              className="w-full h-10 px-3 py-2 bg-white rounded-md border border-gray-200 text-sm font-medium font-rubik focus:outline-none focus:ring-2 focus:ring-zinc-800"
+                            />
+                            <span className="text-xs text-gray-500 font-rubik mt-1 block">Start (days)</span>
+                          </div>
+                          <span className="text-gray-400">-</span>
+                          <div className="flex-1">
+                            <input
+                              type="number"
+                              min="1"
+                              max="365"
+                              value={timelineEnd}
+                              onChange={(e) => setValue("timelineEnd", parseInt(e.target.value) || 1, { shouldValidate: true })}
+                              className="w-full h-10 px-3 py-2 bg-white rounded-md border border-gray-200 text-sm font-medium font-rubik focus:outline-none focus:ring-2 focus:ring-zinc-800"
+                            />
+                            <span className="text-xs text-gray-500 font-rubik mt-1 block">End (days)</span>
+                          </div>
+                        </div>
+                        {errors.timelineEnd && (
+                          <span className="text-red-500 text-xs font-rubik mt-1">
+                            {errors.timelineEnd.message}
                           </span>
                         )}
                       </div>

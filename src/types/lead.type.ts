@@ -91,6 +91,7 @@ export interface SubmitPublicLeadDTO {
   source?: string
   ipAddress?: string
   userAgent?: string
+  data?: JsonValue // Additional structured data (project types, timeline, etc.)
 }
 
 /**
