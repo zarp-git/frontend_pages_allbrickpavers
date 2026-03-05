@@ -130,15 +130,23 @@ export default function FeedbackSection() {
 // ---------------------------------------------------------------------------
 // ReviewCard sub-component
 // ---------------------------------------------------------------------------
+const WORD_LIMIT = 40;
+
 function ReviewCard({ review }: { review: Review }) {
   const hasImages = review.images.length > 0;
   const hasMultipleImages = review.images.length > 1;
 
+  const words = review.text.split(/\s+/);
+  const isLong = words.length > WORD_LIMIT;
+  const truncated = words.slice(0, WORD_LIMIT).join(" ");
+
+  const [expanded, setExpanded] = useState(false);
+
   return (
-    <article className="w-full p-4 sm:p-5 bg-gray-50 rounded-2xl border border-gray-200 flex flex-col justify-start items-start gap-3 sm:gap-4 h-full">
+    <article className="w-full h-[480px] p-3 sm:p-4 bg-gray-50 rounded-2xl border border-gray-200 flex flex-col justify-start items-start gap-2.5 sm:gap-3">
       {/* ── Project Image(s) with Service Chip ── */}
       {hasImages && (
-        <div className="relative self-stretch h-32 sm:h-40 rounded-md border border-gray-200 overflow-hidden">
+        <div className="relative self-stretch shrink-0 h-32 sm:h-40 lg:h-48 rounded-md border border-gray-200 overflow-hidden">
           {hasMultipleImages ? (
             <ImageCarousel images={review.images} serviceTag={review.serviceTag} />
           ) : (
@@ -160,13 +168,13 @@ function ReviewCard({ review }: { review: Review }) {
 
       {/* ── Service tag (shown inline when no images) ── */}
       {!hasImages && (
-        <span className="px-3 py-1.5 bg-stone-50 rounded-full border border-gray-200 text-gray-700 text-xs font-medium font-rubik">
+        <span className="shrink-0 px-3 py-1.5 bg-stone-50 rounded-full border border-gray-200 text-gray-700 text-xs font-medium font-rubik">
           {review.serviceTag}
         </span>
       )}
 
       {/* ── Reviewer Info ── */}
-      <div className="self-stretch flex flex-col gap-3.5">
+      <div className="self-stretch shrink-0 flex flex-col gap-3.5">
         <div className="self-stretch relative flex items-center gap-4">
           {/* Avatar with Google badge */}
           <div className="relative shrink-0">
@@ -204,9 +212,24 @@ function ReviewCard({ review }: { review: Review }) {
       </div>
 
       {/* ── Review Text ── */}
-      <p className="self-stretch text-neutral-600 text-base font-normal font-rubik leading-6">
-        {review.text}
-      </p>
+      <div className="self-stretch flex-1 min-h-0 overflow-y-auto">
+        <p className="text-neutral-600 text-base font-normal font-rubik leading-6">
+          {isLong && !expanded ? (
+            <>
+              {truncated}...{" "}
+              <button
+                type="button"
+                onClick={() => setExpanded(true)}
+                className="text-primary font-medium hover:underline"
+              >
+                read more
+              </button>
+            </>
+          ) : (
+            review.text
+          )}
+        </p>
+      </div>
     </article>
   );
 }
@@ -230,14 +253,17 @@ function ImageCarousel({
   return (
     <>
       <Swiper
-        modules={[Pagination]}
-        pagination={{
-          clickable: true,
-          el: null, // we render custom bullets below
+        modules={[Autoplay]}
+        nested
+        autoplay={{
+          delay: 2000,
+          disableOnInteraction: false,
+          pauseOnMouseEnter: true,
         }}
         spaceBetween={0}
         slidesPerView={1}
         loop
+        speed={500}
         onSlideChange={handleSlideChange}
         className="h-full w-full"
       >

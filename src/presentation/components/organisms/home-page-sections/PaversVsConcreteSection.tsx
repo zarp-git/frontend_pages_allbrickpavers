@@ -7,7 +7,7 @@ import { CtaButton } from "@/presentation/components/molecules/common/CtaButton"
 
 export const PaversVsConcreteSection = () => {
   return (
-    <section id="pavers-vs-concrete" className="py-10 sm:py-14 md:py-20 bg-white">
+    <section id="pavers-vs-concrete" className="py-10 sm:py-14 md:py-20 bg-white overflow-hidden">
       <div className="section-container flex flex-col items-center gap-8 sm:gap-10 md:gap-12">
         <h2 className="text-foreground text-2xl sm:text-3xl font-black font-hanken uppercase leading-tight tracking-wide text-center">
           PAVERS VS CONCRETE
