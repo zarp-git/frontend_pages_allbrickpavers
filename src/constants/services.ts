@@ -59,7 +59,11 @@ export const SERVICES_DATA: ServiceData[] = [
         "Contact us today to start planning your perfect outdoor project!",
       ],
     },
-    galleryImages: [PATIO_IMAGES[1], PATIO_IMAGES[2], PATIO_IMAGES[3], PATIO_IMAGES[4]],
+    galleryImages: [
+      ...PATIO_IMAGES.slice(1, 5),
+      ...DRIVEWAY_IMAGES.slice(0, 3),
+      ...POOL_DECK_IMAGES.slice(0, 3),
+    ],
     faqs: [
       {
         question: "How long does paver installation take?",
@@ -113,7 +117,10 @@ export const SERVICES_DATA: ServiceData[] = [
         "Don't let damaged pavers diminish your outdoor space. Contact us for a free assessment and get your pavers looking like new again!",
       ],
     },
-    galleryImages: [PATIO_IMAGES[6], PATIO_IMAGES[7], DRIVEWAY_IMAGES[0]],
+    galleryImages: [
+      ...PATIO_IMAGES.slice(6, 9),
+      ...DRIVEWAY_IMAGES.slice(0, 3),
+    ],
     faqs: [
       {
         question: "Can individual pavers be replaced?",
@@ -167,7 +174,10 @@ export const SERVICES_DATA: ServiceData[] = [
         "Join our satisfied clients who enjoy worry-free, beautiful outdoor spaces. Contact us to learn about our flexible maintenance plan options!",
       ],
     },
-    galleryImages: [PATIO_IMAGES[9], PATIO_IMAGES[10], PATIO_IMAGES[11]],
+    galleryImages: [
+      ...PATIO_IMAGES.slice(9, 12),
+      ...POOL_DECK_IMAGES.slice(3, 6),
+    ],
     faqs: [
       {
         question: "How often should pavers be sealed?",
@@ -211,7 +221,7 @@ export const SERVICES_DATA: ServiceData[] = [
     title: "Patio Pavers",
     breadcrumbLabel: "Patio Pavers",
     heroSubtitle: "Best Construction Services",
-    heroImage: PATIO_IMAGES[12],
+    heroImage: PATIO_IMAGES[0],
     content: {
       heading: "Transform Your Outdoor Space with Expert Patio Installation",
       paragraphs: [
@@ -221,10 +231,7 @@ export const SERVICES_DATA: ServiceData[] = [
         "Contact us today to start planning your perfect patio!",
       ],
     },
-    galleryImages: [
-      PATIO_IMAGES[13], PATIO_IMAGES[14], PATIO_IMAGES[15],
-      PATIO_IMAGES[16], PATIO_IMAGES[17], PATIO_IMAGES[18],
-    ],
+    galleryImages: [...PATIO_IMAGES.slice(1)],
     faqs: [
       {
         question: "What patio shapes and sizes can you create?",
@@ -278,7 +285,7 @@ export const SERVICES_DATA: ServiceData[] = [
         "Ready to transform your pool area into a stunning outdoor retreat? Contact us today to start planning your custom pool deck!",
       ],
     },
-    galleryImages: [POOL_DECK_IMAGES[1], POOL_DECK_IMAGES[2], POOL_DECK_IMAGES[3]],
+    galleryImages: [...POOL_DECK_IMAGES.slice(1)],
     faqs: [
       {
         question: "Are pavers safe around pools?",
@@ -332,7 +339,7 @@ export const SERVICES_DATA: ServiceData[] = [
         "Ready to upgrade your home's entrance? Contact us for a free driveway consultation and estimate!",
       ],
     },
-    galleryImages: [DRIVEWAY_IMAGES[1], DRIVEWAY_IMAGES[2], DRIVEWAY_IMAGES[3]],
+    galleryImages: [...DRIVEWAY_IMAGES.slice(1)],
     faqs: [
       {
         question: "Can pavers handle heavy vehicles?",
@@ -386,7 +393,7 @@ export const SERVICES_DATA: ServiceData[] = [
         "Imagine gathering around your own custom fire pit on a cool evening. Contact us today to make that vision a reality!",
       ],
     },
-    galleryImages: [FIREPIT_IMAGES[1], FIREPIT_IMAGES[2], FIREPIT_IMAGES[3]],
+    galleryImages: [...FIREPIT_IMAGES.slice(1)],
     faqs: [
       {
         question: "What type of fire pit is best for Florida?",

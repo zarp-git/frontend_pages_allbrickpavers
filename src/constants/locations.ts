@@ -10,12 +10,19 @@ import {
 // Shared — reused across all locations
 // ---------------------------------------------------------------------------
 
-const SHARED_SERVICE_BLOCKS: LocationServiceBlock[] = [
+/** Block templates — image offset is applied per-location for variety. */
+const SERVICE_BLOCK_TEMPLATES: {
+  heading: string;
+  description: string;
+  images: readonly string[];
+  ctaLabel: string;
+  ctaHref: string;
+}[] = [
   {
     heading: "Outdoor Living",
     description:
       "Outdoor living projects give homeowners a clearer, more usable backyard layout that supports how they relax, gather, and spend time outside. With planning that accounts for Central Florida's heat, rain, and daily use, your space stays organized and comfortable. Whether the focus is a patio, pool deck, walkway, or a combination of features, outdoor living improvements help your yard perform well and feel ready for everyday use.",
-    image: PATIO_IMAGES[0],
+    images: PATIO_IMAGES,
     ctaLabel: "Explore Services",
     ctaHref: "/services/pavers-installation",
   },
@@ -23,7 +30,7 @@ const SHARED_SERVICE_BLOCKS: LocationServiceBlock[] = [
     heading: "Patio Spaces Planned for How You Live",
     description:
       "A patio gives you a defined place to relax, dine, or spend time outside without dealing with uneven surfaces or worn materials. With proper grading and a layout built for daily use, your patio becomes a steady part of your outdoor routine. Homeowners often choose a patio to improve comfort, support gatherings, and make their backyard easier to enjoy year-round.",
-    image: PATIO_IMAGES[1],
+    images: PATIO_IMAGES,
     ctaLabel: "Explore Services",
     ctaHref: "/services/patio-pavers",
   },
@@ -31,7 +38,7 @@ const SHARED_SERVICE_BLOCKS: LocationServiceBlock[] = [
     heading: "Paver Driveways That Improve Your Home's Arrival",
     description:
       "A paver driveway provides a clean, dependable entrance that handles heat, rain, and frequent use. With the right base preparation and layout, your driveway stays level and consistent, giving your home a neater, more organized arrival point. Many homeowners choose a paver driveway when they want a surface that performs well and complements the overall look of their property.",
-    image: DRIVEWAY_IMAGES[0],
+    images: DRIVEWAY_IMAGES,
     ctaLabel: "Explore Services",
     ctaHref: "/services/driveway-pavers",
   },
@@ -39,7 +46,7 @@ const SHARED_SERVICE_BLOCKS: LocationServiceBlock[] = [
     heading: "Pool Deck Upgrades Built for Daily Comfort",
     description:
       "A pool deck should feel comfortable underfoot and ready for daily use. When the surface is worn or uneven, it takes away from the experience. With materials chosen for the climate and installation steps suited for heat and moisture, your pool deck stays cleaner, more consistent, and easier to enjoy. Many homeowners upgrade their pool deck to improve comfort, organization, and safety around the water.",
-    image: POOL_DECK_IMAGES[0],
+    images: POOL_DECK_IMAGES,
     ctaLabel: "Explore Services",
     ctaHref: "/services/pool-deck-pavers",
   },
@@ -47,20 +54,27 @@ const SHARED_SERVICE_BLOCKS: LocationServiceBlock[] = [
     heading: "Firepit Areas Designed for Gathering",
     description:
       "A fire pit area creates the perfect gathering spot for family and friends. Using heat-rated materials that withstand high temperatures while maintaining beauty and structural integrity, we design fire pit installations that become the centerpiece of your outdoor living space, perfect for cool Florida evenings and year-round entertaining.",
-    image: FIREPIT_IMAGES[0],
+    images: FIREPIT_IMAGES,
     ctaLabel: "Explore Services",
     ctaHref: "/services/firepit-pavers",
   },
 ];
 
-/** Helper to personalize shared blocks with the city name. */
+/**
+ * Build personalized service blocks for a location.
+ * `locationIndex` offsets which image from each category is picked,
+ * so every city page looks visually different.
+ */
 function personalizeBlocks(
   cityName: string,
-  blocks: LocationServiceBlock[] = SHARED_SERVICE_BLOCKS
+  locationIndex: number,
 ): LocationServiceBlock[] {
-  return blocks.map((block) => ({
-    ...block,
-    heading: `${block.heading} in ${cityName}`,
+  return SERVICE_BLOCK_TEMPLATES.map((tpl) => ({
+    heading: `${tpl.heading} in ${cityName}`,
+    description: tpl.description,
+    image: tpl.images[locationIndex % tpl.images.length],
+    ctaLabel: tpl.ctaLabel,
+    ctaHref: tpl.ctaHref,
   }));
 }
 
@@ -77,7 +91,7 @@ export const LOCATIONS_DATA: LocationData[] = [
       "Paver Installation and Outdoor Living Services in Winter Haven, FL",
     heroSubtitle: "Central Florida's Trusted Paver Experts",
     heroImage: PATIO_IMAGES[2],
-    serviceBlocks: personalizeBlocks("Winter Haven"),
+    serviceBlocks: personalizeBlocks("Winter Haven", 0),
     about: {
       heading: "About Winter Haven, FL",
       description:
@@ -146,13 +160,13 @@ export const LOCATIONS_DATA: LocationData[] = [
     heroHeading:
       "Paver Installation and Outdoor Living Services in Lakeland, FL",
     heroSubtitle: "Central Florida's Trusted Paver Experts",
-    heroImage: PATIO_IMAGES[4],
-    serviceBlocks: personalizeBlocks("Lakeland"),
+    heroImage: DRIVEWAY_IMAGES[1],
+    serviceBlocks: personalizeBlocks("Lakeland", 1),
     about: {
       heading: "About Lakeland, FL",
       description:
         "Lakeland, FL sits between Tampa and Orlando, offering a blend of urban amenities and small-town charm. Known for its beautiful lakes, historic downtown, and vibrant arts scene, Lakeland homeowners take pride in their outdoor spaces. The warm climate makes it ideal for year-round outdoor living, and expertly installed pavers help create patios, driveways, and pool decks that enhance both comfort and property value.",
-      image: PATIO_IMAGES[5],
+      image: DRIVEWAY_IMAGES[2],
     },
     faqs: [
       {
@@ -214,13 +228,13 @@ export const LOCATIONS_DATA: LocationData[] = [
     heroHeading:
       "Paver Installation and Outdoor Living Services in Haines City, FL",
     heroSubtitle: "Central Florida's Trusted Paver Experts",
-    heroImage: PATIO_IMAGES[6],
-    serviceBlocks: personalizeBlocks("Haines City"),
+    heroImage: POOL_DECK_IMAGES[1],
+    serviceBlocks: personalizeBlocks("Haines City", 2),
     about: {
       heading: "About Haines City, FL",
       description:
         "Haines City, FL is a growing community in Polk County known for its proximity to top Florida attractions and its welcoming neighborhoods. With sunny weather year-round and expanding residential areas, homeowners in Haines City are investing in outdoor improvements that increase comfort and property value. Professional paver installation transforms backyards, driveways, and pool areas into functional, stylish outdoor spaces.",
-      image: PATIO_IMAGES[7],
+      image: POOL_DECK_IMAGES[2],
     },
     faqs: [
       {
@@ -281,7 +295,7 @@ export const LOCATIONS_DATA: LocationData[] = [
       "Paver Installation and Outdoor Living Services in Davenport, FL",
     heroSubtitle: "Central Florida's Trusted Paver Experts",
     heroImage: PATIO_IMAGES[8],
-    serviceBlocks: personalizeBlocks("Davenport"),
+    serviceBlocks: personalizeBlocks("Davenport", 3),
     about: {
       heading: "About Davenport, FL",
       description:
@@ -345,13 +359,13 @@ export const LOCATIONS_DATA: LocationData[] = [
     heroHeading:
       "Paver Installation and Outdoor Living Services in Auburndale, FL",
     heroSubtitle: "Central Florida's Trusted Paver Experts",
-    heroImage: PATIO_IMAGES[10],
-    serviceBlocks: personalizeBlocks("Auburndale"),
+    heroImage: FIREPIT_IMAGES[1],
+    serviceBlocks: personalizeBlocks("Auburndale", 4),
     about: {
       heading: "About Auburndale, FL",
       description:
         "Auburndale, FL is a charming lakeside community nestled between Lakeland and Winter Haven. Known for its beautiful lakes, parks, and friendly neighborhoods, Auburndale offers a relaxed lifestyle with easy access to Central Florida's amenities. Homeowners here appreciate quality outdoor spaces that complement the natural surroundings, from lakefront patios to elegant driveways and cozy fire pit areas.",
-      image: PATIO_IMAGES[11],
+      image: FIREPIT_IMAGES[2],
     },
     faqs: [
       {
@@ -410,13 +424,13 @@ export const LOCATIONS_DATA: LocationData[] = [
     heroHeading:
       "Paver Installation and Outdoor Living Services in Horizon West, FL",
     heroSubtitle: "Central Florida's Trusted Paver Experts",
-    heroImage: PATIO_IMAGES[12],
-    serviceBlocks: personalizeBlocks("Horizon West"),
+    heroImage: DRIVEWAY_IMAGES[5],
+    serviceBlocks: personalizeBlocks("Horizon West", 5),
     about: {
       heading: "About Horizon West, FL",
       description:
         "Horizon West, FL is one of the most sought-after master-planned communities in the greater Orlando area. With modern homes, top-rated schools, and a focus on community living, Horizon West attracts families who value quality and design in every aspect of their home. Professional paver installation helps homeowners create outdoor spaces that match the high standards of their community — from elegant driveways to resort-style pool decks.",
-      image: PATIO_IMAGES[13],
+      image: POOL_DECK_IMAGES[5],
     },
     faqs: [
       {
