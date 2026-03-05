@@ -120,7 +120,7 @@ export function OurWorkSection() {
           <div className="w-full max-w-sm mx-auto lg:mx-0 lg:w-[320px] xl:w-[360px] shrink-0">
             <VideoPlayer
               src="/videos/allbrickpavers_about_us.mp4"
-              autoPlay={false}
+              autoPlay
               loop
               muted
               controls
