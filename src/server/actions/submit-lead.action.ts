@@ -11,13 +11,15 @@ import { headers } from "next/headers"
 import { leadApiService } from "@/server/services/lead/lead-api.service"
 import type { SubmitPublicLeadDTO, PublicLeadApiResponse } from "@/types/lead.type"
 
+import type { JsonValue } from "@/types/lead.type"
+
 export interface SubmitLeadInput {
   name: string
   email: string
   phone?: string
   message?: string
   source?: string
-  data?: Record<string, unknown>
+  data?: JsonValue
 }
 
 export async function submitLeadAction(
