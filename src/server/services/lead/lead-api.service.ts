@@ -42,7 +42,7 @@ export class LeadApiService implements ILeadApiService {
     try {
       const url = "/api/leads/submit"
       console.log("[LEAD_API_SERVICE] Submitting lead to:", this.client.defaults.baseURL + url)
-      console.log("[LEAD_API_SERVICE] Tenant Key:", this.tenantKey ? "Present" : "Missing")
+      console.log("[LEAD_API_SERVICE] Tenant Key:", this.tenantKey)
       
       const response = await this.client.post<{ leadId: number }>(
         url,

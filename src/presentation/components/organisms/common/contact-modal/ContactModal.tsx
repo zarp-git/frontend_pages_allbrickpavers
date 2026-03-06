@@ -143,7 +143,7 @@ export const ContactModal = () => {
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
       <DialogContent
-        className="w-full h-full md:h-auto max-w-full md:max-w-3xl p-5 pb-6 md:rounded-3xl rounded-none outline outline-1 outline-offset-[-1px] outline-gray-200 border-none bg-white gap-0 overflow-y-auto md:overflow-hidden shadow-2xl fixed inset-0 md:inset-auto md:left-[50%] md:top-[50%] md:translate-x-[-50%] md:translate-y-[-50%]"
+        className="w-[calc(100%-2rem)] max-w-3xl p-5 pb-6 rounded-3xl outline outline-1 outline-offset-[-1px] outline-gray-200 border-none bg-white gap-0 shadow-2xl max-h-[90dvh] overflow-y-auto"
         aria-describedby={undefined}
       >
         <DialogTitle className="sr-only">
