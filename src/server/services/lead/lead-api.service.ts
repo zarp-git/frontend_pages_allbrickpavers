@@ -21,16 +21,16 @@ export class LeadApiService implements ILeadApiService {
     const tenantKey = process.env.NEXT_PUBLIC_TENANT_KEY
 
     if (!apiUrl) {
-      throw new Error("ZARP_API_ENDPOINT_URL is not configured")
+      console.warn("ZARP_API_ENDPOINT_URL is not configured, using fallback")
     }
 
     if (!tenantKey) {
-      throw new Error("NEXT_PUBLIC_TENANT_KEY is not configured")
+      console.warn("NEXT_PUBLIC_TENANT_KEY is not configured, using fallback")
     }
 
-    this.tenantKey = tenantKey
+    this.tenantKey = tenantKey || ""
     this.client = axios.create({
-      baseURL: apiUrl,
+      baseURL: apiUrl || "https://api.zarpstudio.com",
       timeout: 10000,
       headers: {
         "Content-Type": "application/json",
@@ -40,8 +40,12 @@ export class LeadApiService implements ILeadApiService {
 
   async submitLead(data: SubmitPublicLeadDTO): Promise<PublicLeadApiResponse> {
     try {
+      const url = "/api/leads/submit"
+      console.log("[LEAD_API_SERVICE] Submitting lead to:", this.client.defaults.baseURL + url)
+      console.log("[LEAD_API_SERVICE] Tenant Key:", this.tenantKey ? "Present" : "Missing")
+      
       const response = await this.client.post<{ leadId: number }>(
-        "/api/leads/submit",
+        url,
         data,
         {
           headers: {
@@ -49,6 +53,8 @@ export class LeadApiService implements ILeadApiService {
           },
         }
       )
+
+      console.log("[LEAD_API_SERVICE] Success:", response.status)
 
       return {
         success: true,
@@ -64,6 +70,8 @@ export class LeadApiService implements ILeadApiService {
           status,
           message,
           data: error.response?.data,
+          url: error.config?.url,
+          baseURL: error.config?.baseURL,
         })
 
         return {

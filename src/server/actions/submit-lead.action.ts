@@ -9,9 +9,7 @@
 
 import { headers } from "next/headers"
 import { leadApiService } from "@/server/services/lead/lead-api.service"
-import type { SubmitPublicLeadDTO, PublicLeadApiResponse } from "@/types/lead.type"
-
-import type { JsonValue } from "@/types/lead.type"
+import type { SubmitPublicLeadDTO, PublicLeadApiResponse, JsonValue } from "@/types/lead.type"
 
 export interface SubmitLeadInput {
   name: string
