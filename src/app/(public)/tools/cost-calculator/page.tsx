@@ -26,7 +26,7 @@ const TAX_RATE = 0.30;
 
 const LABOR_CONFIG = {
   patio: { minimums: { 300: 570, 500: 770 }, perSf: 1.80, perSfThreshold: 600 },
-  driveway: { minimums: { 500: 770 }, perSf: 1.40, perSfThreshold: 600 },
+  driveway: { minimums: { 400: 770 }, perSf: 1.40, perSfThreshold: 600 },
 };
 
 const DRIVER_RATE = { patio: 220, driveway: 270 };
@@ -100,16 +100,14 @@ function getTierPricePerSf(sqft: number, type: ProjectType): number | null {
     if (sqft < 1600) return 9.0;
     return 8.75;
   }
-  // Driveway — no tier pricing below 800 sqft, uses minimum only
-  if (sqft < 800) return null;
-  if (sqft < 900) return 10.0;
-  if (sqft < 1000) return 9.5;
-  if (sqft < 1100) return 9.0;
-  return 8.75;
+  // Driveway — no tier pricing below 400 sqft, uses minimum only
+  if (sqft < 400) return null;
+  if (sqft <= 850) return 10.0;
+  return 9.5;
 }
 
 function calculate(sqft: number, type: ProjectType): CalcResults {
-  const clampedSqft = Math.max(sqft, type === "driveway" ? 500 : 400);
+  const clampedSqft = Math.max(sqft, 400);
 
   const materials = Math.round(clampedSqft * MATERIAL_COST_PER_SF);
   const labor = getLabor(clampedSqft, type);
@@ -131,10 +129,12 @@ function calculate(sqft: number, type: ProjectType): CalcResults {
     minPrice = clampedSqft * minPerSf;
   }
 
-  // Quote = max of tier and minimum
+  // Quote = tier price for driveway (when defined), or max of tier and minimum for patio
   let quote: number;
   if (tierPerSf === null) {
     quote = minPrice;
+  } else if (type === "driveway") {
+    quote = tierPrice;
   } else {
     quote = Math.max(tierPrice, minPrice);
   }
@@ -167,7 +167,7 @@ export default function CostCalculatorPage() {
 
   const results = useMemo(() => calculate(sqft, type), [sqft, type]);
 
-  const minSqft = type === "driveway" ? 500 : 400;
+  const minSqft = 400;
   const maxSqft = 2000;
   const displaySqft = Math.max(sqft, minSqft);
 
@@ -224,9 +224,9 @@ export default function CostCalculatorPage() {
                     key={t}
                     onClick={() => {
                       setType(t);
-                      if (t === "driveway" && sqft < 500) {
-                        setSqft(500);
-                        setInputValue("500");
+                      if (sqft < 400) {
+                        setSqft(400);
+                        setInputValue("400");
                       }
                     }}
                     className={`flex-1 flex flex-col items-center gap-2 py-4 rounded-xl font-rubik font-semibold capitalize transition-all cursor-pointer ${
