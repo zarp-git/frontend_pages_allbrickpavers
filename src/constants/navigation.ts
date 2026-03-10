@@ -36,7 +36,7 @@ export const NAV_ITEMS: INavItem[] = [
     ],
   },
   { title: "Gallery", href: "/gallery" },
-  { title: "Learning Center", href: "/learning-center" },
+  { title: "Blog", href: "/blog" },
   {
     title: "Tools",
     href: "/tools",

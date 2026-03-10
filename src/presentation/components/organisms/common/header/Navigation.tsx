@@ -92,7 +92,7 @@ export default function Navigation({ className, navItems }: NavigationProps) {
   };
 
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    if (href === "/learning-center" || href === "/tools/design-visualizer") {
+    if (href === "/tools/design-visualizer") {
       e.preventDefault();
       openModal();
     }

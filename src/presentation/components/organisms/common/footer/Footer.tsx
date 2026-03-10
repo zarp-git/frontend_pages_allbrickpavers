@@ -363,9 +363,7 @@ function FooterLinkColumn({
     href: string,
   ) => {
     if (
-      href === "/learning-center" ||
-      href === "/tools/design-visualizer" ||
-      href === "/tools/cost-calculator"
+      href === "/tools/design-visualizer"
     ) {
       e.preventDefault();
       onLinkClick();

@@ -25,7 +25,7 @@ export const FOOTER_LOCATIONS = [
 export const FOOTER_COMPANY_LINKS = [
   { label: "About us", href: "/about" },
   { label: "Gallery", href: "/gallery" },
-  { label: "Learning Center", href: "/learning-center" },
+  { label: "Blog", href: "/blog" },
   { label: "Tools", href: "/tools" },
   { label: "Faq", href: "/faq" },
 ] as const;
