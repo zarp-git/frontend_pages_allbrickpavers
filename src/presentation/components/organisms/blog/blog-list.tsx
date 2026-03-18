@@ -17,6 +17,15 @@ interface BlogListProps {
 }
 
 export function BlogList({ articles, currentPage, totalPages }: BlogListProps) {
+  console.log("[BlogList] Total articles:", articles.length);
+  articles.forEach((article) => {
+    console.log(`[BlogList] Article "${article.title}":`, {
+      images_raw: article.images,
+      images_count: article.images?.length ?? 0,
+      primary_image: getPrimaryBlogImage(article.images),
+    });
+  });
+
   return (
     <div className="space-y-10">
       {/* Articles Grid */}

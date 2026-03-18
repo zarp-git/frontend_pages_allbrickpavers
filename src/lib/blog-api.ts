@@ -36,7 +36,9 @@ function normalizeBlogArticle(
     content: article.content || "",
     published_at: article.published_at || new Date().toISOString(),
     display_order: article.display_order || 0,
-    images: Array.isArray(article.images)
+    images: article.cover_image
+      ? [normalizeBlogImage(article.cover_image)]
+      : Array.isArray(article.images)
       ? article.images.map(normalizeBlogImage).filter(Boolean)
       : [],
     author: article.author
@@ -82,6 +84,8 @@ export async function getArticles(
     }
 
     const data = await response.json();
+
+    console.log("[Blog API] Raw response sample:", JSON.stringify(data.data?.[0], null, 2));
 
     console.log("[Blog API] Articles fetched successfully:", {
       totalArticles: data.data?.length || 0,
