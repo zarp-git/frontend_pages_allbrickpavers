@@ -34,6 +34,7 @@ function normalizeBlogArticle(
     language: article.language || "en_us",
     slug: article.slug || "",
     content: article.content || "",
+    meta_description: article.meta_description || null,
     published_at: article.published_at || new Date().toISOString(),
     display_order: article.display_order || 0,
     images: article.cover_image

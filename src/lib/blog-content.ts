@@ -15,6 +15,15 @@ export function stripMarkdown(markdown: string): string {
     .trim();
 }
 
+export function cleanMarkdownContent(content: string): string {
+  return content
+    // Remove zero-width spaces and other invisible unicode chars
+    .replace(/[\u200B\u200C\u200D\uFEFF]/g, "")
+    // Collapse 3+ consecutive blank lines into max 2
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+}
+
 export function getBlogExcerpt(content: string, maxLength: number = 160): string {
   const plainText = stripMarkdown(content);
   if (plainText.length <= maxLength) return plainText;

@@ -4,7 +4,7 @@ import Image from "next/image";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import type { BlogArticleSummary } from "@/types/blog.type";
-import { getBlogReadingTime, getPrimaryBlogImage } from "@/lib/blog-content";
+import { getBlogReadingTime, getPrimaryBlogImage, cleanMarkdownContent } from "@/lib/blog-content";
 import { formatBlogDate } from "@/lib/blog-date";
 
 interface ArticleDetailProps {
@@ -18,9 +18,15 @@ export function ArticleDetail({ article }: ArticleDetailProps) {
     <article className="max-w-4xl mx-auto">
       {/* Header */}
       <header className="mb-8">
-        <h1 className="text-4xl md:text-5xl font-bold font-hanken text-gray-900 mb-6">
+        <h1 className="text-4xl md:text-5xl font-bold font-hanken text-gray-900 mb-4">
           {article.title}
         </h1>
+
+        {article.meta_description && (
+          <p className="text-lg text-gray-500 font-rubik leading-relaxed mb-6">
+            {article.meta_description}
+          </p>
+        )}
 
         <div className="flex items-center gap-4 mb-8">
           {article.author?.avatar && (
@@ -60,9 +66,9 @@ export function ArticleDetail({ article }: ArticleDetailProps) {
       </header>
 
       {/* Content */}
-      <div className="prose prose-lg prose-gray max-w-none prose-headings:font-hanken prose-headings:font-bold prose-headings:text-gray-900 prose-p:font-rubik prose-p:text-gray-700 prose-a:text-primary prose-strong:text-gray-900 prose-img:rounded-xl">
+      <div className="prose prose-lg prose-gray max-w-none blog-content">
         <ReactMarkdown remarkPlugins={[remarkGfm]}>
-          {article.content}
+          {cleanMarkdownContent(article.content)}
         </ReactMarkdown>
       </div>
 

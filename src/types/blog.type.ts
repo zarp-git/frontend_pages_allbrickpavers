@@ -22,6 +22,7 @@ export interface BlogArticleSummary {
   language: string;
   slug: string;
   content: string;
+  meta_description?: string | null;
   published_at: string;
   display_order: number;
   images?: BlogArticleImage[];
