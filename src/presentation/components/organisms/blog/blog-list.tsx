@@ -17,110 +17,59 @@ interface BlogListProps {
 }
 
 export function BlogList({ articles, currentPage, totalPages }: BlogListProps) {
-  const featuredArticle = articles[0];
-  const regularArticles = articles.slice(1);
-
   return (
-    <div className="space-y-12">
-
-      {/* Featured Article */}
-      {featuredArticle && (
-        <Link
-          href={`/blog/${featuredArticle.slug}`}
-          className="block group"
-        >
-          <article className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="relative h-64 md:h-full">
-                {getPrimaryBlogImage(featuredArticle.images) ? (
-                  <Image
-                    src={getPrimaryBlogImage(featuredArticle.images)!.url}
-                    alt={
-                      getPrimaryBlogImage(featuredArticle.images)!.alt ||
-                      featuredArticle.title
-                    }
-                    fill
-                    className="object-cover"
-                  />
-                ) : (
-                  <div className="w-full h-full bg-gray-200 flex items-center justify-center">
-                    <span className="text-gray-400">No image</span>
-                  </div>
-                )}
-              </div>
-              <div className="p-8 flex flex-col justify-center">
-                <span className="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-rubik font-semibold rounded-full mb-4 w-fit">
-                  Featured
-                </span>
-                <h2 className="text-3xl font-bold font-hanken text-gray-900 mb-4 group-hover:text-primary transition-colors">
-                  {featuredArticle.title}
-                </h2>
-                <p className="text-gray-600 font-rubik mb-4">
-                  {getBlogExcerpt(featuredArticle.content, 200)}
-                </p>
-                <div className="flex items-center gap-4 text-sm text-gray-500 font-rubik">
-                  <span>{formatBlogDate(featuredArticle.published_at)}</span>
-                  <span>•</span>
-                  <span>{getBlogReadingTime(featuredArticle.content)} min read</span>
-                  {featuredArticle.author && (
-                    <>
-                      <span>•</span>
-                      <span>{featuredArticle.author.full_name}</span>
-                    </>
+    <div className="space-y-10">
+      {/* Articles Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {articles.map((article) => {
+          const image = getPrimaryBlogImage(article.images);
+          return (
+            <Link
+              key={article.id}
+              href={`/blog/${article.slug}`}
+              className="block group"
+            >
+              <article className="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                {/* Image area */}
+                <div className="relative h-48 w-full bg-gray-100">
+                  {image ? (
+                    <Image
+                      src={image.url}
+                      alt={image.alt || article.title}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center bg-gray-100">
+                      <span className="text-gray-400 font-rubik text-sm">No image</span>
+                    </div>
                   )}
                 </div>
-              </div>
-            </div>
-          </article>
-        </Link>
-      )}
 
-      {/* Regular Articles Grid */}
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {regularArticles.map((article) => (
-          <Link
-            key={article.id}
-            href={`/blog/${article.slug}`}
-            className="block group"
-          >
-            <article className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-shadow h-full flex flex-col">
-              <div className="relative h-48">
-                {getPrimaryBlogImage(article.images) ? (
-                  <Image
-                    src={getPrimaryBlogImage(article.images)!.url}
-                    alt={
-                      getPrimaryBlogImage(article.images)!.alt || article.title
-                    }
-                    fill
-                    className="object-cover"
-                  />
-                ) : (
-                  <div className="w-full h-full bg-gray-200 flex items-center justify-center">
-                    <span className="text-gray-400">No image</span>
+                {/* Card content */}
+                <div className="p-4 flex flex-col gap-2">
+                  <h3 className="text-base font-bold font-hanken text-gray-900 leading-snug group-hover:text-primary transition-colors line-clamp-2">
+                    {article.title}
+                  </h3>
+                  <p className="text-gray-500 font-rubik text-sm line-clamp-2">
+                    {getBlogExcerpt(article.content, 100)}
+                  </p>
+                  <div className="flex items-center gap-2 text-xs text-gray-400 font-rubik mt-1">
+                    <span>{formatBlogDate(article.published_at)}</span>
+                    <span>•</span>
+                    <span>{getBlogReadingTime(article.content)} min read</span>
                   </div>
-                )}
-              </div>
-              <div className="p-6 flex flex-col flex-grow">
-                <h3 className="text-xl font-bold font-hanken text-gray-900 mb-3 group-hover:text-primary transition-colors">
-                  {article.title}
-                </h3>
-                <p className="text-gray-600 font-rubik text-sm mb-4 flex-grow">
-                  {getBlogExcerpt(article.content, 120)}
-                </p>
-                <div className="flex items-center gap-3 text-xs text-gray-500 font-rubik">
-                  <span>{formatBlogDate(article.published_at)}</span>
-                  <span>•</span>
-                  <span>{getBlogReadingTime(article.content)} min</span>
                 </div>
-              </div>
-            </article>
-          </Link>
-        ))}
+              </article>
+            </Link>
+          );
+        })}
       </div>
 
       {/* Pagination */}
       {totalPages > 1 && (
-        <div className="flex justify-center gap-2 mt-12">
+        <div className="flex justify-center gap-2">
           {currentPage > 1 && (
             <Link
               href={`/blog?page=${currentPage - 1}`}
