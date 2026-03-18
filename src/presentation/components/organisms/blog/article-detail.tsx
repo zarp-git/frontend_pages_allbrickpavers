@@ -60,7 +60,7 @@ export function ArticleDetail({ article }: ArticleDetailProps) {
       </header>
 
       {/* Content */}
-      <div className="prose prose-lg max-w-none font-rubik">
+      <div className="prose prose-lg prose-gray max-w-none prose-headings:font-hanken prose-headings:font-bold prose-headings:text-gray-900 prose-p:font-rubik prose-p:text-gray-700 prose-a:text-primary prose-strong:text-gray-900 prose-img:rounded-xl">
         <ReactMarkdown remarkPlugins={[remarkGfm]}>
           {article.content}
         </ReactMarkdown>
